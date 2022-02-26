@@ -1,0 +1,36 @@
+
+/*
+*   Variables
+*/
+
+$navigation-background: #fff;
+$hero-background: #fff;
+
+/*
+*   End Variables
+*/
+
+/*
+*   Mixins
+*/
+
+
+@mixin flex-column-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+@mixin flex-row-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+/*
+*   End Mixins
+*/
+
+.header{
+    @include flex-row-wrap;
+}
