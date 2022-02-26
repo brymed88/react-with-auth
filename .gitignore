@@ -30,3 +30,4 @@ package-lock.json
 *.log
 #include the min.css for main css file
 !index.min.css 
+!normalize.min.css
