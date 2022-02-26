@@ -14,6 +14,7 @@ This repo will be a mono-repo and contain files for both the client and server (
 <li>Default site pages (Home, About, Contact, Login)</li>
 <li>Portable Code/Components</li>
 <li>Basic SCSS/CSS including <a href="https://necolas.github.io/normalize.css/">normalize.css</a></li>
+<li>Component Testing with Jest</li>
 </p>
 
 <h2>In Development!</h2>
