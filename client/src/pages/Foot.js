@@ -1,9 +1,9 @@
 const Foot = () => {
 
-    return(
+    return (
         <section className="footer">
             <div>
-&copy; 2022
+               Your Company &copy; 2022
             </div>
         </section>
     )
