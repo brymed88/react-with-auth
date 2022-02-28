@@ -18,11 +18,11 @@ const Login = () => {
     }
 
     const handleLogin = (event) => {
-        //stop submit from action like a normal form
+        //stop submit from acting like a normal form
         event.preventDefault();
-        setSErrorFlag(''); // unset flag before logic
+        setSErrorFlag('');
 
-        //build array with form data
+        //build object with form data
         const datObj = {
             eType: sLoginType,
             eAddress: sEmail,
@@ -30,11 +30,11 @@ const Login = () => {
         };
 
         if (datObj.eType === 'login') {
-            callApi(datObj)
+            //callApi(datObj)
         }
         else if (datObj.eType === 'signup') {
             if (datObj.ePass === sPassConf) {
-                callApi(datObj);
+               // callApi(datObj);
             }
             else {
                 setSErrorFlag({ p: "Passwords Must Match!" });
@@ -51,10 +51,10 @@ const Login = () => {
 
     }
 
-    const typeChange = (event) => {
+    const typeChange = (e) => {
 
         setSErrorFlag(''); // unset flag on type change
-        (event.target.id !== 'login' ? setSLoginType('signup') : setSLoginType('login'))
+        (e.target.id !== 'login' ? setSLoginType('signup') : setSLoginType('login'))
 
     }
 
@@ -75,11 +75,10 @@ const Login = () => {
     return (
         <section className=' login_form'>
             <form onSubmit={handleLogin}>
+
                 <div className="tabs">
-                    <label className={sLoginType !== 'login' ? 'label_not_selected' : ''} htmlFor='login'>Login</label>
-                    <input type="radio" onClick={typeChange} name='slide' id='login' defaultChecked={sLoginType === 'login' ? true : false} />
-                    <label className={sLoginType !== 'signup' ? 'label_not_selected' : ''} htmlFor='signup'>Signup</label>
-                    <input type='radio' onClick={typeChange} name='slide' id='signup' defaultChecked={sLoginType !== 'login' ? true : false} />
+                    <label className={sLoginType !== 'login' ? 'label_not_selected' : ''} onClick={typeChange} id="login">Login</label>
+                    <label className={sLoginType !== 'signup' ? 'label_not_selected' : ''} onClick={typeChange} id="signup" >Signup</label>
                 </div>
 
                 {(sErrorFlag !== '' ? <ErrorPop /> : '')}
