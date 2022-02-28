@@ -1,10 +1,12 @@
+import Head from "./pages/Head";
+import Foot from "./pages/Foot";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        hello
-      </header>
+      <Head />
+
+      <Foot />
     </div>
   );
 }
