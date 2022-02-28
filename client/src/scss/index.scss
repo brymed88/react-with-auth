@@ -1,10 +1,26 @@
-
 /*
 *   Variables
 */
 
-$navigation-background: #fff;
+$navigation-background: rgb(36, 144, 187);
 $hero-background: #fff;
+
+$font-light: #fff;
+
+$header-height: 100px;
+$content_width: 1600px;
+
+$font-sm: 1rem;
+$font-md: 1.2rem;
+$font-lg: 1.4rem;
+$font-xl: 1.6rem;
+$font-xxl: 1.8rem;
+
+$pad-sm: 4px;
+$pad-md: 8px;
+$pad-lg: 12px;
+$pad-xl: 16px;
+$pad-xxl: 20px;
 
 /*
 *   End Variables
@@ -13,7 +29,6 @@ $hero-background: #fff;
 /*
 *   Mixins
 */
-
 
 @mixin flex-column-wrap {
     display: flex;
@@ -31,6 +46,67 @@ $hero-background: #fff;
 *   End Mixins
 */
 
-.header{
+.header {
     @include flex-row-wrap;
+    width: 100%;
+    height: $header-height;
+    background-color: $navigation-background;
+    position: relative;
+
+    .topcontainer {
+        height: $header-height;
+        max-width: $content_width;
+    }
+    .menu {
+        position: absolute;
+        /*set to position to height of nav container for spacing*/
+        top: $header-height;
+        /* Hide the menu off-screen to the left */
+        right: -150%;
+        background: $navigation-background;
+        z-index: 11;
+        text-align: center;
+        transition: all 2s ease;
+    }
+    .visible {
+        transition: all 2s ease;
+        right: auto !important;
+        width: 100%;
+    }
+
+    /* Style navigation menu links */
+    .menu a {
+        color: $font_light;
+        padding: $pad-lg $pad-xl;
+        text-decoration: none;
+        font-size: $font_lg;
+        margin: 2px;
+        display: block;
+    }
+
+    /* Style the hamburger menu */
+    .icon {
+        width: 60px;
+        height: 60px;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        color: $font_light;
+        font-size: 2.8rem;
+        transform: rotate(0deg);
+        transition: all 0.4s ease;
+        background: none;
+        border: none;
+        outline: none;
+    }
+    .rot {
+        transform: rotate(135deg);
+        transition: all 0.4s ease;
+    }
+    .brand img {
+        height: 60px;
+        margin: 20px 0 0 10px;
+    }
 }
+
+/*END TOP MENU STYLES*/
