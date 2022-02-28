@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes} from 'react-router-dom';
 
 import Head from "./pages/parts/Head";
 import Home from "./pages/Home";
@@ -13,6 +13,8 @@ function App() {
     <BrowserRouter>
 
       <Head />
+
+      <div className="page-container">
       <Routes>
         <Route path="/" element={<Home />} exact />
         <Route path="/about" element={<About />} />
@@ -20,6 +22,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<Error />} />
       </Routes>
+      </div>
+
       <Foot />
 
     </BrowserRouter>
