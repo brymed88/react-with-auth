@@ -59,28 +59,31 @@ $pad-xxl: 20px;
     }
     .menu {
         position: absolute;
-        /*set to position to height of nav container for spacing*/
-        top: $header-height;
-        /* Hide the menu off-screen to the left */
-        right: -150%;
-        background: $navigation-background;
-        z-index: 11;
+        background-color: $navigation-background;
+        width: 0;
+        left: 0;
+        z-index: 3;
+        padding: 40px 0;
+        opacity: 0;
+        transition: all 0.2s linear;
         text-align: center;
-        transition: all 2s ease;
+        box-shadow: 0px 1px 1px #222;
     }
     .visible {
-        transition: all 2s ease;
-        right: auto !important;
+        transition: all 0.2s linear;
+        width: 100%;
+        opacity: 0.9;
         width: 100%;
     }
 
     /* Style navigation menu links */
     .menu a {
         color: $font_light;
-        padding: $pad-lg $pad-xl;
+        padding: $pad-lg 0;
         text-decoration: none;
         font-size: $font_lg;
-        margin: 2px;
+        margin: 2px 0;
+        width: 100%;
         display: block;
     }
 
@@ -111,6 +114,18 @@ $pad-xxl: 20px;
 
 /*END TOP MENU STYLES*/
 
+/*
+*Container Styles
+*/
+.page-container{
+    @include flex-column-wrap;
+    //Set to 100 view height minus footer height - sticky footer
+    min-height: calc(100vh - 62px);
+    padding:20px;
+}
+/*
+*End Container Styles
+*/
 /*Popup Login Form*/
 
 .login_form {
@@ -177,13 +192,13 @@ $pad-xxl: 20px;
             background: red;
             border-radius: 2px;
             text-align: center;
-            padding: $pad_md;
             font-size: 1.2rem;
         }
         button {
             background-color: green;
             width: 84%;
             padding: $pad_xxl;
+            cursor: pointer;
             margin: $pad_md 0;
             border: none;
             border-radius: 4px;
@@ -206,3 +221,22 @@ $pad-xxl: 20px;
     }
 }
 /*End Login Form*/
+
+/*
+*Footer Styles
+*/
+.footer{
+    @include flex-row-wrap;
+    width: 100%;
+    background-color: $navigation-background;
+    padding: 20px 0;
+    justify-content: center;
+
+    div{
+        color: $font-light;
+        font-size: $font-md;
+    }
+}
+/*
+*End footer styles
+*/
