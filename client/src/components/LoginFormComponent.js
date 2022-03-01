@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 import '../scss/LoginComponent.min.css';
 
@@ -105,7 +106,7 @@ const LoginFormComponent = () => {
                 }
 
                 <div className="login_disclaimer">
-                    By creating this account, you agree to our <a href='/privacy'>Privacy Policy</a>
+                    By creating this account, you agree to our <Link to='/privacy'>Privacy Policy</Link>
                 </div>
 
             </form>
