@@ -1,8 +1,7 @@
 import React from "react";
+import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 
 const Head = () => {
-
-    const base_url = document.location.origin
 
     // Declare a new state variable for button toggle and toggle className;
     const [btnTog, setBtnTog] = React.useState(false);
@@ -11,26 +10,37 @@ const Head = () => {
         btnTog === false ? setBtnTog(true) : setBtnTog(false)
     }
 
+    //Array of link objects to display in top menu
+    const pageLinks = [
+        { location: "/", displayText: "Home" },
+        { location: "/about", displayText: "About" },
+        { location: "/contact", displayText: "Contact" },
+        { location: "/login", displayText: "Login / Signup" }
+    ];
+
+
+
+
     return (
 
         <section className={(btnTog === true ? 'o_show' : 'o_hide') + ' header'}>
 
             <div className="topcontainer">
-                <a href="/" className="brand"><img src={base_url + '/logo.svg'} alt="" /></a>
+                <a href="/" className="brand"><img src='/logo.svg' alt="" /></a>
                 <div id="myLinks" className={(btnTog === true ? 'visible' : '') + ' menu'}>
-                    
-                    <a href={'/'}>Home</a>
-                    <a href={'/about'}>About</a>
-                    <a href={'/contact'}>Contact</a>
-                    <a href="/login">Login / Signup</a>
+
+                    {
+                        //Map through pageLinks and build the link tree
+                        pageLinks.map(link =>
+                            <Link to={link.location} key={link.displayText} onClick={menuToggle}>{link.displayText}</Link>
+                        )
+                    }
 
                 </div>
-
                 <button onClick={menuToggle} className={(btnTog === true ? 'rot' : '') + ' icon'}>+</button>
             </div>
 
         </section>
-
     );
 };
 
