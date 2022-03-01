@@ -178,7 +178,8 @@ $pad-xxl: 20px;
             padding: $pad_sm 0;
 
             input {
-                padding: $pad-xxl;
+                padding: $pad-xxl 0;
+                text-indent: 4px;
                 margin: $pad_sm;
                 width: 84%;
                 font-size: 1.1rem;
