@@ -4,6 +4,7 @@ import { Suspense, lazy } from "react";
 import Head from "./pages/parts/Head";
 import Foot from "./pages/parts/Foot";
 import Home from "./pages/Home";
+import SpinnerComponent from "./components/SpinnerComponent";
 
 /*
 * Lazy loading to selectively load pages based on usage
@@ -26,27 +27,27 @@ function App() {
           <Route path="/" element={<Home />} exact />
           <Route path="*" element=
             {
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<SpinnerComponent class='full' size='60px'/>}>
                 <Error />
               </Suspense>
             } />
 
           <Route path="/about" element=
             {
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<SpinnerComponent class='full' size='60px'/>}>
                 <About />
               </Suspense>
             } />
 
           <Route path="/contact" element=
             {
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<SpinnerComponent class='full' size='60px'/>}>
                 <Contact />
               </Suspense>
             } />
           <Route path="/login" element=
             {
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<SpinnerComponent class='full' size='60px'/>}>
                 <Login />
               </Suspense>
             } />
