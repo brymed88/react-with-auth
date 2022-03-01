@@ -18,15 +18,12 @@ const Head = () => {
         { location: "/login", displayText: "Login / Signup" }
     ];
 
-
-
-
     return (
 
         <section className={(btnTog === true ? 'o_show' : 'o_hide') + ' header'}>
 
             <div className="topcontainer">
-                <a href="/" className="brand"><img src='/logo.svg' alt="" /></a>
+                <Link to='/' className="brand"><img src='/logo.svg' alt="" /></Link>
                 <div id="myLinks" className={(btnTog === true ? 'visible' : '') + ' menu'}>
 
                     {
