@@ -122,6 +122,14 @@ $pad-xxl: 20px;
     //Set to 100 view height minus footer height - sticky footer
     min-height: calc(100vh - 62px);
     padding:20px;
+
+    h2{
+        padding: $pad-md;
+    }
+    p{
+        padding: $pad-md;
+        font-size: $font-md;
+    }
 }
 /*
 *End Container Styles
