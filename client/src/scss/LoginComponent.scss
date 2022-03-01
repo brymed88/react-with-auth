@@ -1,0 +1,98 @@
+@import "./variables.scss";
+
+/*Popup Login Form*/
+
+.login_form {
+    @include flex-column-wrap;
+    max-width: 100%;
+    background: #fff;
+    align-items: center;
+    padding: 40px 0;
+
+    form {
+        @include flex-column-wrap;
+        align-items: center;
+        width: 96%;
+        max-width: 600px;
+        align-self: center;
+        border-radius: 4px;
+        box-shadow: 0px 0px 4px #aaa;
+        padding: 40px 0;
+
+        .tabs {
+            @include flex-row-wrap;
+            align-content: center;
+            width: 100%;
+            margin: $pad-md 0;
+
+            label {
+                padding: $pad_md 0;
+                width: 50%;
+                text-align: center;
+                color: black;
+                font-size: $font_lg;
+                border-top: 4px solid green;
+                cursor: pointer;
+            }
+
+            .label_not_selected {
+                border: none;
+            }
+
+            input[type="radio"] {
+                display: none;
+            }
+        }
+
+        .inputs {
+            width: 100%;
+            @include flex-column-wrap;
+            align-content: center;
+            align-items: center;
+            padding: $pad_sm 0;
+
+            input {
+                padding: $pad-xxl 0;
+                text-indent: 4px;
+                margin: $pad_sm;
+                width: 84%;
+                font-size: 1.1rem;
+                border-radius: 4px;
+                border: 1px solid #ddd;
+            }
+        }
+        .login_error {
+            color: $font_light;
+            width: 98%;
+            background: red;
+            border-radius: 2px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+        button {
+            background-color: green;
+            width: 84%;
+            padding: $pad_xxl;
+            cursor: pointer;
+            margin: $pad_md 0;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            color: white;
+        }
+        .sign_span {
+            padding-top: $pad_lg;
+        }
+        .sign_span a {
+            color: blue;
+            cursor: pointer;
+        }
+        .login_disclaimer {
+            width: 84%;
+            padding-top: $pad_lg;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+    }
+}
+/*End Login Form*/

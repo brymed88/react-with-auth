@@ -28,6 +28,10 @@ package-lock.json
 *.css
 *.min.css
 *.log
+
 #include the min.css for main css file
 !index.min.css 
 !normalize.min.css
+!ContactComponent.min.css
+!LoginComponent.min.css
+!SpinnerComponent.min.css

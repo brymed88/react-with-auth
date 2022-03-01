@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 
+import '../scss/LoginComponent.min.css';
+
 const LoginFormComponent = () => {
 
     const [sLoginType, setSLoginType] = React.useState('login');

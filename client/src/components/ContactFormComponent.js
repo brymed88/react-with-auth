@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 
+import '../scss/ContactComponent.min.css';
+
 const ContactFormComponent = () => {
     const [status, setStatus] = useState('Send');
 
