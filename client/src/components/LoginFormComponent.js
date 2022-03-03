@@ -1,106 +1,110 @@
-import React from "react";
-import axios from "axios";
-import {Link} from "react-router-dom";
-
+import {useState} from "react";
+import { Link } from "react-router-dom";
+import SpinnerComponent from "./SpinnerComponent";
+import ErrorComponent from "./ErrorComponent";
 import '../scss/LoginComponent.min.css';
 
 const LoginFormComponent = () => {
 
-    const [sLoginType, setSLoginType] = React.useState('login');
-    const [sEmail, setSEmail] = React.useState('Email');
-    const [sPass, setSPass] = React.useState('Password');
-    const [sPassConf, setSPassConf] = React.useState('Confirm Password');
-    const [sErrorFlag, setSErrorFlag] = React.useState('');
-
-    const ErrorPop = () => {
-        return (
-            <div className="login_error">
-                <p>{sErrorFlag.p}</p>
-            </div>
-        );
-    }
+    const [loginType, setLoginType] = useState('login');
+    const [email, setEmail] = useState('Email');
+    const [password, setPassword] = useState('Password');
+    const [passwordConf, setPasswordConf] = useState('Confirm Password');
+    const [errorFlag, setErrorFlag] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleLogin = (event) => {
         //stop submit from acting like a normal form
         event.preventDefault();
-        setSErrorFlag('');
+        setErrorFlag('');
 
         //build object with form data
         const datObj = {
-            eType: sLoginType,
-            eAddress: sEmail,
-            ePass: sPass
+            eType: loginType,
+            eAddress: email,
+            ePass: password
         };
 
-        if (datObj.eType === 'login') {
-            //callApi(datObj)
-        }
-        else if (datObj.eType === 'signup') {
-            if (datObj.ePass === sPassConf) {
-               // callApi(datObj);
+        if (datObj.eAddress !== 'Email' && datObj.eAddress !== '') {
+            if (datObj.ePass !== 'Password' && datObj.ePass !== '') {
+
+                if (datObj.eType === 'login') {
+                    setLoading(true)
+                    //call api for login
+                }
+
+                else if (datObj.eType === 'signup') {
+                    if (datObj.ePass === passwordConf) {
+                        setLoading(true);
+                        // call api for signup
+                    }
+                    else {
+                        setErrorFlag("Passwords Must Match!");
+                    }
+                }
             }
             else {
-                setSErrorFlag({ p: "Passwords Must Match!" });
+                setErrorFlag("Please enter a password!");
             }
+
+        }
+        else {
+            setErrorFlag("Please enter a valid email address!");
         }
 
-        function callApi(OBJ) {
-            axios
-                .post('http://127.0.0.1:3001/api/auth', OBJ, { withCredentials: true })
-                .then(res => {
-
-                })
-        }
 
     }
 
     const typeChange = (e) => {
 
-        setSErrorFlag(''); // unset flag on type change
-        (e.target.id !== 'login' ? setSLoginType('signup') : setSLoginType('login'))
+        setErrorFlag(''); // unset flag on type change
+        (e.target.id !== 'login' ? setLoginType('signup') : setLoginType('login'))
 
     }
 
     const updateEmail = (event) => {
-        setSEmail(event.target.value)
+        setEmail(event.target.value)
     }
 
     const updatePass = (event) => {
-        setSPass(event.target.value);
+        setPassword(event.target.value);
     }
 
     const updatePassConfirm = (event) => {
-        setSPassConf(event.target.value);
+        setPasswordConf(event.target.value);
     }
-
-
 
     return (
         <section className=' login_form'>
+            {loading === true
+                ? <SpinnerComponent type='full' size='100px' />
+                : ''
+            }
+
             <form onSubmit={handleLogin}>
 
                 <div className="tabs">
-                    <label className={sLoginType !== 'login' ? 'label_not_selected' : ''} onClick={typeChange} id="login">Login</label>
-                    <label className={sLoginType !== 'signup' ? 'label_not_selected' : ''} onClick={typeChange} id="signup" >Signup</label>
+                    <label className={loginType !== 'login' ? 'label_not_selected' : ''} onClick={typeChange} id="login">Login</label>
+                    <label className={loginType !== 'signup' ? 'label_not_selected' : ''} onClick={typeChange} id="signup" >Signup</label>
                 </div>
 
-                {(sErrorFlag !== '' ? <ErrorPop /> : '')}
+                {(errorFlag !== '' ? <ErrorComponent error={errorFlag} /> : '')}
 
                 <div className='inputs'>
-                    <input type="email" onChange={updateEmail} placeholder="Email" id='email' required />
-                    <input type="password" onChange={updatePass} placeholder="Password" id='password' required />
+                    <input type="email" onChange={updateEmail} placeholder="Email" id='email' />
+                    <input type="password" onChange={updatePass} placeholder="Password" id='password' />
 
-                    {sLoginType === 'signup'
-                        ? <input type="password" onChange={updatePassConfirm} placeholder="Confirm Password" id='confirm_password' required />
+                    {loginType === 'signup'
+                        ? <input type="password" onChange={updatePassConfirm} placeholder="Confirm Password" id='confirm_password' />
                         : ''
                     }
                 </div>
 
                 <button type='submit'>
-                    {sLoginType === 'login' ? 'Login' : 'Signup'}
+                    {loginType === 'login' ? 'Login' : 'Signup'}
                 </button>
 
-                {sLoginType === 'login'
+                {loginType === 'login'
                     ? <span className="sign_span">Not a member? <a onClick={typeChange} id='signup'>Signup now</a></span>
                     : <span className="sign_span">Already a member? <a onClick={typeChange} id='login'>Login</a></span>
                 }

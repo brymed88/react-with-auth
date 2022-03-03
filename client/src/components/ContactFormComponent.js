@@ -1,49 +1,77 @@
 import { useState } from "react";
-import axios from "axios";
 
 import '../scss/ContactComponent.min.css';
+import SpinnerComponent from './SpinnerComponent';
+import ErrorComponent from "./ErrorComponent";
 
 const ContactFormComponent = () => {
     const [status, setStatus] = useState('Send');
+    const [errorFlag, setErrorFlag] = useState('');
+    const [name, setName] = useState('Name');
+    const [email, setEmail] = useState('Email');
+    const [topic, setTopic] = useState('Topic');
+    const [loading, setLoading] = useState(false);
 
     const contactSubmit = e => {
         e.preventDefault();
 
-        //set status to empty (loading)
-        setStatus('')
-
-        const { name, email, message } = e.target.elements;
-        let details = {
-            name: name.value,
-            email: email.value,
-            message: message.value,
+        //build object with form data
+        const datObj = {
+            name: name,
+            email: email,
+            topic: topic
         };
 
-        if (details.name !== '' && details.email !== '' && details.message !== '') {
-            axios
-                .post('/api/mail', details)
-                .then(res => {
-                    if (res.status === 200 && res.data.status === 'success') {
-                        //set status to complete(thank you message)
-                        setStatus('Email Sent!')
-                    }
-                    else {
-                        setStatus('Failed to send message!')
-                    }
-                })
+        if (datObj.name !== 'Name' && datObj.name !== '') {
+            if (datObj.email !== 'Email' && datObj.email !== '') {
+                if (datObj.topic !== 'Topic' && datObj.topic !== '') {
+                    setErrorFlag('');
+                    setLoading(true);
+                }
+                else {
+                    setErrorFlag('Please enter a valid topic!');
+                }
+            }
+            else {
+                setErrorFlag('Please enter a valid email!');
+            }
         }
-    };
+        else {
+            setErrorFlag('Please enter a valid name!');
+        }
+
+
+    }
+
+    const updateName = (e) => {
+        setName(e.target.value)
+    }
+
+    const updateEmail = (e) => {
+        setEmail(e.target.value)
+    }
+    const updateTopic = (e) => {
+        setTopic(e.target.value)
+    }
+
     return (
         <section className="contact_wrapper">
+            {loading === true
+                ? <SpinnerComponent type='full' size='100px' />
+                : ''
+            }
             <div className="contact_container" id="contact">
                 <h2>Contact Me</h2>
                 <form onSubmit={contactSubmit}>
-                    <input type="text" id="name" placeholder="Name" />
-                    <input type="email" id="email" placeholder="Email" />
-                    <textarea id="message" placeholder="Topic of discussion" />
+                    {(errorFlag !== '' ? <ErrorComponent error={errorFlag} /> : '')}
+
+                    <input type="text" id="name" placeholder="Name" onChange={updateName} />
+                    <input type="email" id="email" placeholder="Email" onChange={updateEmail}/>
+                    <textarea id="message" placeholder="Topic of discussion" onChange={updateTopic}/>
                     <button
-                        className={status === '' ? 'btn btn_load' : status === 'Send' ? 'btn' : status === 'Email Sent!' ? 'btn btn_complete' : 'btn btn_failed'}
+                        className={status === 'Send' ? 'btn' : status === 'Message Sent!' ? 'btn btn_complete' : 'btn btn_failed'}
                     >{status}</button>
+
                 </form>
             </div>
         </section >
