@@ -75,19 +75,21 @@
     @include flex-column-wrap;
     //Set to 100 view height minus footer height - sticky footer
     min-height: calc(100vh - 62px);
-    padding: 20px;
+    padding: 10px;
 
-    h2 {
-        padding: $pad-md;
-    }
-    p {
-        padding: $pad-md;
-        font-size: $font-md;
-    }
 }
 /*
 *End Container Styles
 */
+
+.form_error {
+    color: $font_light;
+    width: 100%;
+    background: red;
+    border-radius: 2px;
+    text-align: center;
+    font-size: 1rem;
+}
 
 /*
 *Footer Styles
