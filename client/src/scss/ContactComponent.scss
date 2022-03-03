@@ -7,31 +7,27 @@
     @include flex-column-wrap;
     align-items: center;
     width: 100%;
+    background: #fff;
     padding: 40px 0;
-
-    .contact_container {
-        @include flex-column-wrap;
-        align-items: center;
-        width: 100%;
-        background-color: #fff;
-        border-radius: 4px;
-        box-shadow: 0px 0px 4px #aaa;
-        max-width: 400px;
-    }
-    h2 {
-        color: #555;
-    }
+    
     form {
         width: 90%;
+        max-width: 400px;
+        background-color: #fff;
         @include flex-column-wrap;
         align-items: center;
-        padding-bottom: 30px;
+        padding:$pad_xxl $pad_lg;
+        border-radius: 4px;
+        box-shadow: 0px 0px 4px #aaa;
 
+        h2 {
+            color: #555;
+        }
         input,
         textarea,
         button {
-            padding: $pad-lg 0;
-            font-size: $font-lg;
+            padding: $pad-xxl 0;
+            font-size: 1.2rem;
             border-radius: 4px;
             margin: 8px 0;
             font-weight: bold;
@@ -50,6 +46,7 @@
             height: 48px;
             line-height: 0px;
             color: white;
+            cursor: pointer;
             border: none;
             outline: none;
         }

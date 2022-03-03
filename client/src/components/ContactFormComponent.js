@@ -60,9 +60,9 @@ const ContactFormComponent = () => {
                 ? <SpinnerComponent type='full' size='100px' />
                 : ''
             }
-            <div className="contact_container" id="contact">
-                <h2>Contact Me</h2>
                 <form onSubmit={contactSubmit}>
+                <h2>Contact Me</h2>
+
                     {(errorFlag !== '' ? <ErrorComponent error={errorFlag} /> : '')}
 
                     <input type="text" id="name" placeholder="Name" onChange={updateName} />
@@ -73,7 +73,6 @@ const ContactFormComponent = () => {
                     >{status}</button>
 
                 </form>
-            </div>
         </section >
     );
 }
