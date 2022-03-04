@@ -11,12 +11,12 @@
     padding: 40px 0;
     
     form {
-        width: 90%;
+        width: 100%;
         max-width: 400px;
         background-color: #fff;
         @include flex-column-wrap;
         align-items: center;
-        padding:$pad_xxl $pad_lg;
+        padding:$pad_xxl 0;
         border-radius: 4px;
         box-shadow: 0px 0px 4px #aaa;
 
@@ -31,18 +31,17 @@
             border-radius: 4px;
             margin: 8px 0;
             font-weight: bold;
+            width: 84%;
+
         }
         input,
         textarea {
-            width: 100%;
             text-indent: 4px;
             border-radius: 4px;
             border: 1px solid #ddd;
         }
         button {
-            align-self: flex-end;
             background-color: green;
-            width: 72px;
             height: 48px;
             line-height: 0px;
             color: white;
@@ -52,35 +51,12 @@
         }
     }
 }
-.btn_load {
-    border: 20px solid green !important;
-    border-top: 20px solid $font-light !important;
-    border-radius: 50% !important;
-    width: 20px !important;
-    padding: 8px !important;
-    animation: spin 0.8s linear infinite;
-}
 
 .btn_complete {
-    width: 96% !important;
-    align-self: center !important;
     background-color: rgb(35, 161, 24) !important;
-    font-size: $font_md;
 }
 .btn_failed {
-    width: 96% !important;
-    align-self: center !important;
     background-color: red !important;
-    font-size: $font_md;
-}
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
 }
 
 /*
