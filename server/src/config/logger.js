@@ -21,5 +21,25 @@ const logger = winston.createLogger({
         })
     ]
 });
+const userLogger = winston.createLogger({
 
-module.exports.log = logger
+    format: winston.format.combine(
+        winston.format.timestamp({
+            format: 'YYYY-MM-DD HH:mm:ss'
+        }),
+        winston.format.json()
+    ),
+    timestamp: true,
+    transports: [
+        new winston.transports.Console(),
+        new winston.transports.DailyRotateFile({
+            filename: `${process.env.logLocation}/user-%DATE%.log`,
+            datePattern: 'YYYY-MM-DD',
+            zippedArchive: true,
+            maxSize: '20m'
+        })
+    ]
+});
+
+module.exports.log = logger;
+module.exports.userlog = userLogger;
