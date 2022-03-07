@@ -4,8 +4,9 @@ const { log } = require("./src/config/logger");
 
 const authRoute = require('./src/routes/auth.route');
 const contactRoute = require('./src/routes/contact.route');
-const userRoute = require('./src/routes/user.route');
+const accountRoute = require('./src/routes/account.route');
 
+require("./src/config/database").connect();
 require('dotenv').config();
 
 const aport = process.env.PORT || process.env.expressPort;
@@ -31,4 +32,4 @@ app.get('/', (req,res) => {
 
 app.use('/api/auth', authRoute);
 app.use('/api/contact', contactRoute);
-app.use('/api/user', userRoute);
+app.use('/api/account', accountRoute);
