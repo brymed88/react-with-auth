@@ -1,8 +1,9 @@
-const userService = require('../services/user.service');
+const accountService = require('../services/account.service');
 
 async function get(req, res, next) {
+    
     try {
-        res.json(await userService.get(req.query));
+        res.json(await accountService.get(req.query));
     }
     catch (err) {
         console.error('Error while getting user information', err.message);
@@ -12,7 +13,7 @@ async function get(req, res, next) {
 
 async function create(req, res, next) {
     try {
-        res.json(await userService.get(req.query));
+        res.json(await accountService.get(req.query));
     }
     catch (err) {
         console.error('Error while getting user information', err.message);
@@ -22,7 +23,7 @@ async function create(req, res, next) {
 
 async function update(req, res, next) {
     try {
-        res.json(await userService.get(req.query));
+        res.json(await accountService.get(req.query));
     }
     catch (err) {
         console.error('Error while getting user information', err.message);
@@ -32,7 +33,7 @@ async function update(req, res, next) {
 
 async function remove(req, res, next) {
     try {
-        res.json(await userService.get(req.query));
+        res.json(await accountService.get(req.query));
     }
     catch (err) {
         console.error('Error while getting user information', err.message);
