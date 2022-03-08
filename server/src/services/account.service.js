@@ -1,33 +1,45 @@
-const Account = require('../models/account.model');
+const AccountModel = require('../models/account.model');
 bcrypt = require("bcryptjs");
 
 async function get(query, page, limit) {
-    return query;
-    /*try {
-        let users = await Account.findOne(query);
-        return users;
+
+    let users = await AccountModel.findOne({ email: query.email });
+
+    if (users) {
+        //do some logic to verify the password and JWT token match then return token...
+        return { status: success }
     }
-    catch (e) {
-        //log error
-        throw Error('Error while retreiving user')
-    }*/
+    else {
+        return { status: null }
+    }
 }
 
 async function create(query) {
-    return query;
-    /*try {
-        let users = await Account.create({
+    //TODO add validation and additional logic before blindly inserting new user
+    try {
+
+        let users = new AccountModel({
             first_name: '',
             last_name: '',
             email: query.email,
-            password: query.password,
-            token:bcrypt.hashSync(query.password, 8)
-        }
-        )
+            password: bcrypt.hashSync(query.password, 8),
+            token: ''
+        });
+
+        users.save((err, data) => {
+            if (err) {
+                console.log(err)
+                return err
+            }
+            else {
+                return 'success';
+            }
+
+        });
     }
     catch (e) {
-
-    }*/
+        return 'failed to insert user';
+    }
 }
 
 async function update(user) {

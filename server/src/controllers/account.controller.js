@@ -12,7 +12,7 @@ async function get(req, res, next) {
 
 async function create(req, res, next) {
     try {
-        res.json(await accountService.get(req.query));
+        res.json(await accountService.create(req.body));
     }
     catch (err) {
         console.error('Error while getting user information', err.message);

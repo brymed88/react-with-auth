@@ -3,9 +3,9 @@ const router = express.Router();
 
 const accountController = require('../controllers/account.controller');
 
-router.get('/', accountController.get);
+router.get('/login', accountController.get);
 
-router.post('/', accountController.create)
+router.post('/create', accountController.create)
 
 router.put('/:id', accountController.update)
 
