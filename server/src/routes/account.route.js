@@ -5,7 +5,7 @@ const accountController = require('../controllers/account.controller');
 
 router.get('/', accountController.get);
 
-router.post('/create', accountController.create)
+router.post('/', accountController.create)
 
 router.put('/:id', accountController.update)
 

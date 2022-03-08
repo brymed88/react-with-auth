@@ -1,7 +1,6 @@
 const accountService = require('../services/account.service');
 
 async function get(req, res, next) {
-    
     try {
         res.json(await accountService.get(req.query));
     }
