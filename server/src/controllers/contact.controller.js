@@ -1,6 +1,8 @@
-const contactService = require('../services/contact.service');
+import contactService from '../services/contact.service.js';
 
-async function get(req, res, next) {
+const contactController = {};
+
+contactController.get = async (req, res, next) => {
     try {
         res.json(await contactService.get(req.query));
     }
@@ -10,7 +12,7 @@ async function get(req, res, next) {
     }
 }
 
-async function create(req, res, next) {
+contactController.create = async (req, res, next) => {
     try {
         res.json(await contactService.get(req.query));
     }
@@ -20,7 +22,7 @@ async function create(req, res, next) {
     }
 }
 
-async function update(req, res, next) {
+contactController.update = async (req, res, next) => {
     try {
         res.json(await contactService.get(req.query));
     }
@@ -30,7 +32,7 @@ async function update(req, res, next) {
     }
 }
 
-async function remove(req, res, next) {
+contactController.remove = async (req, res, next) => {
     try {
         res.json(await contactService.get(req.query));
     }
@@ -39,9 +41,4 @@ async function remove(req, res, next) {
         next(err);
     }
 }
-module.exports = {
-    get,
-    create,
-    update,
-    remove
-}
+export default contactController;

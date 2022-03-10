@@ -1,6 +1,7 @@
-const winston = require("winston");
-require("winston-daily-rotate-file");
-require('dotenv').config();
+import winston from "winston";
+import "winston-daily-rotate-file";
+
+const config = process.env;
 
 const logger = winston.createLogger({
 
@@ -14,7 +15,7 @@ const logger = winston.createLogger({
     transports: [
         new winston.transports.Console(),
         new winston.transports.DailyRotateFile({
-            filename: `${process.env.logLocation}/%DATE%.log`,
+            filename: `${config.logLocation}/%DATE%.log`,
             datePattern: 'YYYY-MM-DD',
             zippedArchive: true,
             maxSize: '20m'
@@ -33,7 +34,7 @@ const userLogger = winston.createLogger({
     transports: [
         new winston.transports.Console(),
         new winston.transports.DailyRotateFile({
-            filename: `${process.env.logLocation}/user-%DATE%.log`,
+            filename: `${config.logLocation}/user-%DATE%.log`,
             datePattern: 'YYYY-MM-DD',
             zippedArchive: true,
             maxSize: '20m'
@@ -41,5 +42,5 @@ const userLogger = winston.createLogger({
     ]
 });
 
-module.exports.log = logger;
-module.exports.userlog = userLogger;
+export {logger as log};
+export {userLogger as ulog};

@@ -1,9 +1,12 @@
-const mongoose = require("mongoose");
-const { log } = require("./logger");
-require('dotenv').config();
+import mongoose from "mongoose";
+import { log } from "./logger.js";
 
-const { MONGO_URI, DATABASE_NAME } = process.env;
-exports.connect = () => {
+const config = process.env;
+
+const { MONGO_URI, DATABASE_NAME } = config;
+
+const db = {};
+db.connect = () => {
     // Connecting to the database
     mongoose
         .connect(MONGO_URI + DATABASE_NAME, {
@@ -25,3 +28,4 @@ exports.connect = () => {
             process.exit(1);
         });
 };
+export default db;

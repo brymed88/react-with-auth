@@ -1,7 +1,7 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
-const authController = require('../controllers/auth.controller');
+import authController from '../controllers/auth.controller.js';
 
 router.get('/', authController.get);
 
@@ -11,4 +11,4 @@ router.put('/:id', authController.update)
 
 router.delete('/:id', authController.remove)
 
-module.exports = router;
+export {router as authRoute};

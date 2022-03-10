@@ -1,14 +1,14 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-
-const accountController = require('../controllers/account.controller');
+import auth from "../middleware/auth.js";
+import accountController from '../controllers/account.controller.js';
 
 router.get('/login', accountController.get);
 
 router.post('/create', accountController.create)
 
-router.put('/:id', accountController.update)
+router.put('/:id', auth, accountController.update)
 
-router.delete('/:id', accountController.remove)
+router.delete('/:id',auth, accountController.remove)
 
-module.exports = router;
+export {router as accountRoute};

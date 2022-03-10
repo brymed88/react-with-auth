@@ -1,7 +1,7 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
-const contactController = require('../controllers/contact.controller');
+import contactController from '../controllers/contact.controller.js';
 
 router.get('/', contactController.get);
 
@@ -11,4 +11,4 @@ router.put('/:id', contactController.update)
 
 router.delete('/:id', contactController.remove)
 
-module.exports = router;
+export { router as contactRoute };

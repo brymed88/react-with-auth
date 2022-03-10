@@ -1,23 +1,20 @@
 
-async function get(user) {
+const contactService = {};
+
+contactService.get = (user) => {
     return user;
 }
 
-async function create(user) {
+contactService.create = (user) => {
     return user;
 }
 
-async function update(user) {
+contactService.update = (user) => {
     return user;
 }
 
-async function remove(user) {
-    return user
+contactService.remove = (user) => {
+    return user;
 }
 
-module.exports = {
-    get,
-    create,
-    update,
-    remove
-}
+export default contactService;

@@ -1,6 +1,7 @@
-const accountService = require('../services/account.service');
+import accountService from '../services/account.service.js';
 
-async function get(req, res, next) {
+const accountController = {};
+accountController.get = async (req, res, next) => {
     try {
         res.json(await accountService.get(req.query));
     }
@@ -10,8 +11,9 @@ async function get(req, res, next) {
     }
 }
 
-async function create(req, res, next) {
+accountController.create = async (req, res, next) => {
     try {
+        console.log(req.body)
         res.json(await accountService.create(req.body));
     }
     catch (err) {
@@ -20,7 +22,7 @@ async function create(req, res, next) {
     }
 }
 
-async function update(req, res, next) {
+accountController.update = async (req, res, next) => {
     try {
         res.json(await accountService.get(req.query));
     }
@@ -30,7 +32,7 @@ async function update(req, res, next) {
     }
 }
 
-async function remove(req, res, next) {
+accountController.remove = async (req, res, next) => {
     try {
         res.json(await accountService.get(req.query));
     }
@@ -39,9 +41,4 @@ async function remove(req, res, next) {
         next(err);
     }
 }
-module.exports = {
-    get,
-    create,
-    update,
-    remove
-}
+export default accountController

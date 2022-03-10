@@ -1,6 +1,8 @@
-const authService = require('../services/auth.service');
+import authService from '../services/auth.service.js';
 
-async function get(req, res, next) {
+const authController = {};
+
+authController.get = async (req, res, next) => {
     try {
         res.json(await authService.get(req.query));
     }
@@ -10,7 +12,7 @@ async function get(req, res, next) {
     }
 }
 
-async function create(req, res, next) {
+authController.create = async (req, res, next) => {
     try {
         res.json(await authService.get(req.query));
     }
@@ -20,7 +22,7 @@ async function create(req, res, next) {
     }
 }
 
-async function update(req, res, next) {
+authController.update = async (req, res, next) => {
     try {
         res.json(await authService.get(req.query));
     }
@@ -30,7 +32,7 @@ async function update(req, res, next) {
     }
 }
 
-async function remove(req, res, next) {
+authController.remove = async (req, res, next) => {
     try {
         res.json(await authService.get(req.query));
     }
@@ -39,9 +41,4 @@ async function remove(req, res, next) {
         next(err);
     }
 }
-module.exports = {
-    get,
-    create,
-    update,
-    remove
-}
+export default authController;

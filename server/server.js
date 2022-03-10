@@ -1,19 +1,24 @@
-const express = require('express');
+import express from 'express';
+
+import { log } from "./src/config/logger.js";
+
+import {authRoute} from './src/routes/auth.route.js';
+import {contactRoute} from './src/routes/contact.route.js';
+import {accountRoute} from './src/routes/account.route.js';
+
+import {} from 'dotenv/config';
+const config = process.env;
+
+const aport = config.PORT || config.expressPort;
+
 const app = express();
-const { log } = require("./src/config/logger");
-
-const authRoute = require('./src/routes/auth.route');
-const contactRoute = require('./src/routes/contact.route');
-const accountRoute = require('./src/routes/account.route');
-
-require("./src/config/database").connect();
-require('dotenv').config();
-
-const aport = process.env.PORT || process.env.expressPort;
+app.use(express.json());
 
 app.listen(aport, () => { log.info("server - started on port " + aport); });
 
-app.use(express.json());
+/*Connect the the MongoDB */
+import db from './src/config/database.js';
+db.connect();
 
 /**
  * Enable cors and allow incoming connection from clientside
@@ -26,8 +31,8 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.get('/', (req,res) => {
-    res.json({"message":"Hello World"});
+app.get('/', (req, res) => {
+  res.json({ "message": "Hello World" });
 })
 
 app.use('/api/auth', authRoute);
