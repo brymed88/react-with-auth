@@ -1,58 +1,89 @@
-const AccountModel = require('../models/account.model');
-bcrypt = require("bcryptjs");
+import AccountModel from '../models/account.model.js';
+import jwt from 'jsonwebtoken';
+import bcrypt from "bcryptjs";
 
-async function get(query, page, limit) {
+const accountService = {};
 
-    let users = await AccountModel.findOne({ email: query.email });
+accountService.get = async (query) => {
 
-    if (users) {
-        //do some logic to verify the password and JWT token match then return token...
-        return { status: success }
+    const { email, password } = query;
+    // Validate user input
+    if (!(email && password)) {
+        return { status: 'null' };
     }
+
+    let user = await AccountModel.findOne({ email: email });
+
+    //do some logic to verify the password and jwt token match then return token...
+    if (user && (await bcrypt.compareSync(password, user.password) === true)) {
+
+        const token = jwt.sign(
+            { user_id: user._id, email },
+            process.env.TOKEN_KEY,
+            {
+                expiresIn: "2h",
+            }
+        );
+
+        user.token = token;
+
+        return {
+            id: user._id,
+            email: user.email,
+            accessToken: user.token,
+            role: user.role,
+        }
+    }
+
     else {
-        return { status: null }
+        return { status: "Invalid Credentials" }
     }
 }
 
-async function create(query) {
+accountService.create = async (query) => {
     //TODO add validation and additional logic before blindly inserting new user
+
     try {
+        const { email, password } = query;
 
-        let users = new AccountModel({
-            first_name: '',
-            last_name: '',
-            email: query.email,
-            password: bcrypt.hashSync(query.password, 8),
-            token: ''
+        if (!(email && password)) {
+            return { status: 'Invalid input' };
+        }
+        const curUser = await AccountModel.findOne({ email });
+
+        if (curUser) {
+            return { status: 'Existing user' };
+        }
+
+        const user = await AccountModel.create({
+            email: email.toLowerCase(),
+            password: bcrypt.hashSync(password, 10),
         });
 
-        users.save((err, data) => {
-            if (err) {
-                console.log(err)
-                return err
+        const token = jwt.sign(
+            { user_id: user._id, email },
+            process.env.TOKEN_KEY,
+            {
+                expiresIn: "2h",
             }
-            else {
-                return 'success';
-            }
+        );
+        user.token = token;
 
-        });
+        //TODO add logic to send one time code to email for registration purposes
+        return { status: "User Created" }
     }
     catch (e) {
-        return 'failed to insert user';
+        console.log(e);
+        return { status: 'Insert failed' };
     }
 }
 
-async function update(user) {
+accountService.update = async (user) => {
     return user;
 }
 
-async function remove(user) {
+accountService.remove = async (user) => {
     return user
 }
 
-module.exports = {
-    get,
-    create,
-    update,
-    remove
-}
+export default accountService
