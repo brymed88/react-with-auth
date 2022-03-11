@@ -2,10 +2,11 @@ import express from 'express';
 const router = express.Router();
 import auth from "../middleware/auth.js";
 import accountController from '../controllers/account.controller.js';
+import userExists from '../middleware/userExists.js';
 
 router.get('/login', accountController.get);
 
-router.post('/create', accountController.create)
+router.post('/create', userExists ,accountController.create)
 
 router.put('/:id', auth, accountController.update)
 
