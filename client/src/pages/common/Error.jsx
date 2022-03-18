@@ -1,4 +1,4 @@
-const e404 = () => {
+const Error = () => {
 
     return(
         <div>
@@ -10,4 +10,4 @@ const e404 = () => {
     )
 }
 
-export default e404;
+export default Error;
