@@ -1,16 +1,27 @@
-@import "./variables.scss";
+
+@mixin fx-col-wp {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    
+}
+@mixin fx-row-wp {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap
+}
 
 /*Popup Login Form*/
 
 .login_form {
-    @include flex-column-wrap;
+    @include fx-col-wp;
     max-width: 100%;
     background: #fff;
     align-items: center;
     padding: 40px 0;
 
     form {
-        @include flex-column-wrap;
+        @include fx-col-wp;
         align-items: center;
         width: 100%;
         max-width: 600px;
@@ -20,17 +31,17 @@
         padding: 40px 0;
 
         .tabs {
-            @include flex-row-wrap;
+            @include fx-row-wp;
             align-content: center;
             width: 100%;
-            margin: $pad-md 0;
+            margin: 8px 0;
 
             label {
-                padding: $pad_md 0;
+                padding: 8px 0;
                 width: 50%;
                 text-align: center;
                 color: black;
-                font-size: $font_lg;
+                font-size: 1.4rem;
                 border-top: 4px solid green;
                 cursor: pointer;
             }
@@ -46,15 +57,15 @@
 
         .inputs {
             width: 100%;
-            @include flex-column-wrap;
+            @include fx-col-wp;
             align-content: center;
             align-items: center;
-            padding: $pad_sm 0;
+            padding: 4px 0;
 
             input {
-                padding: $pad-xxl 0;
+                padding: 20px 0;
                 text-indent: 4px;
-                margin: $pad_sm;
+                margin: 4px;
                 width: 84%;
                 font-size: 1.2rem;
                 border-radius: 4px;
@@ -65,16 +76,16 @@
         button {
             background-color: green;
             width: 84%;
-            padding: $pad_xxl;
+            padding: 20px;
             cursor: pointer;
-            margin: $pad_md 0;
+            margin: 8px 0;
             border: none;
             border-radius: 4px;
             font-size: 1.2rem;
             color: white;
         }
         .sign_span {
-            padding-top: $pad_lg;
+            padding-top: 12px;
         }
         .sign_span a {
             color: blue;
@@ -82,7 +93,7 @@
         }
         .login_disclaimer {
             width: 84%;
-            padding-top: $pad_lg;
+            padding-top: 12px;
             font-size: 0.8rem;
             text-align: center;
         }

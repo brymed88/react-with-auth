@@ -1,10 +1,22 @@
-@import "./variables.scss";
+
+
+@mixin fx-col-wp {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    
+}
+@mixin fx-row-wp {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap
+}
 
 /*
 *Contact Form Component
 */
 .contact_wrapper {
-    @include flex-column-wrap;
+    @include fx-col-wp;
     align-items: center;
     width: 100%;
     background: #fff;
@@ -14,9 +26,9 @@
         width: 100%;
         max-width: 400px;
         background-color: #fff;
-        @include flex-column-wrap;
+        @include fx-col-wp;
         align-items: center;
-        padding:$pad_xxl 0;
+        padding:20px 0;
         border-radius: 4px;
         box-shadow: 0px 0px 4px #aaa;
 
@@ -26,7 +38,7 @@
         input,
         textarea,
         button {
-            padding: $pad-xxl 0;
+            padding: 20px 0;
             font-size: 1.2rem;
             border-radius: 4px;
             margin: 8px 0;

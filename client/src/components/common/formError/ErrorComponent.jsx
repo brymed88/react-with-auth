@@ -1,3 +1,5 @@
+import './ErrorComponent.min.css';
+
 const ErrorComponent = (props) => {
 
     return (

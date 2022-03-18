@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import '../scss/ContactComponent.min.css';
-import SpinnerComponent from './SpinnerComponent';
-import ErrorComponent from "./ErrorComponent";
+import './ContactComponent.min.css';
+import SpinnerComponent from '../../common/spinner/SpinnerComponent';
+import ErrorComponent from "../../common/formError/ErrorComponent";
 
 const ContactFormComponent = () => {
     const [status, setStatus] = useState('Send');
@@ -57,22 +57,21 @@ const ContactFormComponent = () => {
     return (
         <section className="contact_wrapper">
             {loading === true
-                ? <SpinnerComponent type='full' size='100px' />
-                : ''
+                && <SpinnerComponent type='full' size='100px' />
             }
-                <form onSubmit={contactSubmit}>
+            <form onSubmit={contactSubmit}>
                 <h2>Contact Me</h2>
 
-                    {(errorFlag !== '' ? <ErrorComponent error={errorFlag} /> : '')}
+                {(errorFlag !== '' && <ErrorComponent error={errorFlag} />)}
 
-                    <input type="text" id="name" placeholder="Name" onChange={updateName} />
-                    <input type="email" id="email" placeholder="Email" onChange={updateEmail}/>
-                    <textarea id="message" placeholder="Topic of discussion" onChange={updateTopic}/>
-                    <button
-                        className={status === 'Send' ? 'btn' : status === 'Message Sent!' ? 'btn btn_complete' : 'btn btn_failed'}
-                    >{status}</button>
+                <input type="text" id="name" placeholder="Name" onChange={updateName} />
+                <input type="email" id="email" placeholder="Email" onChange={updateEmail} />
+                <textarea id="message" placeholder="Topic of discussion" onChange={updateTopic} />
+                <button
+                    className={status === 'Send' ? 'btn' : status === 'Message Sent!' ? 'btn btn_complete' : 'btn btn_failed'}
+                >{status}</button>
 
-                </form>
+            </form>
         </section >
     );
 }

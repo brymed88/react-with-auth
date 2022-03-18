@@ -1,8 +1,8 @@
 import {useState} from "react";
 import { Link } from "react-router-dom";
-import SpinnerComponent from "./SpinnerComponent";
-import ErrorComponent from "./ErrorComponent";
-import '../scss/LoginComponent.min.css';
+import SpinnerComponent from "../../common/spinner/SpinnerComponent";
+import ErrorComponent from "../../common/formError/ErrorComponent";
+import './LoginComponent.min.css';
 
 const LoginFormComponent = () => {
 
@@ -84,19 +84,18 @@ const LoginFormComponent = () => {
             <form onSubmit={handleLogin}>
 
                 <div className="tabs">
-                    <label className={loginType !== 'login' ? 'label_not_selected' : ''} onClick={typeChange} id="login">Login</label>
-                    <label className={loginType !== 'signup' ? 'label_not_selected' : ''} onClick={typeChange} id="signup" >Signup</label>
+                    <label className={loginType !== 'login' && 'label_not_selected'} onClick={typeChange} id="login">Login</label>
+                    <label className={loginType !== 'signup' && 'label_not_selected'} onClick={typeChange} id="signup" >Signup</label>
                 </div>
 
-                {(errorFlag !== '' ? <ErrorComponent error={errorFlag} /> : '')}
+                {(errorFlag !== '' && <ErrorComponent error={errorFlag} /> )}
 
                 <div className='inputs'>
                     <input type="email" onChange={updateEmail} placeholder="Email" id='email' />
                     <input type="password" onChange={updatePass} placeholder="Password" id='password' />
 
                     {loginType === 'signup'
-                        ? <input type="password" onChange={updatePassConfirm} placeholder="Confirm Password" id='confirm_password' />
-                        : ''
+                        && <input type="password" onChange={updatePassConfirm} placeholder="Confirm Password" id='confirm_password' />
                     }
                 </div>
 

@@ -1,19 +1,30 @@
-@import "./variables.scss";
+
+@mixin fx-col-wp {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    
+}
+@mixin fx-row-wp {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap
+}
 
 .header {
-    @include flex-row-wrap;
+    @include fx-row-wp;
     width: 100%;
-    height: $header-height;
-    background-color: $navigation-background;
+    height: 100px;
+    background-color: #2490BB;
     position: relative;
 
     .topcontainer {
-        height: $header-height;
-        max-width: $content_width;
+        height: 100px;
+        max-width: 1600px;
     }
     .menu {
         position: absolute;
-        background-color: $navigation-background;
+        background-color: #2490BB;
         width: 0;
         left: 0;
         z-index: 3;
@@ -32,10 +43,10 @@
 
     /* Style navigation menu links */
     .menu a {
-        color: $font_light;
-        padding: $pad-lg 0;
+        color: #fff;
+        padding: 12px 0;
         text-decoration: none;
-        font-size: $font_lg;
+        font-size: 1.4rem;
         margin: 2px 0;
         width: 100%;
         display: block;
@@ -48,7 +59,7 @@
         position: absolute;
         right: 20px;
         top: 20px;
-        color: $font_light;
+        color: #fff;
         font-size: 2.8rem;
         transform: rotate(0deg);
         transition: all 0.4s ease;
@@ -67,45 +78,3 @@
 }
 
 /*END TOP MENU STYLES*/
-
-/*
-*Container Styles
-*/
-.page-container {
-    @include flex-column-wrap;
-    //Set to 100 view height minus footer height - sticky footer
-    min-height: calc(100vh - 62px);
-    padding: 10px;
-
-}
-/*
-*End Container Styles
-*/
-
-.form_error {
-    color: $font_light;
-    width: 100%;
-    background: red;
-    border-radius: 2px;
-    text-align: center;
-    font-size: 1rem;
-}
-
-/*
-*Footer Styles
-*/
-.footer {
-    @include flex-row-wrap;
-    width: 100%;
-    background-color: $navigation-background;
-    padding: 20px 0;
-    justify-content: center;
-
-    div {
-        color: $font-light;
-        font-size: $font-md;
-    }
-}
-/*
-*End footer styles
-*/

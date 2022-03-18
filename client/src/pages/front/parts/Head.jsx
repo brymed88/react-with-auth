@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 
+import './Head.min.css';
+
 const Head = () => {
 
     // Declare a new state variable for button toggle and toggle className;

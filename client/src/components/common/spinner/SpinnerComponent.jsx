@@ -1,4 +1,4 @@
-import '../scss/SpinnerComponent.min.css';
+import "./SpinnerComponent.min.css";
 /*
 * The purpose of this component is to create a Spinner for page/api loads during the user interaction.
 * It can be initialized by the following using the following variables
