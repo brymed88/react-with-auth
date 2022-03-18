@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import SpinnerComponent from "../../common/spinner/SpinnerComponent";
 import ErrorComponent from "../../common/formError/ErrorComponent";
@@ -84,11 +84,11 @@ const LoginFormComponent = () => {
             <form onSubmit={handleLogin}>
 
                 <div className="tabs">
-                    <label className={loginType !== 'login' && 'label_not_selected'} onClick={typeChange} id="login">Login</label>
-                    <label className={loginType !== 'signup' && 'label_not_selected'} onClick={typeChange} id="signup" >Signup</label>
+                    <label className={loginType !== 'login' ? 'label_not_selected' : ''} onClick={typeChange} id="login">Login</label>
+                    <label className={loginType !== 'signup' ? 'label_not_selected' : ''} onClick={typeChange} id="signup" >Signup</label>
                 </div>
 
-                {(errorFlag !== '' && <ErrorComponent error={errorFlag} /> )}
+                {(errorFlag !== '' && <ErrorComponent error={errorFlag} />)}
 
                 <div className='inputs'>
                     <input type="email" onChange={updateEmail} placeholder="Email" id='email' />
