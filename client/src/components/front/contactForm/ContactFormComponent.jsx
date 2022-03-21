@@ -1,57 +1,18 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 import './ContactComponent.min.css';
 import SpinnerComponent from '../../common/spinner/SpinnerComponent';
-import ErrorComponent from "../../common/formError/ErrorComponent";
 
 const ContactFormComponent = () => {
+
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const [status, setStatus] = useState('Send');
-    const [errorFlag, setErrorFlag] = useState('');
-    const [name, setName] = useState('Name');
-    const [email, setEmail] = useState('Email');
-    const [topic, setTopic] = useState('Topic');
     const [loading, setLoading] = useState(false);
 
-    const contactSubmit = e => {
-        e.preventDefault();
-
-        //build object with form data
-        const datObj = {
-            name: name,
-            email: email,
-            topic: topic
-        };
-
-        if (datObj.name !== 'Name' && datObj.name !== '') {
-            if (datObj.email !== 'Email' && datObj.email !== '') {
-                if (datObj.topic !== 'Topic' && datObj.topic !== '') {
-                    setErrorFlag('');
-                    setLoading(true);
-                }
-                else {
-                    setErrorFlag('Please enter a valid topic!');
-                }
-            }
-            else {
-                setErrorFlag('Please enter a valid email!');
-            }
-        }
-        else {
-            setErrorFlag('Please enter a valid name!');
-        }
-
-
-    }
-
-    const updateName = (e) => {
-        setName(e.target.value)
-    }
-
-    const updateEmail = (e) => {
-        setEmail(e.target.value)
-    }
-    const updateTopic = (e) => {
-        setTopic(e.target.value)
+    const FormSubmit = (data) => {
+        console.log(data)
+        setLoading(true);
     }
 
     return (
@@ -59,19 +20,29 @@ const ContactFormComponent = () => {
             {loading === true
                 && <SpinnerComponent type='full' size='100px' />
             }
-            <form onSubmit={contactSubmit}>
+
+            <form onSubmit={handleSubmit(FormSubmit)}>
+
                 <h2>Contact Me</h2>
+                <input {...register("name", { required: true })} placeholder="Name" />
+                {/* errors will return when field validation fails  */}
+                {errors.name && <span>This field is required</span>}
 
-                {(errorFlag !== '' && <ErrorComponent error={errorFlag} />)}
+                <input {...register("email", { required: true })} placeholder="Email" />
+                {/* errors will return when field validation fails  */}
+                {errors.email && <span>This field is required</span>}
 
-                <input type="text" id="name" placeholder="Name" onChange={updateName} />
-                <input type="email" id="email" placeholder="Email" onChange={updateEmail} />
-                <textarea id="message" placeholder="Topic of discussion" onChange={updateTopic} />
+                <textarea {...register("password", { required: true })} placeholder="Topic of discussion" />
+                {/* errors will return when field validation fails  */}
+                {errors.password && <span>This field is required</span>}
+
+                {/* Change button styles based on form status */}
                 <button
                     className={status === 'Send' ? 'btn' : status === 'Message Sent!' ? 'btn btn_complete' : 'btn btn_failed'}
                 >{status}</button>
 
             </form>
+
         </section >
     );
 }
