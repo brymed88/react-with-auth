@@ -1,14 +1,12 @@
-
 @mixin fx-col-wp {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    
 }
 @mixin fx-row-wp {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap
+    flex-wrap: wrap;
 }
 
 /*Popup Login Form*/
@@ -62,18 +60,26 @@
             align-items: center;
             padding: 4px 0;
 
+            div{
+                width: 100%;
+            }
             input {
-                padding: 20px 0;
-                text-indent: 4px;
                 margin: 4px;
-                width: 84%;
-                font-size: 1.2rem;
-                border-radius: 4px;
                 border: 1px solid #ddd;
+                border-radius: 4px;
+                padding: 16px 0;
+                text-indent: 4px;
+                min-width: 84%;
+                font-size: 1.2rem;
+            }
+            span {
+                color: red;
+                padding: 4px 0;
+                width: 84%;
             }
         }
-        
-        button {
+
+        input[type=submit] {
             background-color: green;
             width: 84%;
             padding: 20px;

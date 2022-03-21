@@ -1,109 +1,85 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+
 import SpinnerComponent from "../../common/spinner/SpinnerComponent";
-import ErrorComponent from "../../common/formError/ErrorComponent";
+
 import './LoginComponent.min.css';
 
 const LoginFormComponent = () => {
 
-    const [loginType, setLoginType] = useState('login');
-    const [email, setEmail] = useState('Email');
-    const [password, setPassword] = useState('Password');
-    const [passwordConf, setPasswordConf] = useState('Confirm Password');
-    const [errorFlag, setErrorFlag] = useState('');
+    const { register, handleSubmit, setError, clearErrors, formState: { errors } } = useForm();
+
+    const [formType, setFormType] = useState('login');
     const [loading, setLoading] = useState(false);
 
-    const handleLogin = (event) => {
-        //stop submit from acting like a normal form
-        event.preventDefault();
-        setErrorFlag('');
-
-        //build object with form data
-        const datObj = {
-            eType: loginType,
-            eAddress: email,
-            ePass: password
-        };
-
-        if (datObj.eAddress !== 'Email' && datObj.eAddress !== '') {
-            if (datObj.ePass !== 'Password' && datObj.ePass !== '') {
-
-                if (datObj.eType === 'login') {
-                    setLoading(true)
-                    //call api for login
-                }
-
-                else if (datObj.eType === 'signup') {
-                    if (datObj.ePass === passwordConf) {
-                        setLoading(true);
-                        // call api for signup
-                    }
-                    else {
-                        setErrorFlag("Passwords Must Match!");
-                    }
-                }
-            }
-            else {
-                setErrorFlag("Please enter a password!");
-            }
-
+    const FormSubmit = (data) => {
+        if (formType === 'login') {
+            setLoading(true);
+            console.log(data)
+            //do fetch call
+            //
         }
         else {
-            setErrorFlag("Please enter a valid email address!");
+            if (data.vpassword === data.password) {
+                console.log(data);
+                //do fetch call
+                setLoading(true);
+            }
+            else {
+                setError("vpassword", { type: "manual", message: "Passwords must match!" });
+            }
         }
-
-
     }
 
     const typeChange = (e) => {
-
-        setErrorFlag(''); // unset flag on type change
-        (e.target.id !== 'login' ? setLoginType('signup') : setLoginType('login'))
-
-    }
-
-    const updateEmail = (event) => {
-        setEmail(event.target.value)
-    }
-
-    const updatePass = (event) => {
-        setPassword(event.target.value);
-    }
-
-    const updatePassConfirm = (event) => {
-        setPasswordConf(event.target.value);
+        clearErrors();
+        // Set formType state to either login or signup based on target id
+        (e.target.id !== 'login' ? setFormType('signup') : setFormType('login'))
     }
 
     return (
-        <section className=' login_form'>
+        <section className='login_form'>
             {loading === true
                 ? <SpinnerComponent type='full' size='100px' />
                 : ''
             }
 
-            <form onSubmit={handleLogin}>
-
+            <form onSubmit={handleSubmit(FormSubmit)}>
                 <div className="tabs">
-                    <label className={loginType !== 'login' ? 'label_not_selected' : ''} onClick={typeChange} id="login">Login</label>
-                    <label className={loginType !== 'signup' ? 'label_not_selected' : ''} onClick={typeChange} id="signup" >Signup</label>
+                    <label className={formType !== 'login' ? 'label_not_selected' : ''} onClick={typeChange} id="login">Login</label>
+                    <label className={formType !== 'signup' ? 'label_not_selected' : ''} onClick={typeChange} id="signup" >Signup</label>
                 </div>
 
-                {(errorFlag !== '' && <ErrorComponent error={errorFlag} />)}
-
-                <div className='inputs'>
-                    <input type="email" onChange={updateEmail} placeholder="Email" id='email' />
-                    <input type="password" onChange={updatePass} placeholder="Password" id='password' />
-
-                    {loginType === 'signup'
-                        && <input type="password" onChange={updatePassConfirm} placeholder="Confirm Password" id='confirm_password' />
-                    }
+                <div className="inputs">
+                    <input {...register("email", { required: true })} placeholder="Email" />
+                    {/* errors will return when field validation fails  */}
+                    {errors.email && <span>This field is required</span>}
                 </div>
 
-                <button type='submit'>
-                    {loginType === 'login' ? 'Login' : 'Signup'}
-                </button>
+                <div className="inputs">
+                    <input {...register("password", { required: true })} placeholder="Password" />
+                    {/* errors will return when field validation fails  */}
+                    {errors.password && <span>This field is required</span>}
+                </div>
 
-                {loginType === 'login'
+                {/* Add the Verify password field conditionally if form type is signup */}
+                {formType === 'signup'
+                    &&
+                    <div className="inputs">
+                        <input {...register("vpassword", { required: true })} placeholder="Verify Password" />
+                        {errors.vpassword &&
+                            <span>
+                                {/*Check if password mismatch error is set, if not then display generic error*/}
+                                {errors.vpassword.message ? errors.vpassword.message : 'This field is required'}
+                            </span>
+                        }
+                    </div>
+                }
+
+                <input type="submit" value={formType === 'login' ? 'Login' : "Signup"} />
+
+                {formType === 'login'
                     ? <span className="sign_span">Not a member? <a onClick={typeChange} id='signup'>Signup now</a></span>
                     : <span className="sign_span">Already a member? <a onClick={typeChange} id='login'>Login</a></span>
                 }
@@ -111,8 +87,8 @@ const LoginFormComponent = () => {
                 <div className="login_disclaimer">
                     By creating this account, you agree to our <Link to='/privacy'>Privacy Policy</Link>
                 </div>
-
             </form>
+
         </section>
 
     );
