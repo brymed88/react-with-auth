@@ -5,6 +5,8 @@ import FrontLayout from './layouts/FrontLayout';
 import DashLayout from './layouts/DashLayout';
 
 import Home from "./pages/front/Home";
+import Dashboard from "./pages/dash/Dashboard";
+
 import SpinnerComponent from "./components/common/spinner/SpinnerComponent";
 import PrivateRouteComponent from './components/common/privateRoute/PrivateRouteComponent';
 
@@ -17,10 +19,7 @@ import './App.min.css';
 const About = lazy(() => import("./pages/front/About"));
 const Contact = lazy(() => import("./pages/front/Contact"));
 const Login = lazy(() => import("./pages/front/Login"));
-const Error = lazy(() => import("./pages/common/Error"));
-
-//TODO implemenent JWT verication before allowing access to dashboard, else redirect to home page.
-const Dashboard = lazy(() => import("./pages/dash/Dashboard"));
+const Error = lazy(() => import("./pages/front/Error"));
 
 function App() {
   return (
@@ -65,13 +64,9 @@ function App() {
         <Route element={<DashLayout />}>
           <Route path="/dashboard" element=
             {
-
-              <Suspense fallback={<SpinnerComponent type="full" size='60px' />}>
                 <PrivateRouteComponent >
                   <Dashboard />
                 </PrivateRouteComponent>
-              </Suspense>
-
             } />
 
         </Route>
