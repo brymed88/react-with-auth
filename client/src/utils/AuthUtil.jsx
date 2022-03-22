@@ -2,6 +2,7 @@
 * The below helper functions remove the API query logic from the pages and components. 
 */
 
+// apiCall function accepts a data object and endpoint, uses POST and returns the requested information.
 const apiCall = async (data, endpoint) => {
 
     const requestOptions = {
@@ -58,6 +59,7 @@ const VerifyAuth = async (token) => {
         throw err;
     }
 }
+
 
 export {
     UserLogin,

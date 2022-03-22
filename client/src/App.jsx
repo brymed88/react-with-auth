@@ -5,7 +5,7 @@ import Head from "./pages/front/parts/Head";
 import Foot from "./pages/front/parts/Foot";
 import Home from "./pages/front/Home";
 import SpinnerComponent from "./components/common/spinner/SpinnerComponent";
-
+import PrivateRouteComponent from './components/common/privateRoute/PrivateRouteComponent';
 import './normalize.min.css';
 import './App.min.css';
 
@@ -56,9 +56,13 @@ function App() {
             } />
           <Route path="/dashboard" element=
             {
+
               <Suspense fallback={<SpinnerComponent type="full" size='60px' />}>
-                <Dashboard />
+                <PrivateRouteComponent >
+                  <Dashboard />
+                </PrivateRouteComponent>
               </Suspense>
+              
             } />
         </Routes>
       </div>
