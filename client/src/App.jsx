@@ -17,6 +17,7 @@ const Contact = lazy(() => import("./pages/front/Contact"));
 const Login = lazy(() => import("./pages/front/Login"));
 const Error = lazy(() => import("./pages/common/Error"));
 
+//TODO implemenent JWT verication before allowing access to dashboard, else redirect to home page.
 const Dashboard = lazy(() => import("./pages/dash/Dashboard"));
 
 function App() {

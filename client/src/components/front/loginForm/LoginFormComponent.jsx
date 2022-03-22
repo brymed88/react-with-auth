@@ -1,24 +1,39 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
+import { UserLogin } from "../../../utils/AuthUtil";
 import SpinnerComponent from "../../common/spinner/SpinnerComponent";
 
 import './LoginComponent.min.css';
 
 const LoginFormComponent = () => {
 
+    const navigate = useNavigate();
     const { register, handleSubmit, setError, clearErrors, formState: { errors } } = useForm();
 
     const [formType, setFormType] = useState('login');
     const [loading, setLoading] = useState(false);
-
     const FormSubmit = (data) => {
         if (formType === 'login') {
             setLoading(true);
-            console.log(data)
-            //do fetch call
-            //
+
+            if (data) {
+                //Call helper function to process api call
+                UserLogin(data)
+                    .then(response => {
+
+                        //Successful login, redirect user to dashboard
+                        if (response.status === 'success') {
+                            setLoading(false);
+                            navigate("/dashboard", { replace: true });
+                        }
+                        else {
+                            setLoading(false);
+                            setError("flogin", { type: "manual", message: "Login Unsuccessful, please try again!" });
+                        }
+                    })
+            }
         }
         else {
             if (data.vpassword === data.password) {
@@ -50,6 +65,13 @@ const LoginFormComponent = () => {
                     <label className={formType !== 'login' ? 'label_not_selected' : ''} onClick={typeChange} id="login">Login</label>
                     <label className={formType !== 'signup' ? 'label_not_selected' : ''} onClick={typeChange} id="signup" >Signup</label>
                 </div>
+
+                {errors.flogin &&
+                    <span className="loginError">
+                        {/*Check if password mismatch error is set, if not then display generic error*/}
+                        {errors.flogin.message && errors.flogin.message}
+                    </span>
+                }
 
                 <div className="inputs">
                     <input {...register("email", { required: true })} placeholder="Email" />
