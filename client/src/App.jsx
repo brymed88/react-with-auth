@@ -1,11 +1,13 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { Suspense, lazy } from "react";
 
-import Head from "./pages/front/parts/Head";
-import Foot from "./pages/front/parts/Foot";
+import FrontLayout from './layouts/FrontLayout';
+import DashLayout from './layouts/DashLayout';
+
 import Home from "./pages/front/Home";
 import SpinnerComponent from "./components/common/spinner/SpinnerComponent";
 import PrivateRouteComponent from './components/common/privateRoute/PrivateRouteComponent';
+
 import './normalize.min.css';
 import './App.min.css';
 
@@ -23,9 +25,11 @@ const Dashboard = lazy(() => import("./pages/dash/Dashboard"));
 function App() {
   return (
     <BrowserRouter>
-      <Head />
-      <div className="page-container">
-        <Routes>
+
+      <Routes>
+
+        {/* Routes will use FrontLayout which will be different than the user dashboard */}
+        <Route element={<FrontLayout />}>
 
           <Route path="/" element={<Home />} exact />
           <Route path="*" element=
@@ -54,6 +58,11 @@ function App() {
                 <Login />
               </Suspense>
             } />
+
+        </Route>
+
+        {/* Routes will use DashLayout which will be different than the front pages*/}
+        <Route element={<DashLayout />}>
           <Route path="/dashboard" element=
             {
 
@@ -62,12 +71,12 @@ function App() {
                   <Dashboard />
                 </PrivateRouteComponent>
               </Suspense>
-              
-            } />
-        </Routes>
-      </div>
 
-      <Foot />
+            } />
+
+        </Route>
+
+      </Routes>
 
     </BrowserRouter>
   );
