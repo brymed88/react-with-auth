@@ -1,6 +1,7 @@
 import accountService from '../services/account.service.js';
 
 const accountController = {};
+
 accountController.get = async (req, res, next) => {
     try {
         res.json(await accountService.get(req.body));
@@ -31,6 +32,7 @@ accountController.verify = (req, res, next) => {
         next(err)
     }
 }
+
 accountController.update = async (req, res, next) => {
     try {
         res.json(await accountService.get(req.query));
