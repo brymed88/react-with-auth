@@ -11,7 +11,6 @@ const ContactFormComponent = () => {
     const [loading, setLoading] = useState(false);
 
     const FormSubmit = (data) => {
-        console.log(data)
         setLoading(true);
     }
 
@@ -32,9 +31,9 @@ const ContactFormComponent = () => {
                 {/* errors will return when field validation fails  */}
                 {errors.email && <span>This field is required</span>}
 
-                <textarea {...register("password", { required: true })} placeholder="Topic of discussion" />
+                <textarea {...register("topic", { required: true })} placeholder="Topic of discussion" />
                 {/* errors will return when field validation fails  */}
-                {errors.password && <span>This field is required</span>}
+                {errors.topic && <span>This field is required</span>}
 
                 {/* Change button styles based on form status */}
                 <button
