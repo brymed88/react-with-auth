@@ -50,8 +50,20 @@ const UserLogin = async (data) => {
     }
 }
 
-const Signup = () => {
-
+const Signup = async (data) => {
+    try {
+        const response = await apiCall(data, `${serverURL}/api/account/create`);
+        if (response.status === 'success') {
+            //TODO add some logic to send email for signup pin code
+            console.log(response);
+        }
+        else {
+            return { "status": "failed" };
+        }
+    }
+    catch (err) {
+        throw err;
+    }
 }
 
 const VerifyAuth = async () => {
