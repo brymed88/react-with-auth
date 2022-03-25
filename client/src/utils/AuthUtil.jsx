@@ -3,7 +3,7 @@
 */
 
 // apiCall function accepts a data object and endpoint, uses POST and returns the requested information.
-//TODO put this value in a .env file or some other global variable
+//TODO this value will be removed depending on network setup.. If nginx with reverse proxy then irrelevant.
 const serverURL = "http://192.168.1.199:3001"
 
 const apiCall = async (data, endpoint) => {
@@ -54,8 +54,9 @@ const Signup = () => {
 
 }
 
-const VerifyAuth = async (token) => {
+const VerifyAuth = async () => {
     try {
+        const token = localStorage.getItem("token");
         const response = await apiCall(token, `${serverURL}/api/account/verify`);
         console.log(response);
 
