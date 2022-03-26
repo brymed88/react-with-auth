@@ -23,9 +23,10 @@
         align-items: center;
         width: 100%;
         max-width: 500px;
-        padding: 20px 0;
+        padding: 40px 0;
         box-shadow: 0px 0px 4px #aaa;
         position: relative;
+
         .tabs {
             @include fx-row-wp;
             align-content: center;
@@ -123,6 +124,28 @@
                 padding-top: 12px;
                 font-size: 0.8rem;
                 text-align: center;
+            }
+        }
+        .success_enroll{
+            @include fx-col-wp;
+            align-items: center;
+            h2{
+                color: green;
+                font-size: 1.6rem;
+            }
+            input[type='button']{
+                background-color: green;
+                width: 84%;
+                padding: 20px;
+                cursor: pointer;
+                margin: 8px 0;
+                border: none;
+                border-radius: 4px;
+                font-size: 1.2rem;
+                color: white;
+            }
+            input[type='button']:hover{
+                box-shadow: 2px 2px 4px rgba(0,0,0,.3);
             }
         }
     }
