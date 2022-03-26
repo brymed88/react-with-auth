@@ -33,10 +33,10 @@ const AccountComponent = () => {
             typeForm = <SignupComponent callback={nextStep} />
             break;
         case 'verify':
-            typeForm = <VerifyComponent />
+            typeForm = <VerifyComponent callback={nextStep} />
             break;
         case 'reset':
-            typeForm = <ResetComponent />
+            typeForm = <ResetComponent callback={nextStep} />
             break;
         case 'success':
             typeForm = <SuccessComponent callback={nextStep} />
@@ -54,13 +54,32 @@ const AccountComponent = () => {
             <div className="account_container">
 
                 {/*Only show tabs if the formtype is login or signup, else show back button*/}
-                {(formType === 'login' || formType === 'signup') ?
-                    <div className="tabs">
-                        <label className={formType !== 'login' ? 'label_not_selected' : ''} onClick={() => { nextStep('login') }} id="login">Login</label>
-                        <label className={formType !== 'signup' ? 'label_not_selected' : ''} onClick={() => { nextStep('signup') }} id="signup" >Signup</label>
+                {(formType === 'login' || formType === 'signup')
+                    ? <div className="tabs">
+                        <label
+                            className={
+                                formType !== 'login' ? 'label_not_selected' : ''
+                            }
+                            onClick={
+                                () => { nextStep('login') }
+                            }
+                            id="login">
+                            Login
+                        </label>
+
+                        <label
+                            className={
+                                formType !== 'signup' ? 'label_not_selected' : ''
+                            }
+                            onClick={
+                                () => { nextStep('signup') }
+                            }
+                            id="signup" >
+                            Signup
+                        </label>
+
                     </div>
-                    :
-                    <div className="back_btn" >
+                    : <div className="back_btn" >
                         <img src="./back.svg" alt="back to the login" onClick={() => { nextStep('login') }} />
                     </div>
                 }
