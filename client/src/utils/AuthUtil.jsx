@@ -78,9 +78,22 @@ const VerifyAuth = async () => {
     }
 }
 
+const SendCode = async (data) => {
+    console.log(data)
+    return {"status":"success"};
+   /* try {
+        const response = await apiCall(data, `${serverURL}/api/account/reset`);
+        console.log(response);
+    }
+    catch (err) {
+        throw err;
+    }*/
+}
+
 
 export {
     UserLogin,
     Signup,
-    VerifyAuth
+    VerifyAuth,
+    SendCode
 }

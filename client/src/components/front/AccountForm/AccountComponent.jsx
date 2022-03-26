@@ -1,10 +1,12 @@
 import { useState } from 'react';
 
-import LoginComponent from './login/LoginComponent';
-import SignupComponent from './signup/SignupComponent';
-import ResetComponent from './passReset/resetComponent';
-import VerifyComponent from './verify/VerifyComponent';
+import LoginComponent from './LoginComponent';
+import SignupComponent from './SignupComponent';
+import ResetComponent from './ResetComponent';
+import VerifyComponent from './VerifyComponent';
+import SuccessComponent from './SuccessComponent';
 
+import './AccountComponent.min.css';
 
 const AccountComponent = () => {
 
@@ -12,39 +14,60 @@ const AccountComponent = () => {
     const [formType, setFormType] = useState('login');
 
     //Initialize typeForm variable for form components
-    let typeForm;
 
-    if (formType === 'login') {
-        typeForm = <LoginComponent />
-    }
-    else if (formType === 'signup') {
-        typeForm = <SignupComponent />
-    }
-    else if (formType === 'reset') {
-        typeForm = <ResetComponent />
-    }
-    else if (formType === 'verify') {
-        typeForm = <VerifyComponent />
+    const nextStep = (e) => {
+        setFormType(e);
     }
 
     function typeChange(e) {
         setFormType(e.target.id);
     }
 
+    let typeForm;
+
+    switch (formType) {
+        case 'login':
+            typeForm = <LoginComponent callback={nextStep} />
+            break;
+        case 'signup':
+            typeForm = <SignupComponent callback={nextStep} />
+            break;
+        case 'verify':
+            typeForm = <VerifyComponent />
+            break;
+        case 'reset':
+            typeForm = <ResetComponent />
+            break;
+        case 'success':
+            typeForm = <SuccessComponent callback={nextStep} />
+            break;
+        default:
+        //return nothing
+    }
+
+    const formSubmit = () => {
+        console.log('submitted');
+    }
+
     return (
         <section className="account_component">
+            <div className="account_container">
 
-            <div className="tabs">
-                <label className={formType !== 'login' ? 'label_not_selected' : ''} onClick={typeChange} id="login">Login</label>
-                <label className={formType !== 'signup' ? 'label_not_selected' : ''} onClick={typeChange} id="signup" >Signup</label>
+                {/*Only show tabs if the formtype is login or signup, else show back button*/}
+                {(formType === 'login' || formType === 'signup') ?
+                    <div className="tabs">
+                        <label className={formType !== 'login' ? 'label_not_selected' : ''} onClick={() => { nextStep('login') }} id="login">Login</label>
+                        <label className={formType !== 'signup' ? 'label_not_selected' : ''} onClick={() => { nextStep('signup') }} id="signup" >Signup</label>
+                    </div>
+                    :
+                    <div className="back_btn" >
+                        <img src="./back.svg" alt="back to the login" onClick={() => { nextStep('login') }} />
+                    </div>
+                }
+
+                {typeForm}
+
             </div>
-            {typeForm}
-
-            {formType === 'login'
-                ? <span className="sign_span">Not a member? <a onClick={typeChange} id='signup'>Signup now</a></span>
-                : <span className="sign_span">Already a member? <a onClick={typeChange} id='login'>Login</a></span>
-            }
-
         </section>
     )
 }
