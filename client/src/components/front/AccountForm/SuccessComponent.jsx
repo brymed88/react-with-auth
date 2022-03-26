@@ -4,9 +4,9 @@ const SuccessComponent = (props) => {
 
   const { callback } = props;
   return (
-    <section>
-      <h2>Successful Enrollment!</h2>
-      <button onClick={() => { callback('login') }}>Login?</button>
+    <section className="success_enroll">
+      <h2>Verification successful!</h2>
+      <input type="button" onClick={() => { callback('login') }} value="Please Login"/>
     </section>
   )
 }

@@ -13,7 +13,8 @@ const ResetComponent = (props) => {
   const [loading, setLoading] = useState(false);
   const [submitError, setSubmitError] = useState(false);
 
-  const [showCode, setShowCode] = useState(false);
+  //destructure callback function from prop
+  const { callback } = props;
 
   const FormSubmit = (data) => {
 
@@ -26,25 +27,29 @@ const ResetComponent = (props) => {
     if (data) {
 
       //Call util function to process api call
-         SendCode(data)
-             .then(response => {
- 
-                 //Successful login, redirect user to dashboard
-                 if (response.status === 'success') {
-                     //Disable loading spinner as action is now complete
-                     setLoading(false);
- 
-                 }
-                 else {
- 
-                     //Set form error for unsuccessful login
-                     setSubmitError(true);
- 
-                     //Disable loading spinner as action is now complete
-                     setLoading(false);
- 
-                 }
-             })
+      SendCode(data)
+        .then(response => {
+
+          //Successful login, redirect user to dashboard
+          if (response.status === 'success') {
+            //Disable loading spinner as action is now complete
+            setLoading(false);
+            console.log(response.status);
+
+            //If the pass reset code has been sent to user and api returns successfull. Navigate to verify page.
+            callback('verify');
+
+          }
+          else {
+
+            //Set form error for unsuccessful login
+            setSubmitError(true);
+
+            //Disable loading spinner as action is now complete
+            setLoading(false);
+
+          }
+        })
     }
   }
 

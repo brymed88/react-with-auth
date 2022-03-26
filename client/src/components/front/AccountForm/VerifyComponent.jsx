@@ -3,14 +3,19 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import SpinnerComponent from '../../common/spinner/SpinnerComponent';
 
+import { VerifyCode } from '../../../utils/AuthUtil';
+
 const VerifyComponent = (props) => {
 
     //De-structure useForm import variables
-    const { register, handleSubmit,formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
     //Setup state variables for form functionality
     const [loading, setLoading] = useState(false);
     const [submitError, setSubmitError] = useState(false);
+
+    //destructure callback function from prop
+    const { callback } = props;
 
     const FormSubmit = (data) => {
 
@@ -23,29 +28,27 @@ const VerifyComponent = (props) => {
         if (data) {
 
             //Call util function to process api call
-            /*   UserLogin(data)
-                   .then(response => {
-   
-                       //Successful login, redirect user to dashboard
-                       if (response.status === 'success') {
-   
-                           //Disable loading spinner as action is now complete
-                           setLoading(false);
-   
-                           //Redirect to dashboard if login was successful
-                           navigate("/dashboard", { replace: true });
-   
-                       }
-                       else {
-   
-                           //Set form error for unsuccessful login
-                           setSubmitError(true);
-   
-                           //Disable loading spinner as action is now complete
-                           setLoading(false);
-   
-                       }
-                   })*/
+            VerifyCode(data)
+                .then(response => {
+
+                    //Successful login, redirect user to dashboard
+                    if (response.status === 'success') {
+
+                        //Disable loading spinner as action is now complete
+                        setLoading(false);
+                        callback('success');
+
+                    }
+                    else {
+
+                        //Set form error for unsuccessful login
+                        setSubmitError(true);
+
+                        //Disable loading spinner as action is now complete
+                        setLoading(false);
+
+                    }
+                })
         }
     }
 
