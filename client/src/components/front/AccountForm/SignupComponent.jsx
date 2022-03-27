@@ -39,7 +39,7 @@ const SignupComponent = (props) => {
               setLoading(false);
 
               //Call back for parent function to proceed to email code verification
-              callback('verify');
+              callback('signup', 'verify');
 
             }
             else {

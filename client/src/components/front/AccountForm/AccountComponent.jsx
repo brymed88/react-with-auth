@@ -3,6 +3,7 @@ import { useState } from 'react';
 import LoginComponent from './LoginComponent';
 import SignupComponent from './SignupComponent';
 import ResetComponent from './ResetComponent';
+import PassResetComponent from './PassResetComponent';
 import VerifyComponent from './VerifyComponent';
 import SuccessComponent from './SuccessComponent';
 
@@ -12,11 +13,11 @@ const AccountComponent = () => {
 
     //State for type of form
     const [formType, setFormType] = useState('login');
+    const [prevFormType, setPrevFormType] = useState('login');
 
-    //Initialize typeForm variable for form components
-
-    const nextStep = (e) => {
-        setFormType(e);
+    const nextStep = (prev, target) => {
+        setPrevFormType(prev);
+        setFormType(target);
     }
 
     let typeForm;
@@ -29,13 +30,16 @@ const AccountComponent = () => {
             typeForm = <SignupComponent callback={nextStep} />
             break;
         case 'verify':
-            typeForm = <VerifyComponent callback={nextStep} />
+            typeForm = <VerifyComponent callback={nextStep} origin={prevFormType} />
             break;
         case 'reset':
             typeForm = <ResetComponent callback={nextStep} />
             break;
+        case 'passreset':
+            typeForm = <PassResetComponent callback={nextStep} />
+            break;
         case 'success':
-            typeForm = <SuccessComponent callback={nextStep} />
+            typeForm = <SuccessComponent callback={nextStep} origin={prevFormType} />
             break;
         default:
         //return nothing

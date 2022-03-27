@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import SpinnerComponent from '../../common/spinner/SpinnerComponent';
-
 import { VerifyCode } from '../../../utils/AuthUtil';
 
 const VerifyComponent = (props) => {
@@ -15,7 +13,7 @@ const VerifyComponent = (props) => {
     const [submitError, setSubmitError] = useState(false);
 
     //destructure callback function from prop
-    const { callback } = props;
+    const { callback, origin } = props;
 
     const FormSubmit = (data) => {
 
@@ -36,8 +34,18 @@ const VerifyComponent = (props) => {
 
                         //Disable loading spinner as action is now complete
                         setLoading(false);
-                        callback('success');
 
+                        switch (origin) {
+                            //if signup workflow
+                            case 'signup':
+                                callback('verify', 'success');
+                                break;
+                            //if pass reset workflow
+                            case 'reset':
+                                callback('verify', 'passreset');
+                                break;
+                            default: ;
+                        }
                     }
                     else {
 

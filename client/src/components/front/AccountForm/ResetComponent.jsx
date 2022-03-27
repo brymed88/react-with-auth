@@ -37,7 +37,7 @@ const ResetComponent = (props) => {
             console.log(response.status);
 
             //If the pass reset code has been sent to user and api returns successfull. Navigate to verify page.
-            callback('verify');
+            callback('reset', 'verify');
 
           }
           else {

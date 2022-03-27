@@ -97,7 +97,7 @@ const LoginComponent = (props) => {
 
       {/*Link for change to pass reset workflow via callback function to parent */}
       <div>
-        <span className="login_trouble" onClick={() => { callback('reset') }} id='reset'>Trouble logging in?</span>
+        <span className="login_trouble" onClick={() => { callback('login', 'reset') }} id='reset'>Trouble logging in?</span>
       </div>
     </form>
   );
