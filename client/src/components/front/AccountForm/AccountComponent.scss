@@ -83,70 +83,55 @@
                 align-content: center;
                 align-items: center;
                 padding: 4px 0;
-
-                input {
-                    margin: 4px;
-                    border: 1px solid #ddd;
-                    border-radius: 4px;
-                    padding: 16px 0;
-                    text-indent: 4px;
-                    min-width: 84%;
-                    font-size: 1.2rem;
-                }
-                span {
-                    color: red;
-                    padding: 4px 0;
-                    width: 84%;
-                    font-size: 1.1rem;
-                }
-            }
-
-            input[type="submit"] {
-                background-color: green;
-                width: 84%;
-                padding: 20px;
-                cursor: pointer;
-                margin: 8px 0;
-                border: none;
-                border-radius: 4px;
-                font-size: 1.2rem;
-                color: white;
-            }
-            .sign_span {
-                padding-top: 12px;
-            }
-            .sign_span a {
-                color: blue;
-                cursor: pointer;
             }
             .login_disclaimer {
                 width: 84%;
                 padding-top: 12px;
-                font-size: 0.8rem;
+                font-size: 0.9rem;
                 text-align: center;
             }
         }
+
+        input {
+            margin: 4px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 16px 0;
+            text-indent: 4px;
+            min-width: 84%;
+            font-size: 1.2rem;
+        }
+        span {
+            color: red;
+            padding: 4px 0;
+            width: 84%;
+            font-size: 1.1rem;
+        }
+
+        input[type="submit"] {
+            background-color: green !important;
+            width: 84%;
+            padding: 20px;
+            cursor: pointer;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.2rem;
+            color: white;
+        }
+        input[type='button']:hover{
+            box-shadow: 2px 2px 4px rgba(0,0,0,.3);
+        }
+
         .success_enroll{
             @include fx-col-wp;
             align-items: center;
+
             h2{
                 color: green;
                 font-size: 1.6rem;
             }
-            input[type='button']{
-                background-color: green;
-                width: 84%;
-                padding: 20px;
-                cursor: pointer;
-                margin: 8px 0;
-                border: none;
-                border-radius: 4px;
-                font-size: 1.2rem;
-                color: white;
-            }
-            input[type='button']:hover{
-                box-shadow: 2px 2px 4px rgba(0,0,0,.3);
-            }
+           
         }
     }
 }
