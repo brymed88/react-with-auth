@@ -6,7 +6,7 @@ const SuccessComponent = (props) => {
   return (
     <section className="success_enroll">
       <h2>Verification successful!</h2>
-      <input type="button" onClick={() => { callback('login') }} value="Please Login"/>
+      <input type="submit" onClick={() => { callback('login') }} value="Please Login"/>
     </section>
   )
 }
