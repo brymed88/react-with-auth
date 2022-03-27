@@ -19,10 +19,6 @@ const AccountComponent = () => {
         setFormType(e);
     }
 
-    function typeChange(e) {
-        setFormType(e.target.id);
-    }
-
     let typeForm;
 
     switch (formType) {
@@ -43,10 +39,6 @@ const AccountComponent = () => {
             break;
         default:
         //return nothing
-    }
-
-    const formSubmit = () => {
-        console.log('submitted');
     }
 
     return (
