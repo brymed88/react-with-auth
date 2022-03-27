@@ -91,6 +91,21 @@ const VerifyAuth = async () => {
 
 }
 
+/*Calls api route and updates user account password. If successful, returns success */
+const PassReset = async (data) => {
+    console.log(data)
+    return { "status": "success" };
+    /* try {
+         const response = await apiCall(data, `${serverURL}/api/account/passreset`);
+         console.log(response);
+         return{"status":"success"};
+     }
+     catch (err) {
+         throw err;
+         return{"status":"failed"};
+     }*/
+}
+
 /*Calls api route and generates code token stored on account. If email is sent, returns success*/
 const SendCode = async (data) => {
     console.log(data)
@@ -122,6 +137,7 @@ const VerifyCode = async (data) => {
 export {
     UserLogin,
     Signup,
+    PassReset,
     VerifyAuth,
     SendCode,
     VerifyCode
