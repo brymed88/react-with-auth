@@ -79,7 +79,8 @@ const AccountComponent = () => {
                         </label>
 
                     </div>
-                    : <div className="back_btn" >
+                    : formType === 'reset'
+                    && <div className="back_btn" >
                         <img src="./back.svg" alt="back to the login" onClick={() => { nextStep('login') }} />
                     </div>
                 }
