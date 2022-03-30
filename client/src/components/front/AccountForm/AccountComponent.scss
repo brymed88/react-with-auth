@@ -2,18 +2,19 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    width: 100%;
 }
 @mixin fx-row-wp {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    width: 100%;
 }
 
 /*Popup Login Form*/
 
 .account_component {
     @include fx-col-wp;
-    max-width: 100%;
     background: #fff;
     align-items: center;
     padding: 40px 0;
@@ -21,7 +22,6 @@
     .account_container {
         @include fx-col-wp;
         align-items: center;
-        width: 100%;
         max-width: 500px;
         padding: 40px 0;
         box-shadow: 0px 0px 4px #aaa;
@@ -30,7 +30,6 @@
         .tabs {
             @include fx-row-wp;
             align-content: center;
-            width: 100%;
             margin: 8px 0;
 
             label {
@@ -46,45 +45,37 @@
             .label_not_selected {
                 border: none;
             }
-
-            input[type="radio"] {
-                display: none;
-            }
         }
+
         .back_btn {
             position: absolute;
             left: 4px;
-            top:4px;
-            img {
-                width: 30px;
-                cursor: pointer;
-            }
+            top: 4px;
+            width: 30px;
+            cursor: pointer;
         }
+
         form {
             @include fx-col-wp;
             align-items: center;
-            width: 100%;
-            max-width: 600px;
-            align-self: center;
             border-radius: 4px;
 
             .loginError {
-                width: 82%;
+                width: 99%;
                 text-align: center;
                 font-size: 1.2rem;
+                margin:10px 0;
                 color: white;
-                background-color: red;
-                border-radius: 4px;
-                padding: 4px;
+                background-color: rgba(255, 0, 0,.8);
+                padding: 8px 0;
             }
+
             .inputs {
-                width: 100%;
                 @include fx-col-wp;
-                align-content: center;
                 align-items: center;
                 padding: 4px 0;
             }
-            .login_disclaimer {
+            .signup_disclaimer {
                 width: 84%;
                 padding-top: 12px;
                 font-size: 0.9rem;
@@ -119,19 +110,18 @@
             font-size: 1.2rem;
             color: white;
         }
-        input[type='button']:hover{
-            box-shadow: 2px 2px 4px rgba(0,0,0,.3);
+        input[type="button"]:hover {
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
-        .success_enroll{
+        .success_enroll {
             @include fx-col-wp;
             align-items: center;
 
-            h2{
+            h2 {
                 color: green;
                 font-size: 1.6rem;
             }
-           
         }
     }
 }
