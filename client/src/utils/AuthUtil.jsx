@@ -15,19 +15,10 @@ const apiCall = async (data, endpoint) => {
     };
 
     const response = await fetch(endpoint, requestOptions)
-        .then((response) => {
-            if (response.ok) {
-                return response.json();
-            }
-        })
-        .catch(error => {
-            //TODO remove before build and deployment
-            console.error('There was an error!', error);
-
-            return { "status": "failed" }
-
-        });
-    return response;
+    if (!response.ok) {
+        throw new Error("HTTP error " + response.status);
+    }
+    return response.json();
 
 }
 
@@ -36,6 +27,7 @@ const UserLogin = async (data) => {
 
     try {
         const response = await apiCall(data, `${serverURL}/api/account/login`);
+        console.log(response)
         if (response.accessToken) {
             //User has successfully logged in. Put accesstoken in browser local storage and return success.
             localStorage.setItem("token", JSON.stringify(response.accessToken));
@@ -45,7 +37,6 @@ const UserLogin = async (data) => {
         else {
             return { "status": "failed" };
         }
-
     }
     catch (err) {
         throw err;
@@ -55,19 +46,20 @@ const UserLogin = async (data) => {
 
 /*Calls api route and creates user account and sends verification code to email. If valid, returns success*/
 const Signup = async (data) => {
-
-    try {
-        const response = await apiCall(data, `${serverURL}/api/account/create`);
-        if (response.status === 'success') {
-            return { "status": "success" };
-        }
-        else {
-            return { "status": "failed" };
-        }
-    }
-    catch (err) {
-        throw err;
-    }
+    console.log(data)
+    return { "status": "success" };
+    /* try {
+         const response = await apiCall(data, `${serverURL}/api/account/create`);
+         if (response.status === 'success') {
+             return { "status": "success" };
+         }
+         else {
+             return { "status": "failed" };
+         }
+     }
+     catch (err) {
+         throw err;
+     }*/
 }
 
 /*Calls api route and verifies local auth token is valid. If valid, returns success */
