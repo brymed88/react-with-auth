@@ -1,13 +1,13 @@
 
-import ContactFormComponent  from '../../components/front/contactForm/ContactFormComponent';
+import ContactFormComponent from '../../components/front/contactForm/ContactFormComponent';
 
 const Contact = () => {
 
     return (
         <section>
-
+            <title>Contact Page</title>
             <ContactFormComponent />
-            
+
         </section>
     )
 }

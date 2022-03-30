@@ -6,6 +6,7 @@ const Login = () => {
 
     return (
         <section>
+            <title>Login Page</title>
             <AccountComponent />
         </section>
     );
