@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { SendCode } from '../../../utils/AuthUtil';
 import SpinnerComponent from '../../common/spinner/SpinnerComponent';
 
+import FormContext from './FormContext';
 const ResetComponent = (props) => {
 
   //De-structure useForm import variables
   const { register, handleSubmit, setError, clearErrors, formState: { errors } } = useForm();
+
+  //Get Form Context
+  const [setContext] = useContext(FormContext);
 
   //Setup state variables for form functionality
   const [loading, setLoading] = useState(false);
@@ -16,7 +20,7 @@ const ResetComponent = (props) => {
   //destructure callback function from prop
   const { callback } = props;
 
-  const FormSubmit = (data) => {
+  const FormSubmit = async (data) => {
 
     //Reset submit status in case of past failure
     setSubmitError(false);
@@ -24,32 +28,34 @@ const ResetComponent = (props) => {
     //Set Loading spinner to true while form is processing
     setLoading(true);
 
+
     if (data) {
 
       //Call util function to process api call
-      SendCode(data)
-        .then(response => {
+      const response = await SendCode(data)
 
-          //Successful login, redirect user to dashboard
-          if (response.status === 'success') {
-            //Disable loading spinner as action is now complete
-            setLoading(false);
-            console.log(response.status);
+      //Successful login, redirect user to dashboard
+      if (response.status === 'success') {
 
-            //If the pass reset code has been sent to user and api returns successfull. Navigate to verify page.
-            callback('reset', 'verify');
+        //Add user email to context
+        setContext(data.email)
 
-          }
-          else {
+        //Disable loading spinner as action is now complete
+        setLoading(false);
 
-            //Set form error for unsuccessful login
-            setSubmitError(true);
+        //If the pass reset code has been sent to user and api returns successfull. Navigate to verify page.
+        callback('reset', 'verify');
 
-            //Disable loading spinner as action is now complete
-            setLoading(false);
+      }
+      else {
 
-          }
-        })
+        //Set form error for unsuccessful login
+        setSubmitError(true);
+
+        //Disable loading spinner as action is now complete
+        setLoading(false);
+
+      }
     }
   }
 

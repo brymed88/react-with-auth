@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import FormContext from './FormContext';
 
 import LoginComponent from './LoginComponent';
 import SignupComponent from './SignupComponent';
@@ -10,6 +11,8 @@ import SuccessComponent from './SuccessComponent';
 import './AccountComponent.min.css';
 
 const AccountComponent = () => {
+
+    const [context, setContext] = useState('default');
 
     //State for type of form
     const [formType, setFormType] = useState('login');
@@ -57,7 +60,7 @@ const AccountComponent = () => {
                                 formType !== 'login' ? 'label_not_selected' : ''
                             }
                             onClick={
-                                () => { nextStep('login') }
+                                () => { nextStep('home', 'login') }
                             }
                             id="login">
                             Login
@@ -68,7 +71,7 @@ const AccountComponent = () => {
                                 formType !== 'signup' ? 'label_not_selected' : ''
                             }
                             onClick={
-                                () => { nextStep('signup') }
+                                () => { nextStep('home', 'signup') }
                             }
                             id="signup" >
                             Signup
@@ -76,12 +79,14 @@ const AccountComponent = () => {
 
                     </div>
                     : formType === 'reset'
-                    && <div className="back_btn" >
-                        <img src="./back.svg" alt="back to the login" onClick={() => { nextStep('login') }} />
-                    </div>
-                }
+                    &&
+                    <img className="back_btn" src="./back.svg" alt="back to the login" onClick={() => { nextStep('reset', 'login') }} />
 
-                {typeForm}
+                }
+                {/*Wrap the form componets in the FormContext for saving user email state*/}
+                <FormContext.Provider value={[context, setContext]}>
+                    {typeForm}
+                </FormContext.Provider>
 
             </div>
         </section>

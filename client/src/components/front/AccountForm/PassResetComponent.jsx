@@ -1,13 +1,15 @@
-import React from 'react'
-import { useState } from 'react';
+import React, { useContext, useState } from 'react'
 import { useForm } from "react-hook-form";
 import { PassReset } from '../../../utils/AuthUtil';
 import SpinnerComponent from '../../common/spinner/SpinnerComponent';
-
+import FormContext from './FormContext';
 const PassResetComponent = (props) => {
 
     //De-structure useForm import variables
     const { register, handleSubmit, setError, formState: { errors } } = useForm();
+
+    //Get Form Context
+    const [context] = useContext(FormContext);
 
     //Setup state variables for form functionality
     const [loading, setLoading] = useState(false);
@@ -16,7 +18,7 @@ const PassResetComponent = (props) => {
     //destructure callback function from prop
     const { callback } = props;
 
-    const FormSubmit = (data) => {
+    const FormSubmit = async (data) => {
 
         //Reset submit status in case of past failure
         setSubmitError(false);
@@ -26,30 +28,31 @@ const PassResetComponent = (props) => {
 
         if (data.vpassword === data.password) {
 
+            //Add user email from context to data object before validation
+            data.email = `${context}`;
+
             //Call util function to process api call for signup
-            PassReset(data)
-                .then(response => {
+            const response = await PassReset(data);
 
-                    //Successful login, redirect user to dashboard
-                    if (response.status === 'success') {
+            //Successful login, redirect user to dashboard
+            if (response.status === 'success') {
 
-                        //Disable loading spinner as action is now complete
-                        setLoading(false);
+                //Disable loading spinner as action is now complete
+                setLoading(false);
 
-                        //Call back for parent function to proceed to email code verification
-                        callback('passreset', 'success');
+                //Call back for parent function to proceed to success component
+                callback('passreset', 'success');
 
-                    }
-                    else {
+            }
+            else {
 
-                        //Disable loading spinner as action is now complete
-                        setLoading(false);
+                //Disable loading spinner as action is now complete
+                setLoading(false);
 
-                        //Set form error for unsuccessful login
-                        setSubmitError(true);
+                //Set form error for unsuccessful login
+                setSubmitError(true);
 
-                    }
-                })
+            }
         }
         else {
 

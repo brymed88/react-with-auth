@@ -1,14 +1,17 @@
-import { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-
 import { Signup } from '../../../utils/AuthUtil';
 import SpinnerComponent from '../../common/spinner/SpinnerComponent';
+import FormContext from './FormContext';
 
 const SignupComponent = (props) => {
 
   //De-structure useForm import variables
   const { register, handleSubmit, setError, formState: { errors } } = useForm();
+
+  //Get Form Context
+  const [context, setContext] = useContext(FormContext);
 
   //Setup state variables for form functionality
   const [loading, setLoading] = useState(false);
@@ -17,7 +20,7 @@ const SignupComponent = (props) => {
   //destructure callback function from prop
   const { callback } = props;
 
-  const FormSubmit = (data) => {
+  const FormSubmit = async (data) => {
 
     //Reset submit status in case of past failure
     setSubmitError(false);
@@ -26,34 +29,32 @@ const SignupComponent = (props) => {
     setLoading(true);
 
     if (data.vpassword === data.password) {
-      if (data) {
 
-        //Call util function to process api call for signup
-        Signup(data)
-          .then(response => {
+      //Call util function to process api call for signup
+      const response = await Signup(data);
+console.log(response)
+      //Successful login, redirect user to dashboard
+      if (response.status === 'success') {
 
-            //Successful login, redirect user to dashboard
-            if (response.status === 'success') {
+        //Add user email to context
+        setContext(data.email)
 
-              //Disable loading spinner as action is now complete
-              setLoading(false);
+        //Disable loading spinner as action is now complete
+        setLoading(false);
 
-              //Call back for parent function to proceed to email code verification
-              callback('signup', 'verify');
+        //Call back for parent function to proceed to email code verification
+        callback('signup', 'verify');
 
-            }
-            else {
-
-              //Set form error for unsuccessful login
-              setSubmitError(true);
-
-              //Disable loading spinner as action is now complete
-              setLoading(false);
-
-            }
-          })
       }
+      else {
 
+        //Set form error for unsuccessful login
+        setSubmitError(true);
+
+        //Disable loading spinner as action is now complete
+        setLoading(false);
+
+      }
     }
     else {
 
@@ -114,7 +115,7 @@ const SignupComponent = (props) => {
       </div>
 
       <input type="submit" value="Signup" />
-      <div className="login_disclaimer">
+      <div className="signup_disclaimer">
         By creating this account, you agree to our <Link to='/privacy'>Privacy Policy</Link>
       </div>
 

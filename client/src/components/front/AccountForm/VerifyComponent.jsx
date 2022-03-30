@@ -1,12 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useForm } from "react-hook-form";
 import SpinnerComponent from '../../common/spinner/SpinnerComponent';
 import { VerifyCode } from '../../../utils/AuthUtil';
+import FormContext from './FormContext';
 
 const VerifyComponent = (props) => {
 
     //De-structure useForm import variables
     const { register, handleSubmit, formState: { errors } } = useForm();
+
+    //Get Form Context
+    const [context] = useContext(FormContext);
 
     //Setup state variables for form functionality
     const [loading, setLoading] = useState(false);
@@ -15,7 +19,7 @@ const VerifyComponent = (props) => {
     //destructure callback function from prop
     const { callback, origin } = props;
 
-    const FormSubmit = (data) => {
+    const FormSubmit = async (data) => {
 
         //Reset submit status in case of past failure
         setSubmitError(false);
@@ -25,38 +29,39 @@ const VerifyComponent = (props) => {
 
         if (data) {
 
+            //Add user email from context to data object before validation
+            data.email = `${context}`;
+
             //Call util function to process api call
-            VerifyCode(data)
-                .then(response => {
+            const response = await VerifyCode(data);
 
-                    //Successful login, redirect user to dashboard
-                    if (response.status === 'success') {
+            //Successful login, redirect user to dashboard
+            if (response.status === 'success') {
 
-                        //Disable loading spinner as action is now complete
-                        setLoading(false);
+                //Disable loading spinner as action is now complete
+                setLoading(false);
 
-                        switch (origin) {
-                            //if signup workflow
-                            case 'signup':
-                                callback('verify', 'success');
-                                break;
-                            //if pass reset workflow
-                            case 'reset':
-                                callback('verify', 'passreset');
-                                break;
-                            default: ;
-                        }
-                    }
-                    else {
+                switch (origin) {
+                    //if signup workflow
+                    case 'signup':
+                        callback('verify', 'success');
+                        break;
+                    //if pass reset workflow
+                    case 'reset':
+                        callback('verify', 'passreset');
+                        break;
+                    default: ;
+                }
+            }
+            else {
 
-                        //Set form error for unsuccessful login
-                        setSubmitError(true);
+                //Set form error for unsuccessful login
+                setSubmitError(true);
 
-                        //Disable loading spinner as action is now complete
-                        setLoading(false);
+                //Disable loading spinner as action is now complete
+                setLoading(false);
 
-                    }
-                })
+            }
         }
     }
 

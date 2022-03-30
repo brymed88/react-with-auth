@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { UserLogin } from '../../../utils/AuthUtil';
 import SpinnerComponent from '../../common/spinner/SpinnerComponent';
@@ -18,7 +18,7 @@ const LoginComponent = (props) => {
 
   const { callback } = props;
 
-  const FormSubmit = (data) => {
+  const FormSubmit = async (data) => {
 
     //Reset submit status in case of past failure
     setSubmitError(false);
@@ -29,29 +29,27 @@ const LoginComponent = (props) => {
     if (data) {
 
       //Call util function to process api call
-      UserLogin(data)
-        .then(response => {
+      const response = await UserLogin(data);
 
-          //Successful login, redirect user to dashboard
-          if (response.status === 'success') {
+      //Successful login, redirect user to dashboard
+      if (response.status === 'success') {
 
-            //Disable loading spinner as action is now complete
-            setLoading(false);
+        //Disable loading spinner as action is now complete
+        setLoading(false);
 
-            //Redirect to dashboard if login was successful
-            navigate("/dashboard", { replace: true });
+        //Redirect to dashboard if login was successful
+        //navigate("/dashboard", { replace: true });
 
-          }
-          else {
+      }
+      else {
 
-            //Set form error for unsuccessful login
-            setSubmitError(true);
+        //Set form error for unsuccessful login
+        setSubmitError(true);
 
-            //Disable loading spinner as action is now complete
-            setLoading(false);
+        //Disable loading spinner as action is now complete
+        setLoading(false);
 
-          }
-        })
+      }
     }
   }
 

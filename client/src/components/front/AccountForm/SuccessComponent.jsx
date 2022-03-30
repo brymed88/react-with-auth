@@ -7,7 +7,7 @@ const SuccessComponent = (props) => {
   let message;
 
   switch (origin) {
-    case 'signup':
+    case 'verify':
       message = 'Verification successful!';
       break;
     case 'passreset':
