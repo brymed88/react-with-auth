@@ -11,7 +11,7 @@ const ResetComponent = (props) => {
   const { register, handleSubmit, setError, clearErrors, formState: { errors } } = useForm();
 
   //Get Form Context
-  const [setContext] = useContext(FormContext);
+  const [context,setContext] = useContext(FormContext);
 
   //Setup state variables for form functionality
   const [loading, setLoading] = useState(false);

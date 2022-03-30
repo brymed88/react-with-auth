@@ -10,7 +10,7 @@ const VerifyComponent = (props) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     //Get Form Context
-    const [context] = useContext(FormContext);
+    const [context, setContext] = useContext(FormContext);
 
     //Setup state variables for form functionality
     const [loading, setLoading] = useState(false);
