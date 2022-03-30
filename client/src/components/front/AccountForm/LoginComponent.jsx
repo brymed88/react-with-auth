@@ -38,7 +38,7 @@ const LoginComponent = (props) => {
         setLoading(false);
 
         //Redirect to dashboard if login was successful
-        //navigate("/dashboard", { replace: true });
+        navigate("/dashboard", { replace: true });
 
       }
       else {
