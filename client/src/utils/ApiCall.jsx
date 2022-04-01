@@ -19,8 +19,8 @@ const ApiCall = async (data, endpoint, type) => {
 
     }
     else {
-        return { "status": "invalid data" };
+        return { status: "Invalid data" };
     }
 
 }
-export default ApiCall
+export default ApiCall;

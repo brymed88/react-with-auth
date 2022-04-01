@@ -7,7 +7,6 @@ import ApiCall from "./ApiCall";
 //TODO this value will be removed depending on network setup.. If nginx with reverse proxy then irrelevant.
 const serverURL = process.env.REACT_APP_SERVER_URL;
 
-
 /*Calls api route for account login. If valid, returns success and sets JWT token  in localstorage*/
 const UserLogin = async (data) => {
     
@@ -23,7 +22,7 @@ const UserLogin = async (data) => {
         }
 
         else {
-            return { "status": "failed" };
+            return { status: "failed" };
         }
     }
     catch (err) {
@@ -40,12 +39,14 @@ const Signup = async (data) => {
 
     try {
         const response = await ApiCall(data, `${serverURL}/api/account/create`, 'POST');
-        if (response.status === 'success') {
-            return { "status": "success" };
+
+        if (response.status === 'User created') {
+            return { status: "success" };
         }
         else {
-            return { "status": "failed" };
+            return { status: "failed" };
         }
+
     }
     catch (err) {
         throw err;
@@ -64,7 +65,7 @@ const PassReset = async (data) => {
         return { "status": "success" };
     }
     catch (err) {
-        return { "status": "failed" };
+        return { status: "failed" };
     }
 }
 
@@ -80,7 +81,7 @@ const SendCode = async (data) => {
     }
     catch (err) {
         console.log(err);
-        return { "status": "failed" };
+        return { status: "failed" };
     }
 }
 
@@ -96,7 +97,7 @@ const VerifyCode = async (data) => {
     }
     catch (err) {
         console.log(err);
-        return { "status": "failed" };
+        return { status: "failed" };
     }
 }
 
