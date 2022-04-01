@@ -6,6 +6,8 @@ const userSchema = new mongoose.Schema({
   email: { type: String, unique: true },
   password: { type: String },
   token: { type: String },
+  authcode: { type: String },
+  active: { type: Boolean },
 });
 
 export default mongoose.model("user", userSchema);

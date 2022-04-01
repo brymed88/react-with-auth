@@ -1,6 +1,7 @@
 import AccountModel from '../models/account.model.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from "bcryptjs";
+import contactService from './contact.service.js';
 
 const accountService = {};
 
@@ -39,7 +40,6 @@ accountService.get = async (query) => {
 }
 
 accountService.create = async (query) => {
-    //TODO add validation and additional logic before blindly inserting new user
 
     try {
         const { email, password } = query;
@@ -47,6 +47,7 @@ accountService.create = async (query) => {
         if (!(email && password)) {
             return { status: 'Invalid input' };
         }
+
         const curUser = await AccountModel.findOne({ email });
 
         if (curUser) {
@@ -56,19 +57,18 @@ accountService.create = async (query) => {
         const user = await AccountModel.create({
             email: email.toLowerCase(),
             password: bcrypt.hashSync(password, 10),
+            active: false,
         });
 
-        const token = jwt.sign(
-            { user_id: user._id, email },
-            process.env.TOKEN_KEY,
-            {
-                expiresIn: "2h",
-            }
-        );
-        user.token = token;
+        //Create 6 digit random code and assign to user.authcode in db
+        let authcode = Math.floor(100000 + Math.random() * 900000);
+        user.authcode = authcode;
 
-        //TODO add logic to send one time code to email for registration purposes
-        return { status: "User Created" }
+        //Call contactService.sendcode to send email to user
+        const mail = await contactService.sendcode({ email: email, code: authcode });
+
+        return { status: "User created" }
+
     }
     catch (e) {
         console.log(e);
@@ -80,8 +80,20 @@ accountService.update = async (user) => {
     return user;
 }
 
+/*Remove user from database
 accountService.remove = async (user) => {
     return user
+}
+*/
+
+accountService.codeverify = async (query) => {
+    try {
+
+    }
+    catch (err) {
+        console.log(err);
+        return { status: 'Verify code failed' };
+    }
 }
 
 export default accountService
