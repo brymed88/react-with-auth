@@ -31,10 +31,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.get('/', (req, res) => {
-  res.json({ "message": "Hello World" });
-})
-
 app.use('/api/auth', authRoute);
 app.use('/api/contact', contactRoute);
 app.use('/api/account', accountRoute);
