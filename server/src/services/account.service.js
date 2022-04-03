@@ -8,6 +8,7 @@ const accountService = {};
 accountService.get = async (query) => {
 
     const { email, password } = query;
+
     // Validate user input
     if (!(email && password)) {
         return { status: 'null' };
@@ -27,6 +28,7 @@ accountService.get = async (query) => {
         );
 
         user.token = token;
+        user.save();
 
         return {
             accessToken: user.token,
@@ -48,7 +50,7 @@ accountService.create = async (query) => {
             return { status: 'Invalid input' };
         }
 
-        const curUser = await AccountModel.findOne({ email });
+        const curUser = await AccountModel.findOne({ email: email });
 
         if (curUser) {
             return { status: 'Existing user' };
@@ -61,11 +63,14 @@ accountService.create = async (query) => {
         });
 
         //Create 6 digit random code and assign to user.authcode in db
-        let authcode = Math.floor(100000 + Math.random() * 900000);
-        user.authcode = authcode;
+        let code = (Math.floor(100000 + Math.random() * 900000)).toString();
+
+        //Set authcode for user in db
+        user.authcode = code;
+        user.save();
 
         //Call contactService.sendcode to send email to user
-        const mail = await contactService.sendcode({ email: email, code: authcode });
+        const mail = contactService.sendcode({ email: email, code: user.authcode });
 
         return { status: "User created" }
 
@@ -76,23 +81,39 @@ accountService.create = async (query) => {
     }
 }
 
-accountService.update = async (user) => {
-    return user;
-}
-
-/*Remove user from database
-accountService.remove = async (user) => {
-    return user
-}
-*/
-
-accountService.codeverify = async (query) => {
+accountService.verifycode = async (query) => {
     try {
+
+        const { email, code } = query;
+
+        //Stringify code variable
+        code.toString();
+
+        // Validate user input
+        if (!(email && code)) {
+            return { status: 'invalid' };
+        }
+
+        let user = await AccountModel.findOne({ email: email });
+
+        //Check for valid user, if so set user.code and change status to true
+        if (user) {
+
+            if (user.authcode === code) {
+                user.active = true;
+                user.authcode = '';
+                user.save();
+
+                return { status: 'success' };
+            }
+            return { status: 'invalid' };
+        }
+        return { status: 'invalid' };
 
     }
     catch (err) {
         console.log(err);
-        return { status: 'Verify code failed' };
+        return { status: 'failed' };
     }
 }
 

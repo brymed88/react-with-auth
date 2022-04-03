@@ -9,7 +9,7 @@ const serverURL = process.env.REACT_APP_SERVER_URL;
 
 /*Calls api route for account login. If valid, returns success and sets JWT token  in localstorage*/
 const UserLogin = async (data) => {
-    
+
     //TODO remove before prod
     console.log(data);
 
@@ -92,8 +92,13 @@ const VerifyCode = async (data) => {
     console.log(data);
 
     try {
-        const response = await ApiCall(data, `${serverURL}/api/account/codeverify`, 'POST');
-        console.log(response);
+        const response = await ApiCall(data, `${serverURL}/api/account/verifycode`, 'POST');
+
+        if (response.status === 'success')
+            return { status: 'success' };
+        else
+            return { status: 'invalid' };
+
     }
     catch (err) {
         console.log(err);

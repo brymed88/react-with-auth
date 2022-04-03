@@ -33,6 +33,18 @@ accountController.verify = (req, res, next) => {
     }
 }
 
+accountController.verifycode = async (req, res, next) => {
+    try {
+        if (req.body) {
+            return res.json(await accountService.verifycode(req.body));
+        }
+    }
+    catch (err) {
+        console.log(err);
+        next(err);
+    }
+}
+
 accountController.update = async (req, res, next) => {
     try {
         res.json(await accountService.get(req.query));
