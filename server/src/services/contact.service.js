@@ -2,7 +2,7 @@ import { sendMail } from "../config/email.js";
 
 const contactService = {};
 
-contactService.sendcode = async (data) => {
+contactService.sendcode = (data) => {
 
     const { email, code } = data;
 
@@ -20,10 +20,8 @@ contactService.sendcode = async (data) => {
         `,
     };
 
-    const mailer = await sendMail(mailOptions);
-    if (mailer.status !== 'sent') {
-        console.log(`Message to ${email} failed to send`)
-    }
+    //Call sendMail function and pass user parameters
+    sendMail(mailOptions);
 
 }
 
