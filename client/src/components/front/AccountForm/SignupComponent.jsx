@@ -32,7 +32,7 @@ const SignupComponent = (props) => {
 
       //Call util function to process api call for signup
       const response = await Signup(data);
-console.log(response)
+
       //Successful login, redirect user to dashboard
       if (response.status === 'success') {
 
