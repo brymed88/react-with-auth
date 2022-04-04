@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { SendCode } from '../../../utils/AuthUtil';
+import { generateCode } from '../../../utils/AuthUtil';
 import SpinnerComponent from '../../common/spinner/SpinnerComponent';
 
 import FormContext from './FormContext';
@@ -32,7 +32,7 @@ const ResetComponent = (props) => {
     if (data) {
 
       //Call util function to process api call
-      const response = await SendCode(data)
+      const response = await generateCode(data)
 
       //Successful login, redirect user to dashboard
       if (response.status === 'success') {

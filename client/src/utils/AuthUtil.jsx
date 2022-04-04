@@ -70,14 +70,15 @@ const PassReset = async (data) => {
 }
 
 /*Calls api route and generates code token stored on account. If email is sent, returns success*/
-const SendCode = async (data) => {
+const generateCode = async (data) => {
 
     //TODO remove before prod
     console.log(data);
 
     try {
-        const response = await ApiCall(data, `${serverURL}/api/account/codesend`, 'POST');
+        const response = await ApiCall(data, `${serverURL}/api/account/generateCode`, 'POST');
         console.log(response);
+        return { status: 'success' };
     }
     catch (err) {
         console.log(err);
@@ -111,6 +112,6 @@ export {
     UserLogin,
     Signup,
     PassReset,
-    SendCode,
+    generateCode,
     VerifyCode
 }
