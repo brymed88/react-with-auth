@@ -22,7 +22,17 @@ accountController.create = async (req, res, next) => {
     }
 }
 
-accountController.verify = (req, res, next) => {
+accountController.generateCode =  async (req, res, next) => {
+
+    if (req.body) {
+        return res.json(await accountService.generateCode(req.body));
+    }
+    else {
+        return res.json({ status: 'invalid' });
+    }
+}
+
+accountController.verifyToken = (req, res, next) => {
     try {
         if (req.body.token) {
             return res.json({ status: "Valid Token" });
@@ -33,10 +43,10 @@ accountController.verify = (req, res, next) => {
     }
 }
 
-accountController.verifycode = async (req, res, next) => {
+accountController.verifyCode = async (req, res, next) => {
     try {
         if (req.body) {
-            return res.json(await accountService.verifycode(req.body));
+            return res.json(await accountService.verifyCode(req.body));
         }
     }
     catch (err) {

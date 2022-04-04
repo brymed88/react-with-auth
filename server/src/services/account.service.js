@@ -2,6 +2,7 @@ import AccountModel from '../models/account.model.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from "bcryptjs";
 import contactService from './contact.service.js';
+import GenerateRandNum from '../utils/GenerateRandNum.helper.js';
 
 const accountService = {};
 
@@ -63,14 +64,11 @@ accountService.create = async (query) => {
         });
 
         //Create 6 digit random code and assign to user.authcode in db
-        let code = (Math.floor(100000 + Math.random() * 900000)).toString();
-
-        //Set authcode for user in db
-        user.authcode = code;
+        user.authcode = GenerateRandNum(6);
         user.save();
 
         //Call contactService.sendcode to send email to user
-        const mail = contactService.sendcode({ email: email, code: user.authcode });
+        contactService.sendcode({ email: email, code: user.authcode });
 
         return { status: "User created" }
 
@@ -81,7 +79,39 @@ accountService.create = async (query) => {
     }
 }
 
-accountService.verifycode = async (query) => {
+accountService.generateCode = async (data) => {
+
+    //de-structure email
+    const { email } = data;
+
+    if (email) {
+
+        let user = await AccountModel.findOne({ email: email });
+
+        if (user) {
+
+            //Set account inactive if pass reset workflow -- login will not work if inactive.
+            user.active = false;
+
+            //Generate 6 digit auth code
+            user.authcode = GenerateRandNum(6);
+            user.save();
+
+            //Call contactService.sendcode to send email to user
+            contactService.sendcode({ email: email, code: user.authcode });
+
+            return { status: 'success' };
+        }
+        else {
+            return { status: 'invalid user' };
+        }
+    }
+    else {
+        return { status: 'invalid user' };
+    }
+}
+
+accountService.verifyCode = async (query) => {
     try {
 
         const { email, code } = query;

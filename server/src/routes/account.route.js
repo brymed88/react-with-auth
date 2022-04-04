@@ -8,9 +8,11 @@ router.post('/login', accountController.get);
 
 router.post('/create', userExists, accountController.create)
 
-router.post('/verify', auth, accountController.verify);
+router.post('/verify', auth, accountController.verifyToken);
 
-router.post('/verifycode', accountController.verifycode);
+router.post('/verifycode', accountController.verifyCode);
+
+router.post('/generateCode', accountController.generateCode);
 
 router.put('/:id', auth, accountController.update)
 
