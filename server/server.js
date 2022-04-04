@@ -5,8 +5,8 @@ import { log } from "./src/config/logger.js";
 import {authRoute} from './src/routes/auth.route.js';
 import {contactRoute} from './src/routes/contact.route.js';
 import {accountRoute} from './src/routes/account.route.js';
-
 import {} from 'dotenv/config';
+
 const config = process.env;
 
 const aport = config.PORT || config.expressPort;
