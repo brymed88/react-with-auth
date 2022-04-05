@@ -13,21 +13,17 @@ const UserLogin = async (data) => {
     //TODO remove before prod
     console.log(data);
 
-    try {
-        const response = await ApiCall(data, `${serverURL}/api/account/login`, 'POST');
-        if (response.accessToken) {
-            //User has successfully logged in. Put accesstoken in browser local storage and return success.
-            localStorage.setItem("token", JSON.stringify(response.accessToken));
-            return { "status": "success" };
-        }
+    const response = await ApiCall(data, `${serverURL}/api/account/login`, 'POST');
 
-        else {
-            return { status: "failed" };
-        }
+    if (response.accessToken) {
+
+        //User has successfully logged in. Put accesstoken in browser local storage and return success.
+        localStorage.setItem("token", JSON.stringify(response.accessToken));
+        return { "status": "success" };
+
     }
-    catch (err) {
-        throw err;
-    }
+
+    return { status: "failed" };
 
 }
 
@@ -37,20 +33,15 @@ const Signup = async (data) => {
     //TODO remove before prod
     console.log(data);
 
-    try {
-        const response = await ApiCall(data, `${serverURL}/api/account/create`, 'POST');
+    const response = await ApiCall(data, `${serverURL}/api/account/create`, 'POST');
 
-        if (response.status === 'User created') {
-            return { status: "success" };
-        }
-        else {
-            return { status: "failed" };
-        }
+    console.log(response.status);
+    if (response.status === 'User created') {
+        return { status: "success" };
+    }
 
-    }
-    catch (err) {
-        throw err;
-    }
+    return { status: "failed" };
+
 }
 
 /*Calls api route and updates user account password. If successful, returns success */
@@ -59,31 +50,29 @@ const PassReset = async (data) => {
     //TODO remove before prod
     console.log(data);
 
-    try {
-        const response = await ApiCall(data, `${serverURL}/api/account/passreset`, 'POST');
-        console.log(response);
+    const response = await ApiCall(data, `${serverURL}/api/account/passreset`, 'POST');
+
+    if (response.status === 'success') {
         return { "status": "success" };
     }
-    catch (err) {
-        return { status: "failed" };
-    }
+
+    return { status: 'failed' }
 }
 
 /*Calls api route and generates code token stored on account. If email is sent, returns success*/
-const generateCode = async (data) => {
+const GenerateCode = async (data) => {
 
     //TODO remove before prod
     console.log(data);
 
-    try {
-        const response = await ApiCall(data, `${serverURL}/api/account/generateCode`, 'POST');
-        console.log(response);
+    const response = await ApiCall(data, `${serverURL}/api/account/generateCode`, 'POST');
+
+    if (response.status === 'success') {
         return { status: 'success' };
     }
-    catch (err) {
-        console.log(err);
-        return { status: "failed" };
-    }
+
+    return { status: 'failed' };
+
 }
 
 /*Calls api route and verifies code token stored on account. If a match, returns success*/
@@ -92,19 +81,14 @@ const VerifyCode = async (data) => {
     //TODO remove before prod
     console.log(data);
 
-    try {
-        const response = await ApiCall(data, `${serverURL}/api/account/verifycode`, 'POST');
+    const response = await ApiCall(data, `${serverURL}/api/account/verifycode`, 'POST');
 
-        if (response.status === 'success')
-            return { status: 'success' };
-        else
-            return { status: 'invalid' };
+    if (response.status === 'success') {
+        return { status: 'success' };
+    }
 
-    }
-    catch (err) {
-        console.log(err);
-        return { status: "failed" };
-    }
+    return { status: 'failed' };
+
 }
 
 
@@ -112,6 +96,6 @@ export {
     UserLogin,
     Signup,
     PassReset,
-    generateCode,
+    GenerateCode,
     VerifyCode
 }
