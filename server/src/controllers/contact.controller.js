@@ -2,7 +2,8 @@ import contactService from '../services/contact.service.js';
 
 const contactController = {};
 
-contactController.contactForm = async (req, res, next) => {
+contactController.contactForm = async (req, res) => {
+
     try {
         res.json(await contactService.contactForm(req.body));
     }
@@ -10,6 +11,7 @@ contactController.contactForm = async (req, res, next) => {
         console.error('Error while getting user information', err.message);
         next(err);
     }
+
 }
 
 export default contactController;

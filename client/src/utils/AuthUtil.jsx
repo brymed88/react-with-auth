@@ -35,8 +35,7 @@ const Signup = async (data) => {
 
     const response = await ApiCall(data, `${serverURL}/api/account/create`, 'POST');
 
-    console.log(response.status);
-    if (response.status === 'User created') {
+    if (response.status === 'success') {
         return { status: "success" };
     }
 

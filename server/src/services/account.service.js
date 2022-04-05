@@ -8,6 +8,7 @@ const accountService = {};
 
 accountService.get = async (query) => {
 
+    //Destructure email,password from incoming data
     const { email, password } = query;
 
     // Validate user input
@@ -17,9 +18,10 @@ accountService.get = async (query) => {
 
     let user = await AccountModel.findOne({ email: email });
 
-    //do some logic to verify the password and jwt token match then return token...
+    //Verify user exists and that incoming password matches stored user password
     if (user && (await bcrypt.compareSync(password, user.password) === true)) {
 
+        //Create signed jwt token
         const token = jwt.sign(
             { user_id: user._id, email },
             process.env.TOKEN_KEY,
@@ -28,7 +30,10 @@ accountService.get = async (query) => {
             }
         );
 
+        //Set user token to signed jwt token
         user.token = token;
+
+        //Save user information
         user.save();
 
         return {
@@ -37,54 +42,55 @@ accountService.get = async (query) => {
         }
     }
 
-    else {
-        return { status: "Invalid Credentials" }
-    }
+    return { status: "Invalid Credentials" }
+
 }
 
 accountService.create = async (query) => {
 
-    try {
-        const { email, password } = query;
+    //Destructure email,password from incoming data
+    const { email, password } = query;
 
-        if (!(email && password)) {
-            return { status: 'Invalid input' };
-        }
+    if (!(email && password)) {
+        return { status: 'Invalid input' };
+    }
 
-        const curUser = await AccountModel.findOne({ email: email });
+    const curUser = await AccountModel.findOne({ email: email });
 
-        //Check if user already exists
-        if (curUser) {
-            return { status: 'Existing user' };
-        }
+    //Check if user already exists
+    if (curUser) {
+        return { status: 'Existing user' };
+    }
 
-        const user = await AccountModel.create({
+    const user = await AccountModel.create({
 
-            //Set user email to email lowercase
-            email: email.toLowerCase(),
+        //Set user email to email lowercase
+        email: email.toLowerCase(),
 
-            //Set password to password input - encrypted
-            password: bcrypt.hashSync(password, 10),
+        //Set password to password input - encrypted
+        password: bcrypt.hashSync(password, 10),
 
-            //Set account status to active
-            active: false,
+        //Set account active to false
+        active: false,
 
-        });
+    });
+
+    if (user) {
 
         //Create 6 digit random code and assign to user.authcode in db
         user.authcode = GenerateRandNum(6);
+
+        //Save user information
         user.save();
 
         //Call contactService.sendcode to send email to user
         contactService.sendcode({ email: email, code: user.authcode });
 
-        return { status: "User created" }
+        return { status: "success" };
+    }
 
-    }
-    catch (e) {
-        console.log(e);
-        return { status: 'Insert failed' };
-    }
+    return { status: "failed" };
+
 }
 
 accountService.passReset = async (data) => {
@@ -144,7 +150,7 @@ accountService.generateCode = async (data) => {
         user.save();
 
         //Call contactService.sendcode to send email to user
-        contactService.sendcode({ email: email, code: user.authcode });
+        contactService.resetCode({ email: email, code: user.authcode });
 
         return { status: 'success' };
     }

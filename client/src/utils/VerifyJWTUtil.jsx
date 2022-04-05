@@ -6,21 +6,17 @@ const serverURL = process.env.REACT_APP_SERVER_URL;
 /*Calls api route and verifies local auth token is valid. If valid, returns success */
 const VerifyJWTUtil = () => {
 
-    try {
-        const token = localStorage.getItem("token");
-        const response = await ApiCall(token, `${serverURL}/api/account/verify`, 'POST');
+    //Grab token from local storage
+    const token = localStorage.getItem("token");
 
-        if (response.status === 'success') {
-            return { "status": "success" };
-        }
-        else {
-            return { "status": "failed" };
-        }
+    const response = await ApiCall(token, `${serverURL}/api/account/verify`, 'POST');
 
+    //If token is valid
+    if (response.status === 'success') {
+        return { "status": "success" };
     }
-    catch (err) {
-        throw err;
-    }
+
+    return { "status": "failed" };
 
 }
 export default VerifyJWTUtil;

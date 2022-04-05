@@ -12,15 +12,15 @@ const ApiCall = async (data, endpoint, type) => {
         };
 
         const response = await fetch(endpoint, requestOptions)
+
         if (!response.ok) {
             throw new Error("HTTP error " + response.status);
         }
         return response.json();
 
     }
-    else {
-        return { status: "Invalid data" };
-    }
+
+    return { status: "Invalid data" };
 
 }
 export default ApiCall;

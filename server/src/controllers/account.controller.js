@@ -2,88 +2,94 @@ import accountService from '../services/account.service.js';
 
 const accountController = {};
 
-accountController.get = async (req, res, next) => {
+accountController.get = async (req, res) => {
+
     try {
         res.json(await accountService.get(req.body));
     }
     catch (err) {
         console.error('Error while getting user information', err.message);
-        next(err);
+        return res.status(400).json({ status: 'User login failed' });
     }
+
 }
 
-accountController.create = async (req, res, next) => {
+accountController.create = async (req, res) => {
+
     try {
         res.json(await accountService.create(req.body));
     }
     catch (err) {
         console.error('Error while getting user information', err.message);
-        next(err);
+        return res.status(400).json({ status: 'Account creation failed' });
     }
+
 }
 
-accountController.generateCode = async (req, res, next) => {
+accountController.generateCode = async (req, res) => {
 
-    if (req.body) {
+    try {
         return res.json(await accountService.generateCode(req.body));
     }
-    else {
-        return res.json({ status: 'invalid' });
+    catch (err) {
+        console.error('Error while generating code', err.message);
+        return res.status(400).json({ status: 'invalid' });
     }
+
 }
 
-accountController.verifyToken = (req, res, next) => {
+accountController.verifyToken = (req, res) => {
+
     try {
+
         if (req.body.token) {
-            return res.json({ status: "Valid Token" });
+            return res.status(200).json({ status: "Valid Token" });
         }
+        return res.status(400).json({ status: 'invalid' });
+
     }
     catch (err) {
-        next(err)
+        console.error('Error while verifying token', err.message);
+        return res.status(400).json({ status: 'invalid' });
     }
+
 }
 
-accountController.verifyCode = async (req, res, next) => {
+accountController.verifyCode = async (req, res) => {
+
     try {
-        if (req.body) {
-            return res.json(await accountService.verifyCode(req.body));
-        }
+        return res.json(await accountService.verifyCode(req.body));
     }
     catch (err) {
-        console.log(err);
-        return res.status(400).json({ status: 'verify code error' });
+        console.error('Error while verifying code', err.message);
+        return res.status(400).json({ status: 'invalid' });
     }
+
 }
 
-accountController.passReset = async (req, res, next) => {
+accountController.passReset = async (req, res) => {
+
     try {
-        if (req.body) {
-            return res.status(200).json(await accountService.passReset(req.body));
-        }
+        return res.status(200).json(await accountService.passReset(req.body));
     }
     catch (err) {
-        console.error(err);
-        return res.status(400).json({ status: 'pass reset error' });
+        console.error('Error while resetting password', err.message);
+        return res.status(400).json({ status: 'invalid' });
     }
+
 }
 
-accountController.update = async (req, res, next) => {
+accountController.update = async (req, res) => {
+
     try {
-        res.json(await accountService.get(req.query));
+        res.status(200).json(await accountService.get(req.query));
     }
     catch (err) {
         console.error('Error while getting user information', err.message);
-        next(err);
+        return res.status(400).json({ status: 'invalid' });
     }
+
 }
 
-accountController.remove = async (req, res, next) => {
-    try {
-        res.json(await accountService.get(req.query));
-    }
-    catch (err) {
-        console.error('Error while getting user information', err.message);
-        next(err);
-    }
-}
+
 export default accountController

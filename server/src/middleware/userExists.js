@@ -5,14 +5,17 @@ import AccountModel from '../models/account.model.js';
 */
 
 const userExists = async (req, res, next) => {
+
     const email = req.body.email || req.query.email;
+
     const curUser = await AccountModel.findOne({ email });
+
     if (curUser) {
-        return res.status(200).json({ status: "User already exists" }); 
+        return res.status(200).json({ status: "User already exists" });
     }
-    else {
-        return next();
-    }
+
+    return next();
+
 }
 
 export default userExists;

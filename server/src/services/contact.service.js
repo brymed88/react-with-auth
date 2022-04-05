@@ -45,7 +45,7 @@ contactService.resetPassword = (data) => {
         </h2>
         
         <p>
-        Someone asked for password reset for email ${email}. If this email was sent in error, please ignore it or call our service line at xxx-xxx-xxxx. 
+        A password reset request has been made for email: ${email}. If this email was sent in error, please ignore it or call our service line at xxx-xxx-xxxx. 
         </p>
         
         `,
@@ -56,6 +56,32 @@ contactService.resetPassword = (data) => {
 
 }
 
+contactService.resetCode = (data) => {
+
+    //Destructure incoming data
+    const { email, code } = data;
+
+    let mailOptions = {
+        from: process.env.SUPPORT_ADDRESS, //support address from env file
+        to: email,
+        subject: `${process.env.SITE_NAME} account authorization code`,
+        html: `
+        
+        <h2>
+        Password reset authorization code
+        </h2>
+        
+        <p>
+        Your one-time authorization code is ${code}. This code will expire in 10 minutes!
+        </p>
+        
+        `,
+    };
+
+    //Call sendMail function and pass user parameters
+    sendMail(mailOptions);
+
+}
 contactService.contactForm = async (data) => {
 
     //Destructure incoming data
@@ -88,6 +114,7 @@ contactService.contactForm = async (data) => {
     if (mailer.status === 'sent') {
         return { status: 'success' };
     }
+
     return { status: 'failed' };
 
 }
