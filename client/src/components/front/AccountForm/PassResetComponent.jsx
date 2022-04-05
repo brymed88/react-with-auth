@@ -28,11 +28,11 @@ const PassResetComponent = (props) => {
 
         if (data.vpassword === data.password) {
 
-            //Add user email from context to data object before validation
-            data.email = `${context}`;
+            //Build value object to send to api
+            const values = { email: `${context}`, password: data.password }
 
             //Call util function to process api call for signup
-            const response = await PassReset(data);
+            const response = await PassReset(values);
 
             //Successful login, redirect user to dashboard
             if (response.status === 'success') {
