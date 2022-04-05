@@ -14,6 +14,8 @@ router.post('/verifycode', accountController.verifyCode);
 
 router.post('/generateCode', accountController.generateCode);
 
+router.post('/passReset', accountController.passReset);
+
 router.put('/:id', auth, accountController.update)
 
 router.delete('/:id', auth, accountController.remove)

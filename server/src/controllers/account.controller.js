@@ -22,7 +22,7 @@ accountController.create = async (req, res, next) => {
     }
 }
 
-accountController.generateCode =  async (req, res, next) => {
+accountController.generateCode = async (req, res, next) => {
 
     if (req.body) {
         return res.json(await accountService.generateCode(req.body));
@@ -51,7 +51,19 @@ accountController.verifyCode = async (req, res, next) => {
     }
     catch (err) {
         console.log(err);
-        next(err);
+        return res.status(400).json({ status: 'verify code error' });
+    }
+}
+
+accountController.passReset = async (req, res, next) => {
+    try {
+        if (req.body) {
+            return res.status(200).json(await accountService.passReset(req.body));
+        }
+    }
+    catch (err) {
+        console.error(err);
+        return res.status(400).json({ status: 'pass reset error' });
     }
 }
 
