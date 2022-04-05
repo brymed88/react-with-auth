@@ -4,6 +4,7 @@ const contactService = {};
 
 contactService.sendcode = (data) => {
 
+    //Destructure incoming data
     const { email, code } = data;
 
     let mailOptions = {
@@ -11,12 +12,15 @@ contactService.sendcode = (data) => {
         to: email,
         subject: `${process.env.SITE_NAME} account authorization code`,
         html: `
+        
         <h2>
         Thank you for signing up with ${process.env.SITE_NAME}!
         </h2>
+        
         <p>
         Your one-time authorization code is ${code}. This code will expire in 10 minutes!
         </p>
+        
         `,
     };
 
@@ -27,6 +31,7 @@ contactService.sendcode = (data) => {
 
 contactService.resetPassword = (data) => {
 
+    //Destructure incoming data
     const { email } = data;
 
     let mailOptions = {
@@ -34,12 +39,15 @@ contactService.resetPassword = (data) => {
         to: email,
         subject: `${process.env.SITE_NAME} - Password reset notification`,
         html: `
+        
         <h2>
         The password for your account has been reset!
         </h2>
+        
         <p>
         Someone asked for password reset for email ${email}. If this email was sent in error, please ignore it or call our service line at xxx-xxx-xxxx. 
         </p>
+        
         `,
     };
 
@@ -48,8 +56,40 @@ contactService.resetPassword = (data) => {
 
 }
 
-contactService.contactForm = (user) => {
-    return user;
+contactService.contactForm = async (data) => {
+
+    //Destructure incoming data
+    const { email, name, topic } = data;
+
+    let mailOptions = {
+        from: email, //support address from env file
+        to: process.env.SUPPORT_ADDRESS,
+        subject: `${process.env.SITE_NAME} - Inquiry from contact form`,
+        html: `
+        
+        <h2>
+        Contact form inquiry!
+        </h2>
+        
+        <p>
+        From: ${name}
+        </p>
+        
+        <p>
+        Topic: ${topic}
+        </p>
+        
+        `,
+    };
+
+    //Call sendMail function and pass user parameters
+    const mailer = await sendMail(mailOptions);
+
+    if (mailer.status === 'sent') {
+        return { status: 'success' };
+    }
+    return { status: 'failed' };
+
 }
 
 contactService.update = (user) => {
