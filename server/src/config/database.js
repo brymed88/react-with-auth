@@ -20,7 +20,7 @@ db.connect = () => {
             family: 4, // Use IPv4, skip trying IPv6
         })
         .then(() => {
-            log.info("Successfully connected to database");
+            log.info(`Successfully connected to MongoDB database: ${DATABASE_NAME}`);
         })
         .catch((error) => {
             log.error("database connection failed. exiting now...");
