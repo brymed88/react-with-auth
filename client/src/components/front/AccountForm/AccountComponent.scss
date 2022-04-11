@@ -36,7 +36,7 @@
                 padding: 8px 0;
                 width: 50%;
                 text-align: center;
-                color: black;
+                color: #333;
                 font-size: 1.4rem;
                 border-top: 4px solid green;
                 cursor: pointer;
@@ -60,6 +60,10 @@
             align-items: center;
             border-radius: 4px;
 
+            h2{
+                font-size: 1.4rem;
+                color: #444;
+            }
             .loginError {
                 width: 99%;
                 text-align: center;
@@ -81,6 +85,10 @@
                 font-size: 0.9rem;
                 text-align: center;
             }
+            p{
+                width: 84%;
+                color: #444;
+            };
         }
 
         input {
@@ -102,7 +110,7 @@
         input[type="submit"] {
             background-color: green !important;
             width: 84%;
-            padding: 20px;
+            padding: 16px 0;
             cursor: pointer;
             margin: 8px 0;
             border: none;
@@ -120,7 +128,7 @@
 
             h2 {
                 color: green;
-                font-size: 1.6rem;
+                font-size: 1.4rem;
             }
         }
     }
