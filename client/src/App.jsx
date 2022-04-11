@@ -20,6 +20,7 @@ const About = lazy(() => import("./pages/front/About"));
 const Contact = lazy(() => import("./pages/front/Contact"));
 const Login = lazy(() => import("./pages/front/Login"));
 const Error = lazy(() => import("./pages/front/Error"));
+const Privacy = lazy(() => import("./pages/front/Privacy"));
 
 function App() {
   return (
@@ -58,15 +59,22 @@ function App() {
               </Suspense>
             } />
 
+          <Route path="/privacy" element=
+            {
+              <Suspense fallback={<SpinnerComponent type="full" size='60px' />}>
+                <Privacy />
+              </Suspense>
+            } />
+
         </Route>
 
         {/* Routes will use DashLayout which will be different than the front pages*/}
         <Route element={<DashLayout />}>
           <Route path="/dashboard" element=
             {
-                <PrivateRouteComponent >
-                  <Dashboard />
-                </PrivateRouteComponent>
+              <PrivateRouteComponent >
+                <Dashboard />
+              </PrivateRouteComponent>
             } />
 
         </Route>
