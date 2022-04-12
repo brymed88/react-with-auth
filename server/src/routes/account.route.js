@@ -1,14 +1,14 @@
 import express from 'express';
 const router = express.Router();
-import auth from "../middleware/auth.js";
 import accountController from '../controllers/account.controller.js';
 import userExists from '../middleware/userExists.js';
+import verifyToken from '../middleware/auth.js';
 
 router.post('/login', accountController.get);
 
 router.post('/create', userExists, accountController.create)
 
-router.post('/verify', auth, accountController.verifyToken);
+router.post('/verify', verifyToken, accountController.verifyToken);
 
 router.post('/verifycode', accountController.verifyCode);
 
