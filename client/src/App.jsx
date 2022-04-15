@@ -1,17 +1,14 @@
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { Suspense, lazy } from "react";
 
-import FrontLayout from './layouts/FrontLayout';
-import DashLayout from './layouts/DashLayout';
+import FrontLayout from './layouts/front/FrontLayout';
+import DashLayout from './layouts/dash/DashLayout';
 
 import Home from "./pages/front/Home";
 import Dashboard from "./pages/dash/Dashboard";
 
 import SpinnerComponent from "./components/common/spinner/SpinnerComponent";
 import PrivateRouteComponent from './components/common/privateRoute/PrivateRouteComponent';
-
-import './normalize.min.css';
-import './App.min.css';
 
 /*
 * Lazy loading to selectively load pages based on usage

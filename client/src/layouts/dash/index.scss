@@ -1,12 +1,7 @@
-
 /*
 *Container Styles
 */
-.page-container {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-
+.dash-container {
     //Set to 100 view height minus footer height - sticky footer
     min-height: calc(100vh - 62px);
     padding: 10px;

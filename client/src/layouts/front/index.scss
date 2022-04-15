@@ -1,0 +1,12 @@
+
+/*
+*Container Styles
+*/
+.page-container {
+    //Set to 100 view height minus footer height - sticky footer
+    min-height: calc(100vh - 62px);
+    padding: 10px;
+}
+/*
+*End Container Styles
+*/
