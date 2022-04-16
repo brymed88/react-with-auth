@@ -26,16 +26,16 @@ const ContactFormComponent = () => {
         if (data) {
 
             //Call util function to process api call
-            const response = ''//await UserLogin(data);
+            const response = '';//await UserLogin(data);
 
             //Successful login, redirect user to dashboard
-            if (response.status === 'success') {
+            if (response === '') {
 
                 //Disable loading spinner as action is now complete
                 setLoading(false);
                 
                 //Set status of form to sent
-                setStatus('Sent');
+                setStatus('Message Sent!');
 
             }
             else {
