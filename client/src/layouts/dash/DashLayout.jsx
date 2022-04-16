@@ -1,5 +1,4 @@
-import Head from "../../pages/dash/parts/Head"
-import Foot from "../../pages/dash/parts/Foot"
+import Header from "../../pages/dash/parts/Header";
 import { Outlet } from 'react-router-dom';
 
 import '../../normalize.min.css';
@@ -8,13 +7,12 @@ import './index.min.css';
 const DashLayout = ({ children }) => {
 
     return (
-        <div>
-            <Head />
+        <div className="dash-wrapper">
+            <Header />
             <div className="dash-container">
                 <Outlet />
                 {children}
             </div>
-            <Foot />
         </div>
     );
 }
