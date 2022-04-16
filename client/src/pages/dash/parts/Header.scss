@@ -27,14 +27,13 @@
     @include fx-col-wp;
     align-items: center;
     background-color: #444;
+    padding-top: 20px;
 
     header {
         height: 40px;
 
-        h2 {
-            text-align: center;
-            color: whitesmoke;
-            line-height: 40px;
+        .brand img {
+            width: 40px;
         }
 
         .tog-btn {
@@ -65,6 +64,8 @@
         width: 100%;
         padding-top: 20px;
         max-width: 400px;
+        @include fx-col-wp;
+        align-items: center;
 
         nav {
             width: 100%;
@@ -100,12 +101,6 @@
 
             }
         }
-    }
-
-    .account {
-        @include fx-col-wp;
-        width: 100%;
-        align-items: center;
 
         h3 {
             width: 100%;
@@ -114,36 +109,9 @@
             color: whitesmoke;
         }
 
-        ul {
-            @include fx-col-wp;
-            padding: 0;
-            width: 90%;
-
-            li {
-                list-style-type: none;
-                margin: 4px 0;
-                width: 100%;
-                background-color: #666;
-                border-radius: 4px;
-
-                a {
-                    color: whitesmoke;
-                    padding: 6px 0;
-                    font-size: 1.1rem;
-                    text-align: center;
-                    display: block;
-                    text-decoration: none;
-                }
-
-            }
-
-            li:hover {
-                background-color: rgba(0, 0, 0, .4);
-            }
-
-        }
 
         input[type='button'] {
+            align-self: center;
             margin-top: 20px;
             border: none;
             outline: none;
@@ -154,24 +122,28 @@
             color: whitesmoke;
             font-size: 1.1rem;
             font-weight: bold;
+            cursor: pointer;
+        }
+        input[type='button']:hover{
+            background-color: rgba(0, 0, 0, .4);
         }
 
-    }
 
-    footer {
-        margin-top: 20px;
-        width: 100%;
-        align-items: center;
-        text-align: center;
-        color: whitesmoke;
-
-        a {
+        footer {
+            margin-top: 20px;
+            width: 100%;
+            align-items: center;
+            text-align: center;
             color: whitesmoke;
+
+            a {
+                color: whitesmoke;
+                text-decoration: none;
+            }
+
+            // .social {}
         }
-
-        // .social {}
     }
-
 }
 
 @media only screen and (min-width: 800px) {
