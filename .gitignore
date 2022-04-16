@@ -32,3 +32,4 @@ package-lock.json
 #include the min.css for main css file
 !*.min.css 
 !.example.env
+!/client/*.env
