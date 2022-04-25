@@ -1,0 +1,14 @@
+Running Task List
+
+Front-end
+//COMPLETE Build all front-end pages (Home, About, Contact, Login, Privacy, 404)
+
+Dashboard
+//COMPLETE Find secure solution for JWT login that does not require db call on each page load
+//TODO Build side nav links
+//TODO Enable logout functionality
+//COMPLETE Build home page module and accept other pages (two to start)
+
+Back-end
+//COMPLETE Build API Routes, Controllers and Services for Login, pass reset, signup and authentication
+//COMPLETE Build API Routes, Controllers and Services for Contact form functionality
