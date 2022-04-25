@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 
 import './Header.min.css';
 import Logo from '../../../assets/common/logo.svg';
-const Header = () => {
 
+const Header = () => {
     const [toggle, setToggle] = useState(false);
 
     const logout = () => {
@@ -31,7 +31,7 @@ const Header = () => {
                 <nav>
                     <ul>
                         <li>
-                            <Link to="/dashboard">Example</Link>
+                            <Link to="/dashboard">Overview</Link>
                         </li>
                         <li>
                             <Link to="/dashboard">Example</Link>
@@ -51,7 +51,7 @@ const Header = () => {
                     <h3>Account Links</h3>
                         
                         <li>
-                            <Link to="/dashboard">Example</Link>
+                            <Link to="/dashboard/account">Account</Link>
                         </li>
                         <li>
                             <Link to="/dashboard">Example</Link>

@@ -9,10 +9,10 @@ const DashLayout = ({ children }) => {
     return (
         <div className="dash-wrapper">
             <Header />
-            <div className="dash-container">
+            <main className="dash-container">
                 <Outlet />
                 {children}
-            </div>
+            </main>
         </div>
     );
 }
