@@ -1,15 +1,49 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import { VerifyLocalAuth } from '../../../utils/LocalAuthUtil';
+import { VerifyJWTUtil } from '../../../utils/VerifyJWTUtil';
+import SpinnerComponent from '../spinner/SpinnerComponent';
 
 const PrivateRouteComponent = ({ children }) => {
 
-    const localAuth = VerifyLocalAuth();
+    //Use state for user authorization
+    const [isAuth, setIsAuth] = useState();
 
-    if (localAuth.status !== 'valid') {
-        return <Navigate to="/login" />
+    //Verify JWT token on page load and set useState based on response
+    useEffect(async () => {
+
+        const isAuthorized = await VerifyJWTUtil();
+
+        if (isAuthorized.status === 'success') {
+            setIsAuth(true);
+        }
+        else {
+            setIsAuth(false);
+        }
+
+    }, []);
+
+
+    if (isAuth === true) {
+
+        return (
+            <section className="dashboard">
+                {children}
+            </section>
+        )
+
     }
-    return children;
+    else if (isAuth === false) {
+
+        return (
+            <Navigate to="/login" />
+        )
+
+    }
+    else {
+        return (
+            <SpinnerComponent type="full" size='60px' />
+        )
+    }
 }
 
 export default PrivateRouteComponent;
