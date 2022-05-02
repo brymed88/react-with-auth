@@ -1,16 +1,18 @@
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { DeleteLocalAuth } from '../../../utils/LocalAuthUtil';
 
 import './Header.min.css';
 import Logo from '../../../assets/common/logo.svg';
 
 const Header = () => {
   const [toggle, setToggle] = useState(false);
+  const navigate = useNavigate();
 
-  const logout = () => {
-    /*
-     * call api to process logout and destruction of JWT, Local storage token
-     */
+  const Logout = () => {
+    DeleteLocalAuth();
+    navigate('/');
   };
 
   const menuToggle = () => {
@@ -64,7 +66,7 @@ const Header = () => {
           </ul>
         </nav>
 
-        <input type='button' value='Log Out' onClick={logout} />
+        <input type='button' value='Log Out' onClick={Logout} />
 
         <footer className='copyright'>
           &copy; 2022 |

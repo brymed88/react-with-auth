@@ -13,4 +13,10 @@ const VerifyLocalAuth = () => {
   return { status: 'invalid' };
 };
 
-export { VerifyLocalAuth };
+const DeleteLocalAuth = () => {
+  localStorage.removeItem('token');
+
+  return { status: 'success' };
+};
+
+export { VerifyLocalAuth, DeleteLocalAuth };
