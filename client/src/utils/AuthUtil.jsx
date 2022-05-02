@@ -15,28 +15,16 @@ const UserLogin = async (data) => {
   const response = await ApiCall(
     data,
     `${serverURL}/api/account/login`,
-<<<<<<< HEAD
     'POST'
-=======
-    "POST"
->>>>>>> f32209941ef862031edd98d776c0e88c365f9503
   );
 
   if (response.accessToken) {
     //User has successfully logged in. Put accesstoken in browser local storage and return success.
-<<<<<<< HEAD
     localStorage.setItem('token', JSON.stringify(response.accessToken));
     return { status: 'success' };
   }
 
   return { status: 'failed' };
-=======
-    localStorage.setItem("token", JSON.stringify(response.accessToken));
-    return { status: "success" };
-  }
-
-  return { status: "failed" };
->>>>>>> f32209941ef862031edd98d776c0e88c365f9503
 };
 
 /*Calls api route and creates user account and sends verification code to email. If valid, returns success*/
@@ -47,7 +35,6 @@ const Signup = async (data) => {
   const response = await ApiCall(
     data,
     `${serverURL}/api/account/create`,
-<<<<<<< HEAD
     'POST'
   );
 
@@ -56,16 +43,6 @@ const Signup = async (data) => {
   }
 
   return { status: 'failed' };
-=======
-    "POST"
-  );
-
-  if (response.status === "success") {
-    return { status: "success" };
-  }
-
-  return { status: "failed" };
->>>>>>> f32209941ef862031edd98d776c0e88c365f9503
 };
 
 /*Calls api route and updates user account password. If successful, returns success */
@@ -76,7 +53,6 @@ const PassReset = async (data) => {
   const response = await ApiCall(
     data,
     `${serverURL}/api/account/passreset`,
-<<<<<<< HEAD
     'POST'
   );
 
@@ -85,16 +61,6 @@ const PassReset = async (data) => {
   }
 
   return { status: 'failed' };
-=======
-    "POST"
-  );
-
-  if (response.status === "success") {
-    return { status: "success" };
-  }
-
-  return { status: "failed" };
->>>>>>> f32209941ef862031edd98d776c0e88c365f9503
 };
 
 /*Calls api route and generates code token stored on account. If email is sent, returns success*/
@@ -105,7 +71,6 @@ const GenerateCode = async (data) => {
   const response = await ApiCall(
     data,
     `${serverURL}/api/account/generateCode`,
-<<<<<<< HEAD
     'POST'
   );
 
@@ -114,16 +79,6 @@ const GenerateCode = async (data) => {
   }
 
   return { status: 'failed' };
-=======
-    "POST"
-  );
-
-  if (response.status === "success") {
-    return { status: "success" };
-  }
-
-  return { status: "failed" };
->>>>>>> f32209941ef862031edd98d776c0e88c365f9503
 };
 
 /*Calls api route and verifies code token stored on account. If a match, returns success*/
@@ -134,7 +89,6 @@ const VerifyCode = async (data) => {
   const response = await ApiCall(
     data,
     `${serverURL}/api/account/verifycode`,
-<<<<<<< HEAD
     'POST'
   );
 
@@ -143,16 +97,6 @@ const VerifyCode = async (data) => {
   }
 
   return { status: 'failed' };
-=======
-    "POST"
-  );
-
-  if (response.status === "success") {
-    return { status: "success" };
-  }
-
-  return { status: "failed" };
->>>>>>> f32209941ef862031edd98d776c0e88c365f9503
 };
 
 export { UserLogin, Signup, PassReset, GenerateCode, VerifyCode };

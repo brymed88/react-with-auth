@@ -13,7 +13,6 @@ const VerifyJWTUtil = async () => {
   const response = await ApiCall(
     token,
     `${serverURL}/api/account/verify`,
-<<<<<<< HEAD
     'POST'
   );
 
@@ -23,16 +22,5 @@ const VerifyJWTUtil = async () => {
   }
 
   return { status: 'failed' };
-=======
-    "POST"
-  );
-
-  //If token is valid
-  if (response.status === "Valid Token") {
-    return { status: "success" };
-  }
-
-  return { status: "failed" };
->>>>>>> f32209941ef862031edd98d776c0e88c365f9503
 };
 export { VerifyJWTUtil };

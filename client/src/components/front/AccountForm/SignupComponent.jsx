@@ -1,18 +1,9 @@
-<<<<<<< HEAD
 import React, { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { Signup } from '../../../utils/AuthUtil';
 import SpinnerComponent from '../../common/spinner/SpinnerComponent';
 import FormContext from './FormContext';
-=======
-import React, { useState, useContext } from "react";
-import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
-import { Signup } from "../../../utils/AuthUtil";
-import SpinnerComponent from "../../common/spinner/SpinnerComponent";
-import FormContext from "./FormContext";
->>>>>>> f32209941ef862031edd98d776c0e88c365f9503
 
 const SignupComponent = (props) => {
   //De-structure useForm import variables
@@ -45,11 +36,7 @@ const SignupComponent = (props) => {
       const response = await Signup(data);
 
       //Successful login, redirect user to dashboard
-<<<<<<< HEAD
       if (response.status === 'success') {
-=======
-      if (response.status === "success") {
->>>>>>> f32209941ef862031edd98d776c0e88c365f9503
         //Add user email to context
         setContext(data.email);
 
@@ -57,11 +44,7 @@ const SignupComponent = (props) => {
         setLoading(false);
 
         //Call back for parent function to proceed to email code verification
-<<<<<<< HEAD
         callback('signup', 'verify');
-=======
-        callback("signup", "verify");
->>>>>>> f32209941ef862031edd98d776c0e88c365f9503
       } else {
         //Set form error for unsuccessful login
         setSubmitError(true);
@@ -71,15 +54,9 @@ const SignupComponent = (props) => {
       }
     } else {
       //Set React-Hook-form error for verify password not matching
-<<<<<<< HEAD
       setError('vpassword', {
         type: 'manual',
         message: 'Passwords must match!',
-=======
-      setError("vpassword", {
-        type: "manual",
-        message: "Passwords must match!",
->>>>>>> f32209941ef862031edd98d776c0e88c365f9503
       });
 
       //Disable loading spinner as action is now complete
@@ -89,11 +66,7 @@ const SignupComponent = (props) => {
 
   return (
     <form onSubmit={handleSubmit(FormSubmit)}>
-<<<<<<< HEAD
       {loading === true ? <SpinnerComponent type='full' size='100px' /> : ''}
-=======
-      {loading === true ? <SpinnerComponent type='full' size='100px' /> : ""}
->>>>>>> f32209941ef862031edd98d776c0e88c365f9503
 
       {submitError === true && (
         <span className='loginError'>
@@ -104,11 +77,7 @@ const SignupComponent = (props) => {
 
       <div className='inputs'>
         <input
-<<<<<<< HEAD
           {...register('email', {
-=======
-          {...register("email", {
->>>>>>> f32209941ef862031edd98d776c0e88c365f9503
             required: true,
             pattern: {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -125,11 +94,7 @@ const SignupComponent = (props) => {
 
       <div className='inputs'>
         <input
-<<<<<<< HEAD
           {...register('password', { required: true })}
-=======
-          {...register("password", { required: true })}
->>>>>>> f32209941ef862031edd98d776c0e88c365f9503
           placeholder='Password'
         />
         {/* errors will return when field validation fails  */}
@@ -139,11 +104,7 @@ const SignupComponent = (props) => {
       {/* Add the Verify password field conditionally if form type is signup */}
       <div className='inputs'>
         <input
-<<<<<<< HEAD
           {...register('vpassword', { required: true })}
-=======
-          {...register("vpassword", { required: true })}
->>>>>>> f32209941ef862031edd98d776c0e88c365f9503
           placeholder='Verify Password'
         />
         {errors.vpassword && (
@@ -151,22 +112,14 @@ const SignupComponent = (props) => {
             {/*Check if password mismatch error is set, if not then display generic error*/}
             {errors.vpassword.message
               ? errors.vpassword.message
-<<<<<<< HEAD
               : 'This field is required'}
-=======
-              : "This field is required"}
->>>>>>> f32209941ef862031edd98d776c0e88c365f9503
           </span>
         )}
       </div>
 
       <input type='submit' value='Signup' />
       <div className='signup_disclaimer'>
-<<<<<<< HEAD
         By creating this account, you agree to our{' '}
-=======
-        By creating this account, you agree to our{" "}
->>>>>>> f32209941ef862031edd98d776c0e88c365f9503
         <Link to='/privacy'>Privacy Policy</Link>
       </div>
     </form>

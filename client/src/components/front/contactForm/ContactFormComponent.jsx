@@ -13,11 +13,7 @@ const ContactFormComponent = () => {
   } = useForm();
 
   //Setup state variables for form functionality
-<<<<<<< HEAD
   const [status, setStatus] = useState('Send');
-=======
-  const [status, setStatus] = useState("Send");
->>>>>>> f32209941ef862031edd98d776c0e88c365f9503
   const [loading, setLoading] = useState(false);
   const [submitError, setSubmitError] = useState(false);
 
@@ -29,26 +25,15 @@ const ContactFormComponent = () => {
 
     if (data) {
       //Call util function to process api call
-<<<<<<< HEAD
       const response = ''; //await UserLogin(data);
 
       //Successful login, redirect user to dashboard
       if (response === '') {
-=======
-      const response = ""; //await UserLogin(data);
-
-      //Successful login, redirect user to dashboard
-      if (response === "") {
->>>>>>> f32209941ef862031edd98d776c0e88c365f9503
         //Disable loading spinner as action is now complete
         setLoading(false);
 
         //Set status of form to sent
-<<<<<<< HEAD
         setStatus('Message Sent!');
-=======
-        setStatus("Message Sent!");
->>>>>>> f32209941ef862031edd98d776c0e88c365f9503
       } else {
         //Set form error for unsuccessful login
         setSubmitError(true);
@@ -74,22 +59,14 @@ const ContactFormComponent = () => {
         )}
 
         <div className='inputs'>
-<<<<<<< HEAD
           <input {...register('name', { required: true })} placeholder='Name' />
-=======
-          <input {...register("name", { required: true })} placeholder='Name' />
->>>>>>> f32209941ef862031edd98d776c0e88c365f9503
           {/* errors will return when field validation fails  */}
           {errors.name && <span>This field is required</span>}
         </div>
 
         <div className='inputs'>
           <input
-<<<<<<< HEAD
             {...register('email', {
-=======
-            {...register("email", {
->>>>>>> f32209941ef862031edd98d776c0e88c365f9503
               required: true,
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -106,11 +83,7 @@ const ContactFormComponent = () => {
 
         <div className='inputs'>
           <textarea
-<<<<<<< HEAD
             {...register('topic', { required: true })}
-=======
-            {...register("topic", { required: true })}
->>>>>>> f32209941ef862031edd98d776c0e88c365f9503
             placeholder='Topic of discussion'
           />
           {/* errors will return when field validation fails  */}
@@ -120,19 +93,11 @@ const ContactFormComponent = () => {
         {/* Change button styles based on form status */}
         <button
           className={
-<<<<<<< HEAD
             status === 'Send'
               ? 'btn'
               : status === 'Message Sent!'
               ? 'btn btn_complete'
               : 'btn btn_failed'
-=======
-            status === "Send"
-              ? "btn"
-              : status === "Message Sent!"
-              ? "btn btn_complete"
-              : "btn btn_failed"
->>>>>>> f32209941ef862031edd98d776c0e88c365f9503
           }>
           {status}
         </button>

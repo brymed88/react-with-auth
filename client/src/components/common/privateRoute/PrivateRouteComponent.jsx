@@ -11,11 +11,7 @@ const PrivateRouteComponent = ({ children }) => {
   useEffect(async () => {
     const isAuthorized = await VerifyJWTUtil();
 
-<<<<<<< HEAD
     if (isAuthorized.status === 'success') {
-=======
-    if (isAuthorized.status === "success") {
->>>>>>> f32209941ef862031edd98d776c0e88c365f9503
       setIsAuth(true);
     } else {
       setIsAuth(false);
