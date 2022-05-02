@@ -1,29 +1,32 @@
-import React from 'react'
+import React from "react";
 
 const SuccessComponent = (props) => {
-
   const { callback, origin } = props;
 
   let message;
 
   switch (origin) {
-    case 'verify':
-      message = 'Verification successful!';
+    case "verify":
+      message = "Verification successful!";
       break;
-    case 'passreset':
-      message = 'Password reset successful!';
+    case "passreset":
+      message = "Password reset successful!";
       break;
-    default: ;
+    default:
   }
 
   return (
-    <section className="success_enroll">
-      <h2>
-        {message}
-      </h2>
-      <input type="submit" onClick={() => { callback('success', 'login') }} value="Please Login" />
+    <section className='success_enroll'>
+      <h2>{message}</h2>
+      <input
+        type='submit'
+        onClick={() => {
+          callback("success", "login");
+        }}
+        value='Please Login'
+      />
     </section>
-  )
-}
+  );
+};
 
 export default SuccessComponent;

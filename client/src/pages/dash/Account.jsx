@@ -1,12 +1,7 @@
-
-import React from 'react';
+import React from "react";
 
 const Account = () => {
-    return (
-        <section>
-            Account Page
-        </section>
-    );
+  return <section>Account Page</section>;
 };
 
 export default Account;

@@ -1,165 +1,160 @@
 * {
-    margin: 0;
+  margin: 0;
 }
 
 @mixin fx-col-wp {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 
 @mixin fx-row-wp {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .menu-show {
-    display: block;
+  display: block;
 }
 
 .menu-hide {
-    display: none;
+  display: none;
 }
 
 .dash-sidebar {
+  width: 100%;
+  @include fx-col-wp;
+  align-items: center;
+  background-color: #444;
+  padding-top: 20px;
+
+  header {
+    height: 40px;
+
+    .brand img {
+      width: 40px;
+    }
+
+    .tog-btn {
+      width: 40px;
+      height: 40px;
+      text-align: center;
+      position: absolute;
+      right: 0px;
+      top: 0;
+      line-height: 40px;
+      color: #fff;
+      font-size: 2.4rem;
+      font-weight: bold;
+      transform: rotate(0deg);
+      transition: all 0.4s ease;
+      background: none;
+      border: none;
+      outline: none;
+    }
+
+    .tog-rotate {
+      transform: rotate(135deg);
+      transition: all 0.4s ease;
+    }
+  }
+
+  .sub-menu {
     width: 100%;
+    padding-top: 20px;
+    max-width: 400px;
     @include fx-col-wp;
     align-items: center;
-    background-color: #444;
-    padding-top: 20px;
 
-    header {
-        height: 40px;
+    nav {
+      width: 100%;
+      @include fx-col-wp;
+      align-items: center;
 
-        .brand img {
-            width: 40px;
-        }
-
-        .tog-btn {
-            width: 40px;
-            height: 40px;
-            text-align: center;
-            position: absolute;
-            right: 0px;
-            top: 0;
-            line-height: 40px;
-            color: #fff;
-            font-size: 2.4rem;
-            font-weight: bold;
-            transform: rotate(0deg);
-            transition: all 0.4s ease;
-            background: none;
-            border: none;
-            outline: none;
-        }
-
-        .tog-rotate {
-            transform: rotate(135deg);
-            transition: all 0.4s ease;
-        }
-    }
-
-    .sub-menu {
-        width: 100%;
-        padding-top: 20px;
-        max-width: 400px;
+      ul {
         @include fx-col-wp;
-        align-items: center;
+        padding: 0;
+        width: 90%;
 
-        nav {
-            width: 100%;
-            @include fx-col-wp;
-            align-items: center;
+        li {
+          list-style-type: none;
+          margin: 4px 0;
+          width: 100%;
+          background-color: #666;
+          border-radius: 4px;
 
-            ul {
-                @include fx-col-wp;
-                padding: 0;
-                width: 90%;
-
-                li {
-                    list-style-type: none;
-                    margin: 4px 0;
-                    width: 100%;
-                    background-color: #666;
-                    border-radius: 4px;
-
-                    a {
-                        color: whitesmoke;
-                        padding: 6px 0;
-                        font-size: 1.1rem;
-                        text-align: center;
-                        display: block;
-                        text-decoration: none;
-                    }
-
-                }
-
-                li:hover {
-                    background-color: rgba(0, 0, 0, .4);
-                }
-
-            }
-        }
-
-        h3 {
-            width: 100%;
-            text-align: center;
-            padding: 24px 0;
+          a {
             color: whitesmoke;
-        }
-
-
-        input[type='button'] {
-            align-self: center;
-            margin-top: 20px;
-            border: none;
-            outline: none;
             padding: 6px 0;
-            border-radius: 4px;
-            width: 86%;
-            background-color: red;
-            color: whitesmoke;
             font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        input[type='button']:hover{
-            background-color: rgba(0, 0, 0, .4);
-        }
-
-
-        footer {
-            margin-top: 20px;
-            width: 100%;
-            align-items: center;
             text-align: center;
-            color: whitesmoke;
-
-            a {
-                color: whitesmoke;
-                text-decoration: none;
-            }
-
-            // .social {}
+            display: block;
+            text-decoration: none;
+          }
         }
+
+        li:hover {
+          background-color: rgba(0, 0, 0, 0.4);
+        }
+      }
     }
+
+    h3 {
+      width: 100%;
+      text-align: center;
+      padding: 24px 0;
+      color: whitesmoke;
+    }
+
+    input[type="button"] {
+      align-self: center;
+      margin-top: 20px;
+      border: none;
+      outline: none;
+      padding: 6px 0;
+      border-radius: 4px;
+      width: 86%;
+      background-color: red;
+      color: whitesmoke;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    input[type="button"]:hover {
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    footer {
+      margin-top: 20px;
+      width: 100%;
+      align-items: center;
+      text-align: center;
+      color: whitesmoke;
+
+      a {
+        color: whitesmoke;
+        text-decoration: none;
+      }
+
+      // .social {}
+    }
+  }
 }
 
 @media only screen and (min-width: 800px) {
+  /*Override default of hide menu with display block if screen > 600px*/
+  .menu-hide {
+    display: block;
+  }
 
-    /*Override default of hide menu with display block if screen > 600px*/
-    .menu-hide {
-        display: block;
-    }
+  /*Hide toggle-btn if screen > 600px*/
+  .tog-btn {
+    display: none;
+  }
 
-    /*Hide toggle-btn if screen > 600px*/
-    .tog-btn {
-        display: none;
-    }
-
-    .dash-sidebar {
-        width: 240px;
-        min-height: 100vh;
-    }
+  .dash-sidebar {
+    width: 240px;
+    min-height: 100vh;
+  }
 }
