@@ -12,7 +12,11 @@ import './SpinnerComponent.min.css';
 const SpinnerComponent = (props) => {
   return (
     <section
+<<<<<<< HEAD
       className={props.type === 'full' ? 'spinner-full' : 'spinner-part'}>
+=======
+      className={props.type === "full" ? "spinner-full" : "spinner-part"}>
+>>>>>>> f32209941ef862031edd98d776c0e88c365f9503
       <div style={{ height: `${props.size}`, width: `${props.size}` }}></div>
     </section>
   );

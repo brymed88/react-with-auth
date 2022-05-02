@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React from 'react';
+=======
+import React from "react";
+>>>>>>> f32209941ef862031edd98d776c0e88c365f9503
 
 const SuccessComponent = (props) => {
   const { callback, origin } = props;
@@ -6,11 +10,11 @@ const SuccessComponent = (props) => {
   let message;
 
   switch (origin) {
-    case 'verify':
-      message = 'Verification successful!';
+    case "verify":
+      message = "Verification successful!";
       break;
-    case 'passreset':
-      message = 'Password reset successful!';
+    case "passreset":
+      message = "Password reset successful!";
       break;
     default:
   }
@@ -21,7 +25,11 @@ const SuccessComponent = (props) => {
       <input
         type='submit'
         onClick={() => {
+<<<<<<< HEAD
           callback('success', 'login');
+=======
+          callback("success", "login");
+>>>>>>> f32209941ef862031edd98d776c0e88c365f9503
         }}
         value='Please Login'
       />

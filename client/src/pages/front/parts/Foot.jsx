@@ -1,4 +1,4 @@
-import './Foot.min.css';
+import "./Foot.min.css";
 
 const Foot = () => {
   return (

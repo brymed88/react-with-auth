@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
-import { VerifyJWTUtil } from '../../../utils/VerifyJWTUtil';
-import SpinnerComponent from '../spinner/SpinnerComponent';
+import React, { useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
+import { VerifyJWTUtil } from "../../../utils/VerifyJWTUtil";
+import SpinnerComponent from "../spinner/SpinnerComponent";
 
 const PrivateRouteComponent = ({ children }) => {
   //Use state for user authorization
@@ -11,7 +11,11 @@ const PrivateRouteComponent = ({ children }) => {
   useEffect(async () => {
     const isAuthorized = await VerifyJWTUtil();
 
+<<<<<<< HEAD
     if (isAuthorized.status === 'success') {
+=======
+    if (isAuthorized.status === "success") {
+>>>>>>> f32209941ef862031edd98d776c0e88c365f9503
       setIsAuth(true);
     } else {
       setIsAuth(false);

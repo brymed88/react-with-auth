@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 import React, { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import SpinnerComponent from '../../common/spinner/SpinnerComponent';
 import { VerifyCode } from '../../../utils/AuthUtil';
 import FormContext from './FormContext';
+=======
+import React, { useState, useContext } from "react";
+import { useForm } from "react-hook-form";
+import SpinnerComponent from "../../common/spinner/SpinnerComponent";
+import { VerifyCode } from "../../../utils/AuthUtil";
+import FormContext from "./FormContext";
+>>>>>>> f32209941ef862031edd98d776c0e88c365f9503
 
 const VerifyComponent = (props) => {
   //De-structure useForm import variables
@@ -37,18 +45,31 @@ const VerifyComponent = (props) => {
       const response = await VerifyCode(data);
 
       //Successful login, redirect user to dashboard
+<<<<<<< HEAD
       if (response.status === 'success') {
+=======
+      if (response.status === "success") {
+>>>>>>> f32209941ef862031edd98d776c0e88c365f9503
         //Disable loading spinner as action is now complete
         setLoading(false);
 
         switch (origin) {
           //if signup workflow
+<<<<<<< HEAD
           case 'signup':
             callback('verify', 'success');
             break;
           //if pass reset workflow
           case 'reset':
             callback('verify', 'passreset');
+=======
+          case "signup":
+            callback("verify", "success");
+            break;
+          //if pass reset workflow
+          case "reset":
+            callback("verify", "passreset");
+>>>>>>> f32209941ef862031edd98d776c0e88c365f9503
             break;
           default:
         }
@@ -65,7 +86,11 @@ const VerifyComponent = (props) => {
   return (
     <section className='verify'>
       <form onSubmit={handleSubmit(FormSubmit)}>
+<<<<<<< HEAD
         {loading === true ? <SpinnerComponent type='full' size='100px' /> : ''}
+=======
+        {loading === true ? <SpinnerComponent type='full' size='100px' /> : ""}
+>>>>>>> f32209941ef862031edd98d776c0e88c365f9503
 
         {submitError === true && (
           <span className='loginError'>
@@ -81,7 +106,11 @@ const VerifyComponent = (props) => {
 
         <div className='inputs'>
           <input
+<<<<<<< HEAD
             {...register('code', {
+=======
+            {...register("code", {
+>>>>>>> f32209941ef862031edd98d776c0e88c365f9503
               required: true,
               pattern: {
                 value: /^[0-9]{6}$/,

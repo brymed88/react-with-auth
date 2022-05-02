@@ -4,6 +4,7 @@
 
 const VerifyLocalAuth = () => {
   //Grab token from localstorage
+<<<<<<< HEAD
   const token = localStorage.getItem('token');
 
   if (token) {
@@ -11,6 +12,15 @@ const VerifyLocalAuth = () => {
   }
 
   return { status: 'invalid' };
+=======
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    return { status: "valid" };
+  }
+
+  return { status: "invalid" };
+>>>>>>> f32209941ef862031edd98d776c0e88c365f9503
 };
 
 export { VerifyLocalAuth };

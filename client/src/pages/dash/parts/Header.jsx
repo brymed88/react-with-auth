@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+=======
+import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+>>>>>>> f32209941ef862031edd98d776c0e88c365f9503
 
-import './Header.min.css';
-import Logo from '../../../assets/common/logo.svg';
+import "./Header.min.css";
+import Logo from "../../../assets/common/logo.svg";
 
 const Header = () => {
   const [toggle, setToggle] = useState(false);
@@ -25,13 +30,21 @@ const Header = () => {
         </Link>
         <span
           onClick={menuToggle}
+<<<<<<< HEAD
           className={(toggle === true ? 'tog-rotate' : '') + ' tog-btn'}>
+=======
+          className={(toggle === true ? "tog-rotate" : "") + " tog-btn"}>
+>>>>>>> f32209941ef862031edd98d776c0e88c365f9503
           +
         </span>
       </header>
 
       <section
+<<<<<<< HEAD
         className={(toggle === true ? 'menu-show' : 'menu-hide') + ' sub-menu'}>
+=======
+        className={(toggle === true ? "menu-show" : "menu-hide") + " sub-menu"}>
+>>>>>>> f32209941ef862031edd98d776c0e88c365f9503
         <nav>
           <ul>
             <li>
@@ -69,7 +82,11 @@ const Header = () => {
         <footer className='copyright'>
           &copy; 2022 |
           <a href='https://treantlabs.com' target='_blank' rel='norefferer'>
+<<<<<<< HEAD
             {' '}
+=======
+            {" "}
+>>>>>>> f32209941ef862031edd98d776c0e88c365f9503
             Treantlabs.com
           </a>
           <section className='social'>F,T,GIT</section>
