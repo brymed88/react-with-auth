@@ -1,7 +1,6 @@
-import React from 'react'
+import React from 'react';
 
 const SuccessComponent = (props) => {
-
   const { callback, origin } = props;
 
   let message;
@@ -13,17 +12,21 @@ const SuccessComponent = (props) => {
     case 'passreset':
       message = 'Password reset successful!';
       break;
-    default: ;
+    default:
   }
 
   return (
-    <section className="success_enroll">
-      <h2>
-        {message}
-      </h2>
-      <input type="submit" onClick={() => { callback('success', 'login') }} value="Please Login" />
+    <section className='success_enroll'>
+      <h2>{message}</h2>
+      <input
+        type='submit'
+        onClick={() => {
+          callback('success', 'login');
+        }}
+        value='Please Login'
+      />
     </section>
-  )
-}
+  );
+};
 
 export default SuccessComponent;
