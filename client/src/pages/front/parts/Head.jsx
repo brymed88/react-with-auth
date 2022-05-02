@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { VerifyLocalAuth } from '../../../utils/LocalAuthUtil';
 
-import "./Head.min.css";
-import Logo from "../../../assets/common/logo.svg";
+import './Head.min.css';
+import Logo from '../../../assets/common/logo.svg';
 
 const Head = () => {
   const isLoggedIn = VerifyLocalAuth();

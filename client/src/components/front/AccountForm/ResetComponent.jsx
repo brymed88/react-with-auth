@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { GenerateCode } from '../../../utils/AuthUtil';
 import SpinnerComponent from '../../common/spinner/SpinnerComponent';
 
-import FormContext from "./FormContext";
+import FormContext from './FormContext';
 const ResetComponent = (props) => {
   //De-structure useForm import variables
   const {

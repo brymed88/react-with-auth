@@ -2,8 +2,8 @@ import Head from '../../pages/front/parts/Head';
 import Foot from '../../pages/front/parts/Foot';
 import { Outlet } from 'react-router-dom';
 
-import "../../normalize.min.css";
-import "./index.min.css";
+import '../../normalize.min.css';
+import './index.min.css';
 
 const FrontLayout = (props) => {
   return (

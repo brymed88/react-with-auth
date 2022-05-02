@@ -6,11 +6,11 @@ const SuccessComponent = (props) => {
   let message;
 
   switch (origin) {
-    case "verify":
-      message = "Verification successful!";
+    case 'verify':
+      message = 'Verification successful!';
       break;
-    case "passreset":
-      message = "Password reset successful!";
+    case 'passreset':
+      message = 'Password reset successful!';
       break;
     default:
   }

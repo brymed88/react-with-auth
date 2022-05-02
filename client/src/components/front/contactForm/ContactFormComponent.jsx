@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import "./ContactComponent.min.css";
-import SpinnerComponent from "../../common/spinner/SpinnerComponent";
+import './ContactComponent.min.css';
+import SpinnerComponent from '../../common/spinner/SpinnerComponent';
 
 const ContactFormComponent = () => {
   //De-structure useForm import variables

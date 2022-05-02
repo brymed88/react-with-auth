@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-import "./Header.min.css";
-import Logo from "../../../assets/common/logo.svg";
+import './Header.min.css';
+import Logo from '../../../assets/common/logo.svg';
 
 const Header = () => {
   const [toggle, setToggle] = useState(false);

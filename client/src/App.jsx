@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 
-import FrontLayout from "./layouts/front/FrontLayout";
-import DashLayout from "./layouts/dash/DashLayout";
+import FrontLayout from './layouts/front/FrontLayout';
+import DashLayout from './layouts/dash/DashLayout';
 
 import Home from './pages/front/Home';
 
