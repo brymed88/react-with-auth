@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
   first_name: { type: String },
@@ -10,4 +10,4 @@ const userSchema = new mongoose.Schema({
   active: { type: Boolean },
 });
 
-export default mongoose.model("user", userSchema);
+export default mongoose.model('user', userSchema);

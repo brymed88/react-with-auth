@@ -1,17 +1,16 @@
-import { sendMail } from "../config/email.js";
+import { sendMail } from '../config/email.js';
 
 const contactService = {};
 
 contactService.sendcode = (data) => {
+  //Destructure incoming data
+  const { email, code } = data;
 
-    //Destructure incoming data
-    const { email, code } = data;
-
-    let mailOptions = {
-        from: process.env.SUPPORT_ADDRESS, //support address from env file
-        to: email,
-        subject: `${process.env.SITE_NAME} account authorization code`,
-        html: `
+  let mailOptions = {
+    from: process.env.SUPPORT_ADDRESS, //support address from env file
+    to: email,
+    subject: `${process.env.SITE_NAME} account authorization code`,
+    html: `
         
         <h2>
         Thank you for signing up with ${process.env.SITE_NAME}!
@@ -22,23 +21,21 @@ contactService.sendcode = (data) => {
         </p>
         
         `,
-    };
+  };
 
-    //Call sendMail function and pass user parameters
-    sendMail(mailOptions);
-
-}
+  //Call sendMail function and pass user parameters
+  sendMail(mailOptions);
+};
 
 contactService.resetPassword = (data) => {
+  //Destructure incoming data
+  const { email } = data;
 
-    //Destructure incoming data
-    const { email } = data;
-
-    let mailOptions = {
-        from: process.env.SUPPORT_ADDRESS, //support address from env file
-        to: email,
-        subject: `${process.env.SITE_NAME} - Password reset notification`,
-        html: `
+  let mailOptions = {
+    from: process.env.SUPPORT_ADDRESS, //support address from env file
+    to: email,
+    subject: `${process.env.SITE_NAME} - Password reset notification`,
+    html: `
         
         <h2>
         The password for your account has been reset!
@@ -49,23 +46,21 @@ contactService.resetPassword = (data) => {
         </p>
         
         `,
-    };
+  };
 
-    //Call sendMail function and pass user parameters
-    sendMail(mailOptions);
-
-}
+  //Call sendMail function and pass user parameters
+  sendMail(mailOptions);
+};
 
 contactService.resetCode = (data) => {
+  //Destructure incoming data
+  const { email, code } = data;
 
-    //Destructure incoming data
-    const { email, code } = data;
-
-    let mailOptions = {
-        from: process.env.SUPPORT_ADDRESS, //support address from env file
-        to: email,
-        subject: `${process.env.SITE_NAME} account authorization code`,
-        html: `
+  let mailOptions = {
+    from: process.env.SUPPORT_ADDRESS, //support address from env file
+    to: email,
+    subject: `${process.env.SITE_NAME} account authorization code`,
+    html: `
         
         <h2>
         Password reset authorization code
@@ -76,22 +71,20 @@ contactService.resetCode = (data) => {
         </p>
         
         `,
-    };
+  };
 
-    //Call sendMail function and pass user parameters
-    sendMail(mailOptions);
-
-}
+  //Call sendMail function and pass user parameters
+  sendMail(mailOptions);
+};
 contactService.contactForm = async (data) => {
+  //Destructure incoming data
+  const { email, name, topic } = data;
 
-    //Destructure incoming data
-    const { email, name, topic } = data;
-
-    let mailOptions = {
-        from: email, //support address from env file
-        to: process.env.SUPPORT_ADDRESS,
-        subject: `${process.env.SITE_NAME} - Inquiry from contact form`,
-        html: `
+  let mailOptions = {
+    from: email, //support address from env file
+    to: process.env.SUPPORT_ADDRESS,
+    subject: `${process.env.SITE_NAME} - Inquiry from contact form`,
+    html: `
         
         <h2>
         Contact form inquiry!
@@ -106,25 +99,24 @@ contactService.contactForm = async (data) => {
         </p>
         
         `,
-    };
+  };
 
-    //Call sendMail function and pass user parameters
-    const mailer = await sendMail(mailOptions);
+  //Call sendMail function and pass user parameters
+  const mailer = await sendMail(mailOptions);
 
-    if (mailer.status === 'sent') {
-        return { status: 'success' };
-    }
+  if (mailer.status === 'sent') {
+    return { status: 'success' };
+  }
 
-    return { status: 'failed' };
-
-}
+  return { status: 'failed' };
+};
 
 contactService.update = (user) => {
-    return user;
-}
+  return user;
+};
 
 contactService.remove = (user) => {
-    return user;
-}
+  return user;
+};
 
 export default contactService;

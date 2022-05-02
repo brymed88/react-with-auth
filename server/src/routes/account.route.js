@@ -6,7 +6,7 @@ import verifyToken from '../middleware/auth.js';
 
 router.post('/login', accountController.get);
 
-router.post('/create', userExists, accountController.create)
+router.post('/create', userExists, accountController.create);
 
 router.post('/verify', verifyToken, accountController.verifyToken);
 
