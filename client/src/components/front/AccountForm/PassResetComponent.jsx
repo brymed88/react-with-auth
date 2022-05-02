@@ -98,7 +98,7 @@ const PassResetComponent = (props) => {
         )}
       </div>
 
-      <input type='submit' value='Signup' />
+      <input type='submit' value='Confirm' />
     </form>
   );
 };
