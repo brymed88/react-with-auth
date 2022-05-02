@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
-import { VerifyJWTUtil } from "../../../utils/VerifyJWTUtil";
-import SpinnerComponent from "../spinner/SpinnerComponent";
+import React, { useState, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
+import { VerifyJWTUtil } from '../../../utils/VerifyJWTUtil';
+import { VerifyLocalAuth } from '../../../utils/LocalAuthUtil';
+
+import SpinnerComponent from '../spinner/SpinnerComponent';
 
 const PrivateRouteComponent = ({ children }) => {
   //Use state for user authorization
@@ -9,10 +11,17 @@ const PrivateRouteComponent = ({ children }) => {
 
   //Verify JWT token on page load and set useState based on response
   useEffect(async () => {
-    const isAuthorized = await VerifyJWTUtil();
+    const localAuth = VerifyLocalAuth();
 
-    if (isAuthorized.status === 'success') {
-      setIsAuth(true);
+    //Check for local token first before api call
+    if (localAuth.status === 'valid') {
+      const isAuthorized = await VerifyJWTUtil();
+
+      if (isAuthorized.status === 'success') {
+        setIsAuth(true);
+      } else {
+        setIsAuth(false);
+      }
     } else {
       setIsAuth(false);
     }
