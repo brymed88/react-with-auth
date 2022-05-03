@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import FormContext from "./FormContext";
+import React, { useState } from 'react';
+import FormContext from './FormContext';
 
-import LoginComponent from "./LoginComponent";
-import SignupComponent from "./SignupComponent";
-import ResetComponent from "./ResetComponent";
-import PassResetComponent from "./PassResetComponent";
-import VerifyComponent from "./VerifyComponent";
-import SuccessComponent from "./SuccessComponent";
+import LoginComponent from './LoginComponent';
+import SignupComponent from './SignupComponent';
+import ResetComponent from './ResetComponent';
+import PassResetComponent from './PassResetComponent';
+import VerifyComponent from './VerifyComponent';
+import SuccessComponent from './SuccessComponent';
 
-import "./AccountComponent.min.css";
+import './AccountComponent.min.css';
 
 const AccountComponent = () => {
   const [context, setContext] = useState('default');
@@ -83,6 +83,7 @@ const AccountComponent = () => {
             />
           )
         )}
+
         {/*Wrap the form componets in the FormContext for saving user email state*/}
         <FormContext.Provider value={[context, setContext]}>
           {typeForm}

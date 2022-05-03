@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-
+import { SendMessage } from '../../../utils/SendMessageUtil';
 import './ContactComponent.min.css';
 import SpinnerComponent from '../../common/spinner/SpinnerComponent';
 
@@ -25,10 +25,10 @@ const ContactFormComponent = () => {
 
     if (data) {
       //Call util function to process api call
-      const response = ''; //await UserLogin(data);
+      const response = await SendMessage(data);
 
-      //Successful login, redirect user to dashboard
-      if (response === '') {
+      //Message successfully sent
+      if (response.status === 'success') {
         //Disable loading spinner as action is now complete
         setLoading(false);
 

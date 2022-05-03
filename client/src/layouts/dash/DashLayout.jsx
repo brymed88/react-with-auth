@@ -6,13 +6,13 @@ import './index.min.css';
 
 const DashLayout = ({ children }) => {
   return (
-    <div className='dash-wrapper'>
+    <section className='dash-wrapper'>
       <Header />
       <main className='dash-container'>
         <Outlet />
         {children}
       </main>
-    </div>
+    </section>
   );
 };
 

@@ -1,17 +1,14 @@
-import React, { useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { GenerateCode } from '../../../utils/AuthUtil';
 import SpinnerComponent from '../../common/spinner/SpinnerComponent';
 
 import FormContext from './FormContext';
-const ResetComponent = (props) => {
+const ResetComponent = ({ callback }) => {
   //De-structure useForm import variables
   const {
     register,
     handleSubmit,
-    setError,
-    clearErrors,
     formState: { errors },
   } = useForm();
 
@@ -22,9 +19,6 @@ const ResetComponent = (props) => {
   const [loading, setLoading] = useState(false);
   const [submitError, setSubmitError] = useState(false);
 
-  //destructure callback function from prop
-  const { callback } = props;
-
   const FormSubmit = async (data) => {
     //Reset submit status in case of past failure
     setSubmitError(false);
@@ -33,7 +27,7 @@ const ResetComponent = (props) => {
     setLoading(true);
 
     if (data) {
-      //Call util function to process api call
+      //Call util function to process api call and generate one-time code
       const response = await GenerateCode(data);
 
       //Successful login, redirect user to dashboard
@@ -60,7 +54,7 @@ const ResetComponent = (props) => {
     <form onSubmit={handleSubmit(FormSubmit)}>
       <h2>Password Reset</h2>
 
-      {loading === true ? <SpinnerComponent type='full' size='100px' /> : ''}
+      {loading === true && <SpinnerComponent type='full' size='100px' />}
 
       {submitError === true && (
         <span className='loginError'>

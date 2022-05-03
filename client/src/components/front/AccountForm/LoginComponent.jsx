@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { UserLogin } from '../../../utils/AuthUtil';
+import { Login } from '../../../utils/AuthUtil';
 import SpinnerComponent from '../../common/spinner/SpinnerComponent';
 
-const LoginComponent = (props) => {
+const LoginComponent = ({ callback }) => {
   //Assign useNavigate import to navigate from react-router-dom
   const navigate = useNavigate();
 
@@ -19,8 +19,6 @@ const LoginComponent = (props) => {
   const [loading, setLoading] = useState(false);
   const [submitError, setSubmitError] = useState(false);
 
-  const { callback } = props;
-
   const FormSubmit = async (data) => {
     //Reset submit status in case of past failure
     setSubmitError(false);
@@ -30,7 +28,7 @@ const LoginComponent = (props) => {
 
     if (data) {
       //Call util function to process api call
-      const response = await UserLogin(data);
+      const response = await Login(data);
 
       //Successful login, redirect user to dashboard
       if (response.status === 'success') {
@@ -87,7 +85,7 @@ const LoginComponent = (props) => {
 
       <input type='submit' value='Login' />
 
-      {/*Link for change to pass reset workflow via callback function to parent */}
+      {/*Pass reset workflow link via callback function to parent */}
       <div>
         <span
           className='login_trouble'

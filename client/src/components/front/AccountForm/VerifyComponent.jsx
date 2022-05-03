@@ -4,7 +4,7 @@ import SpinnerComponent from '../../common/spinner/SpinnerComponent';
 import { VerifyCode } from '../../../utils/AuthUtil';
 import FormContext from './FormContext';
 
-const VerifyComponent = (props) => {
+const VerifyComponent = ({ callback }) => {
   //De-structure useForm import variables
   const {
     register,
@@ -19,9 +19,6 @@ const VerifyComponent = (props) => {
   const [loading, setLoading] = useState(false);
   const [submitError, setSubmitError] = useState(false);
 
-  //destructure callback function from prop
-  const { callback, origin } = props;
-
   const FormSubmit = async (data) => {
     //Reset submit status in case of past failure
     setSubmitError(false);
@@ -33,7 +30,7 @@ const VerifyComponent = (props) => {
       //Add user email from context to data object before validation
       data.email = `${context}`;
 
-      //Call util function to process api call
+      //Call util function for api call to process code verification
       const response = await VerifyCode(data);
 
       //Successful login, redirect user to dashboard
@@ -65,7 +62,7 @@ const VerifyComponent = (props) => {
   return (
     <section className='verify'>
       <form onSubmit={handleSubmit(FormSubmit)}>
-        {loading === true ? <SpinnerComponent type='full' size='100px' /> : ''}
+        {loading === true && <SpinnerComponent type='full' size='100px' />}
 
         {submitError === true && (
           <span className='loginError'>
@@ -74,11 +71,7 @@ const VerifyComponent = (props) => {
           </span>
         )}
         <h2>Verification Sent!</h2>
-        <p>
-          Please enter the six-digit code that was sent to your email. This code
-          will expire in 5 minutes.
-        </p>
-
+        <p>Please enter the six-digit code that was sent to your email.</p>
         <div className='inputs'>
           <input
             {...register('code', {

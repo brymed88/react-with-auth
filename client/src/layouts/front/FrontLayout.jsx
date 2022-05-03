@@ -5,16 +5,16 @@ import { Outlet } from 'react-router-dom';
 import '../../normalize.min.css';
 import './index.min.css';
 
-const FrontLayout = (props) => {
+const FrontLayout = ({ children }) => {
   return (
-    <div>
+    <section>
       <Head />
-      <div className='page-container'>
+      <main className='page-container'>
         <Outlet />
-        {props.children}
-      </div>
+        {children}
+      </main>
       <Foot />
-    </div>
+    </section>
   );
 };
 

@@ -1,9 +1,10 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { PassReset } from '../../../utils/AuthUtil';
 import SpinnerComponent from '../../common/spinner/SpinnerComponent';
 import FormContext from './FormContext';
-const PassResetComponent = (props) => {
+
+const PassResetComponent = ({ callback }) => {
   //De-structure useForm import variables
   const {
     register,
@@ -19,9 +20,6 @@ const PassResetComponent = (props) => {
   const [loading, setLoading] = useState(false);
   const [submitError, setSubmitError] = useState(false);
 
-  //destructure callback function from prop
-  const { callback } = props;
-
   const FormSubmit = async (data) => {
     //Reset submit status in case of past failure
     setSubmitError(false);
@@ -33,7 +31,7 @@ const PassResetComponent = (props) => {
       //Build value object to send to api
       const values = { email: `${context}`, password: data.password };
 
-      //Call util function to process api call for signup
+      //Call util function to process api call for pass reset
       const response = await PassReset(values);
 
       //Successful login, redirect user to dashboard
@@ -64,8 +62,8 @@ const PassResetComponent = (props) => {
 
   return (
     <form onSubmit={handleSubmit(FormSubmit)}>
-      {loading === true ? <SpinnerComponent type='full' size='100px' /> : ''}
-      <h2>Success! Enter new password</h2>
+      {loading === true && <SpinnerComponent type='full' size='100px' />}
+      <h2>Please enter a new password</h2>
       {submitError === true && (
         <span className='loginError'>
           {/*Check if password mismatch error is set, if not then display generic error*/}
@@ -82,7 +80,7 @@ const PassResetComponent = (props) => {
         {errors.password && <span>Field required</span>}
       </div>
 
-      {/* Add the Verify password field conditionally if form type is signup */}
+      {/* Add the Verify password field conditionally if form type is pass reset */}
       <div className='inputs'>
         <input
           {...register('vpassword', { required: true })}

@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 
 import FrontLayout from './layouts/front/FrontLayout';
@@ -9,9 +9,7 @@ import Home from './pages/front/Home';
 import SpinnerComponent from './components/common/spinner/SpinnerComponent';
 import PrivateRouteComponent from './components/common/privateRoute/PrivateRouteComponent';
 
-/*
- * Lazy loading to selectively load pages based on usage
- */
+/* Lazy loading to selectively load pages based on usage */
 
 //Front end pages
 const About = lazy(() => import('./pages/front/About'));

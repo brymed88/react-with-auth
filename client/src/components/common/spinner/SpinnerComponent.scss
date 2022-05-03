@@ -1,13 +1,18 @@
 /* 
 *Spinner Component Styles
 */
+
+$background-color: rgba(0, 0, 0, 0.6);
+$border-color: rgb(218, 218, 218);
+$loader-color: rgb(51, 51, 51);
+
 .spinner-full {
   position: fixed;
   top: 0;
   left: 0;
   min-width: 100%;
   min-height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: $background-color;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,8 +21,8 @@
 }
 .spinner-part {
   div {
-    border: 16px solid rgb(218, 218, 218); /* Light grey */
-    border-top: 16px solid #333; /* Blue */
+    border: 16px solid $border-color;
+    border-top: 16px solid $loader-color;
     border-radius: 50%;
     animation: spin 0.9s ease infinite;
   }

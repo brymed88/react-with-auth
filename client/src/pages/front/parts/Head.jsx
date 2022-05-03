@@ -6,7 +6,7 @@ import './Head.min.css';
 import Logo from '../../../assets/common/logo.svg';
 
 const Head = () => {
-  const isLoggedIn = VerifyLocalAuth();
+  const localAuth = VerifyLocalAuth();
 
   // Declare a new state variable for button toggle and toggle className;
   const [btnTog, setBtnTog] = React.useState(false);
@@ -21,33 +21,24 @@ const Head = () => {
         <Link to='/' className='brand'>
           <img src={Logo} alt='Logo' />
         </Link>
-        <div
+        <nav
           id='myLinks'
-          className={(btnTog === true ? 'visible' : '') + ' menu'}>
-          <Link to='/' onClick={menuToggle}>
-            Home
-          </Link>
-          <Link to='/about' onClick={menuToggle}>
-            About
-          </Link>
-          <Link to='/contact' onClick={menuToggle}>
-            Contact
-          </Link>
+          onClick={menuToggle}
+          className={(btnTog === true && 'visible') + ' menu'}>
+          <Link to='/'>Home</Link>
+          <Link to='/about'>About</Link>
+          <Link to='/contact'>Contact</Link>
 
           {/*If user logged in, display Account instead of Login/Singup*/}
-          {isLoggedIn.status !== 'valid' ? (
-            <Link to='/login' onClick={menuToggle}>
-              Login / Signup
-            </Link>
+          {localAuth.status !== 'valid' ? (
+            <Link to='/login'>Login / Signup</Link>
           ) : (
-            <Link to='/dashboard' onClick={menuToggle}>
-              Account
-            </Link>
+            <Link to='/dashboard'>Account</Link>
           )}
-        </div>
+        </nav>
         <button
           onClick={menuToggle}
-          className={(btnTog === true ? 'rot' : '') + ' icon'}>
+          className={(btnTog === true && 'rot') + ' icon'}>
           +
         </button>
       </div>

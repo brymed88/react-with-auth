@@ -2,7 +2,6 @@
   margin-top: 20px;
   padding: 14px 0;
   border-top: 1px solid whitesmoke;
-  max-width: 300px;
   width: 100%;
   align-items: center;
   text-align: center;
@@ -27,11 +26,10 @@
       list-style-type: none;
 
       img {
-        width: 50px;
+        width: 40px;
       }
-      li:hover{
-      cursor:pointer;
-        
+      li:hover {
+        cursor: pointer;
       }
     }
   }

@@ -67,9 +67,9 @@ const Header = () => {
           </ul>
           <input type='button' value='Log Out' onClick={Logout} />
         </nav>
+        <Social />
 
       </section>
-      <Social />
 
     </aside>
   );

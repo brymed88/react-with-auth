@@ -1,11 +1,11 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { Signup } from '../../../utils/AuthUtil';
 import SpinnerComponent from '../../common/spinner/SpinnerComponent';
 import FormContext from './FormContext';
 
-const SignupComponent = (props) => {
+const SignupComponent = ({ callback }) => {
   //De-structure useForm import variables
   const {
     register,
@@ -20,9 +20,6 @@ const SignupComponent = (props) => {
   //Setup state variables for form functionality
   const [loading, setLoading] = useState(false);
   const [submitError, setSubmitError] = useState(false);
-
-  //destructure callback function from prop
-  const { callback } = props;
 
   const FormSubmit = async (data) => {
     //Reset submit status in case of past failure
@@ -66,7 +63,7 @@ const SignupComponent = (props) => {
 
   return (
     <form onSubmit={handleSubmit(FormSubmit)}>
-      {loading === true ? <SpinnerComponent type='full' size='100px' /> : ''}
+      {loading === true && <SpinnerComponent type='full' size='100px' />}
 
       {submitError === true && (
         <span className='loginError'>

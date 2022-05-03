@@ -1,8 +1,4 @@
-import React from 'react';
-
-const SuccessComponent = (props) => {
-  const { callback, origin } = props;
-
+const SuccessComponent = ({ callback, origin }) => {
   let message;
 
   switch (origin) {

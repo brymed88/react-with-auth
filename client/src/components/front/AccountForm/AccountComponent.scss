@@ -49,9 +49,9 @@
 
     .back_btn {
       position: absolute;
-      left: 4px;
-      top: 4px;
-      width: 30px;
+      left: 5px;
+      top: 5px;
+      width: 22px;
       cursor: pointer;
     }
 
@@ -67,10 +67,9 @@
       .loginError {
         width: 99%;
         text-align: center;
-        font-size: 1.2rem;
         margin: 10px 0;
         color: white;
-        background-color: rgba(255, 0, 0, 0.8);
+        background-color: rgba(255, 0, 0, 0.7);
         padding: 8px 0;
       }
 
@@ -82,7 +81,6 @@
       .signup_disclaimer {
         width: 84%;
         padding-top: 12px;
-        font-size: 0.9rem;
         text-align: center;
       }
       p {
@@ -93,7 +91,7 @@
 
     input {
       margin: 4px;
-      border: 1px solid #ddd;
+      border: 1px solid rgba(0, 0, 0, 0.1);
       border-radius: 4px;
       padding: 16px 0;
       text-indent: 4px;
@@ -101,10 +99,9 @@
       font-size: 1.2rem;
     }
     span {
-      color: red;
+      color: rgb(255, 0, 0);
       padding: 4px 0;
       width: 84%;
-      font-size: 1.1rem;
     }
 
     input[type='submit'] {

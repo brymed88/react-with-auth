@@ -6,7 +6,6 @@ import { VerifyLocalAuth } from '../../../utils/LocalAuthUtil';
 import SpinnerComponent from '../spinner/SpinnerComponent';
 
 const PrivateRouteComponent = ({ children }) => {
-  //Use state for user authorization
   const [isAuth, setIsAuth] = useState();
 
   //Verify JWT token on page load and set useState based on response
@@ -15,9 +14,9 @@ const PrivateRouteComponent = ({ children }) => {
 
     //Check for local token first before api call
     if (localAuth.status === 'valid') {
-      const isAuthorized = await VerifyJWTUtil();
+      const serverAuth = await VerifyJWTUtil();
 
-      if (isAuthorized.status === 'success') {
+      if (serverAuth.status === 'success') {
         setIsAuth(true);
       } else {
         setIsAuth(false);

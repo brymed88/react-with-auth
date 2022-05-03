@@ -1,4 +1,6 @@
-/*apiCall function accepts a data object and endpoint, uses POST and returns response in json format. */
+/*apiCall function accepts a data object and endpoint, 
+  uses POST and returns response in json format. 
+*/
 const ApiCall = async (data, endpoint, type) => {
   const acceptedTypes = ['POST', 'GET', 'PUT', 'PATCH', 'DELETE'];
 

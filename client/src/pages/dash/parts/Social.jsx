@@ -11,7 +11,7 @@ const Social = () => {
       <a href='https://treantlabs.com' target='_blank' rel='norefferer'>
         Treantlabs.com
       </a>
-      <nav>
+      <div>
         <ul>
           <li>
             <a
@@ -38,7 +38,7 @@ const Social = () => {
             </a>
           </li>
         </ul>
-      </nav>
+      </div>
     </section>
   );
 };
