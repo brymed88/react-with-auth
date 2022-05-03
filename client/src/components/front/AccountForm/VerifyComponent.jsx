@@ -4,7 +4,7 @@ import SpinnerComponent from '../../common/spinner/SpinnerComponent';
 import { VerifyCode } from '../../../utils/AuthUtil';
 import FormContext from './FormContext';
 
-const VerifyComponent = ({ callback }) => {
+const VerifyComponent = ({ callback, origin }) => {
   //De-structure useForm import variables
   const {
     register,
