@@ -5,6 +5,7 @@ import { DeleteLocalAuth } from '../../../utils/LocalAuthUtil';
 
 import './Header.min.css';
 import Logo from '../../../assets/common/logo.svg';
+import Social from './Social';
 
 const Header = () => {
   const [toggle, setToggle] = useState(false);
@@ -23,7 +24,7 @@ const Header = () => {
     <aside className='dash-sidebar'>
       <header>
         <Link to='/dashboard' className='brand'>
-          <img src={Logo} />
+          <img src={Logo} alt='Logo' />
         </Link>
         <span
           onClick={menuToggle}
@@ -35,7 +36,7 @@ const Header = () => {
       <section
         className={(toggle === true ? 'menu-show' : 'menu-hide') + ' sub-menu'}>
         <nav>
-          <ul>
+          <ul onClick={menuToggle}>
             <li>
               <Link to='/dashboard'>Overview</Link>
             </li>
@@ -64,19 +65,12 @@ const Header = () => {
               <Link to='/dashboard'>Example</Link>
             </li>
           </ul>
+          <input type='button' value='Log Out' onClick={Logout} />
         </nav>
 
-        <input type='button' value='Log Out' onClick={Logout} />
-
-        <footer className='copyright'>
-          &copy; 2022 |
-          <a href='https://treantlabs.com' target='_blank' rel='norefferer'>
-            {' '}
-            Treantlabs.com
-          </a>
-          <section className='social'>F,T,GIT</section>
-        </footer>
       </section>
+      <Social />
+
     </aside>
   );
 };

@@ -11,8 +11,8 @@ Dashboard
 //COMPLETE Build side nav links
 //COMPLETE Enable logout functionality
 //COMPLETE Build home page module and accept other pages (two to start)
-//TODO refactor dashboard styles and finish styling
-//TODO finalize dashboard pages, layout
+//COMPLETE refactor dashboard styles and finish styling
+//COMPLETE finalize dashboard pages, layout
 
 Back-end
 //COMPLETE Build API Routes, Controllers and Services for Login, pass reset, signup and authentication
