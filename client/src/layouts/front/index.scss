@@ -1,6 +1,9 @@
 /*
 *Container Styles
 */
+* {
+  margin: 0;
+}
 .page-container {
   //Set to 100 view height minus footer height - sticky footer
   min-height: calc(100vh - 62px);
