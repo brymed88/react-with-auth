@@ -24,7 +24,7 @@ accountService.get = async (query) => {
       { user_id: user._id, email },
       process.env.TOKEN_KEY,
       {
-        expiresIn: '24h',
+        expiresIn: '12h',
       }
     );
 

@@ -1,4 +1,5 @@
 import ApiCall from './ApiCall';
+import { DeleteLocalAuth } from './LocalAuthUtil';
 
 //TODO this value will be removed depending on network setup.. If nginx with reverse proxy then irrelevant.
 const serverURL = process.env.REACT_APP_SERVER_URL;
@@ -19,8 +20,9 @@ const VerifyJWTUtil = async () => {
   //If token is valid
   if (response.status === 'Valid Token') {
     return { status: 'success' };
+  } else {
+    DeleteLocalAuth();
+    return { status: 'failed' };
   }
-
-  return { status: 'failed' };
 };
 export { VerifyJWTUtil };
