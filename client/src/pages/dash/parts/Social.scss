@@ -1,0 +1,38 @@
+.social {
+  margin-top: 20px;
+  padding: 14px 0;
+  border-top: 1px solid whitesmoke;
+  max-width: 300px;
+  width: 100%;
+  align-items: center;
+  text-align: center;
+  color: whitesmoke;
+
+  a {
+    color: whitesmoke;
+    text-decoration: none;
+    font-size: 1.3rem;
+  }
+
+  ul {
+    width: 100%;
+    margin: 10px 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+
+    li {
+      list-style-type: none;
+
+      img {
+        width: 50px;
+      }
+      li:hover{
+      cursor:pointer;
+        
+      }
+    }
+  }
+}
