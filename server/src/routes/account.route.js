@@ -4,7 +4,7 @@ import accountController from '../controllers/account.controller.js';
 import userExists from '../middleware/userExists.js';
 import verifyToken from '../middleware/auth.js';
 
-router.post('/login', accountController.get);
+router.post('/login', accountController.login);
 
 router.post('/create', userExists, accountController.create);
 

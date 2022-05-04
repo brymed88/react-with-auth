@@ -27,7 +27,6 @@ package-lock.json
 .vscode
 *.css
 *.min.css
-*.log
 .env
 #include the min.css for main css file
 !*.min.css 

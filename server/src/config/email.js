@@ -1,5 +1,4 @@
 import nodemailer from 'nodemailer';
-import { log } from './logger.js';
 
 export async function sendMail(options) {
   /*
@@ -18,10 +17,10 @@ export async function sendMail(options) {
   const mail = await transporter.sendMail(options);
 
   if (mail.accepted !== '') {
-    log.info(`Authorization code sent to ${options.to}`);
+    console.log(`Authorization code sent to ${options.to}`);
     return { status: 'sent' };
   } else {
-    log.info(`Authorization code failed to send to ${options.to}`);
+    console.log(`Authorization code failed to send to ${options.to}`);
     return { status: 'failed' };
   }
 }

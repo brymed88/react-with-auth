@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import { log } from './logger.js';
 
 const config = process.env;
 
@@ -20,10 +19,10 @@ db.connect = () => {
       family: 4, // Use IPv4, skip trying IPv6
     })
     .then(() => {
-      log.info(`Successfully connected to MongoDB database: ${DATABASE_NAME}`);
+      console.log(`Successfully connected to MongoDB database: ${DATABASE_NAME}`);
     })
     .catch((error) => {
-      log.error('database connection failed. exiting now...');
+      console.log('database connection failed. exiting now...');
       console.error(error);
       process.exit(1);
     });

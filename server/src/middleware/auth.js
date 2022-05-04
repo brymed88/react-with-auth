@@ -1,9 +1,8 @@
 import jwt from 'jsonwebtoken';
 
 const verifyToken = (req, res, next) => {
-  const token =
-    req.body.token || req.query.token || req.headers['x-access-token'];
-  console.log(token);
+  const token = req.body.token || req.headers['x-access-token'];
+
   if (!token) {
     return res
       .status(401)
@@ -11,7 +10,6 @@ const verifyToken = (req, res, next) => {
   }
 
   try {
-    //Decode token
     const decoded = jwt.verify(token, process.env.TOKEN_KEY);
 
     //Set req.user to the decoded jwt token

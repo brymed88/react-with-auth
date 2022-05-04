@@ -76,10 +76,8 @@ contactService.resetCode = (data) => {
   //Call sendMail function and pass user parameters
   sendMail(mailOptions);
 };
-contactService.contactForm = async (data) => {
-  //Destructure incoming data
-  const { email, name, topic } = data;
 
+contactService.contactForm = async ({ email, name, topic }) => {
   let mailOptions = {
     from: email, //support address from env file
     to: process.env.SUPPORT_ADDRESS,

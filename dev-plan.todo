@@ -2,7 +2,7 @@ Running Task List
 
 Front-end
 //COMPLETE Build all front-end pages (Home, About, Contact, Login, Privacy, 404)
-//TODO finalize front-end pages
+//COMPLETE finalize front-end pages
 //TODO refactor front-end styles and finish styling
 
 
@@ -17,4 +17,4 @@ Dashboard
 Back-end
 //COMPLETE Build API Routes, Controllers and Services for Login, pass reset, signup and authentication
 //COMPLETE Build API Routes, Controllers and Services for Contact form functionality
-//TODO finalize back-end and refactor code
+//COMPLETE finalize back-end and refactor code

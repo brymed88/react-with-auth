@@ -6,10 +6,7 @@ import GenerateRandNum from '../utils/GenerateRandNum.helper.js';
 
 const accountService = {};
 
-accountService.get = async (query) => {
-  //Destructure email,password from incoming data
-  const { email, password } = query;
-
+accountService.login = async ({ email, password }) => {
   // Validate user input
   if (!(email && password)) {
     return { status: 'null' };
@@ -18,7 +15,11 @@ accountService.get = async (query) => {
   let user = await AccountModel.findOne({ email: email });
 
   //Verify user exists and that incoming password matches stored user password
-  if (user && (await bcrypt.compareSync(password, user.password)) === true) {
+  if (
+    user &&
+    (await bcrypt.compareSync(password, user.password)) === true &&
+    user.active === true
+  ) {
     //Create signed jwt token
     const token = jwt.sign(
       { user_id: user._id, email },
@@ -34,27 +35,19 @@ accountService.get = async (query) => {
     //Save user information
     user.save();
 
-    return {
-      accessToken: user.token,
-      role: user.role,
-    };
+    return { accessToken: user.token };
   }
 
   return { status: 'Invalid Credentials' };
 };
 
-accountService.create = async (query) => {
-  //Destructure email,password from incoming data
-  const { email, password } = query;
-
+accountService.create = async ({ email, password }) => {
   if (!(email && password)) {
     return { status: 'Invalid input' };
   }
 
-  const curUser = await AccountModel.findOne({ email: email });
-
   //Check if user already exists
-  if (curUser) {
+  if (await AccountModel.findOne({ email: email })) {
     return { status: 'Existing user' };
   }
 
@@ -85,10 +78,7 @@ accountService.create = async (query) => {
   return { status: 'failed' };
 };
 
-accountService.passReset = async (data) => {
-  //Destructure email,password from incoming data
-  const { email, password } = data;
-
+accountService.passReset = async ({ email, password }) => {
   //If email input does not exist return invalid
   if (!email) {
     return { status: 'invalid user' };
@@ -115,10 +105,7 @@ accountService.passReset = async (data) => {
   return { status: 'invalid user' };
 };
 
-accountService.generateCode = async (data) => {
-  //de-structure email from data
-  const { email } = data;
-
+accountService.generateCode = async ({ email }) => {
   //If email input does not exist return invalid
   if (!email) {
     return { status: 'invalid user' };
@@ -145,11 +132,7 @@ accountService.generateCode = async (data) => {
   return { status: 'invalid user' };
 };
 
-accountService.verifyCode = async (query) => {
-  //Destructure email,code from incoming query
-  const { email, code } = query;
-
-  //Stringify code variable
+accountService.verifyCode = async ({ email, code }) => {
   code.toString();
 
   // Validate user input
