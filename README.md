@@ -93,13 +93,21 @@ Status: **V1 - Complete**
 ## Screenshots
 
 Contact Form
+<br/>
+
 <img src="./screenshots/contact_form.png" width="400px">
 
 Login Form
+<br/>
+
 <img src="./screenshots/login_form.png" width="400px">
 
 Signup Form
+<br/>
+
 <img src="./screenshots/signup_form.png" width="400px">
 
 Dashboard
+<br/>
+
 <img src="./screenshots/dashboard_desktop.png" width="400px">
