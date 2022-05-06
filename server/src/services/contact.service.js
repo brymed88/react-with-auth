@@ -2,10 +2,7 @@ import { sendMail } from '../config/email.js';
 
 const contactService = {};
 
-contactService.sendcode = (data) => {
-  //Destructure incoming data
-  const { email, code } = data;
-
+contactService.sendcode = ({ email, code }) => {
   let mailOptions = {
     from: process.env.SUPPORT_ADDRESS, //support address from env file
     to: email,
@@ -27,10 +24,7 @@ contactService.sendcode = (data) => {
   sendMail(mailOptions);
 };
 
-contactService.resetPassword = (data) => {
-  //Destructure incoming data
-  const { email } = data;
-
+contactService.resetPassword = ({ email }) => {
   let mailOptions = {
     from: process.env.SUPPORT_ADDRESS, //support address from env file
     to: email,
@@ -52,10 +46,7 @@ contactService.resetPassword = (data) => {
   sendMail(mailOptions);
 };
 
-contactService.resetCode = (data) => {
-  //Destructure incoming data
-  const { email, code } = data;
-
+contactService.resetCode = ({ email, code }) => {
   let mailOptions = {
     from: process.env.SUPPORT_ADDRESS, //support address from env file
     to: email,
@@ -107,14 +98,6 @@ contactService.contactForm = async ({ email, name, topic }) => {
   }
 
   return { status: 'failed' };
-};
-
-contactService.update = (user) => {
-  return user;
-};
-
-contactService.remove = (user) => {
-  return user;
 };
 
 export default contactService;
