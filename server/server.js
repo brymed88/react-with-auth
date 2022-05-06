@@ -5,7 +5,7 @@ import {} from 'dotenv/config';
 
 const config = process.env;
 
-const aport = config.PORT || config.expressPort;
+const aport = config.PORT || config.EXPRESSPORT;
 
 const app = express();
 app.use(express.json());
@@ -23,7 +23,7 @@ db.connect();
  */
 
 app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:3000'); // update to match the domain you will make the request from
+  res.header('Access-Control-Allow-Origin', `${config.CLIENT_ADDRESS}`); // update to match the domain you will make the request from
   res.header(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept'

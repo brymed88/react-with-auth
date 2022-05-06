@@ -2,15 +2,15 @@ import nodemailer from 'nodemailer';
 
 export async function sendMail(options) {
   /*
-   * Note: The below function transporter section will change depending on your email host. See documentation
-   * at https://nodemailer.com/about/. The below example is currently using FastMail.
+   Note: The below function transporter section will change depending on your email host. See documentation
+   at https://nodemailer.com/about/. The below example is currently using FastMail.
    */
 
   const transporter = nodemailer.createTransport({
     service: 'FastMail',
     auth: {
-      user: process.env.mail_user,
-      pass: process.env.mail_pass,
+      user: process.env.MAIL_USER,
+      pass: process.env.MAIL_PASS,
     },
   });
 
